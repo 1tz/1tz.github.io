@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>俄罗斯韬娃</title>
+    <description>An undergraduate in Beijing Normal University</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 27 Dec 2017 08:30:17 +0800</pubDate>
+    <lastBuildDate>Wed, 27 Dec 2017 08:30:17 +0800</lastBuildDate>
+    <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>不止考试</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;他并不承认&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Tue, 26 Dec 2017 20:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/26/more-than-exam/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/26/more-than-exam/</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
