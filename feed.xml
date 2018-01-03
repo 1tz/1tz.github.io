@@ -5,9 +5,49 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 28 Dec 2017 20:52:39 +0800</pubDate>
-    <lastBuildDate>Thu, 28 Dec 2017 20:52:39 +0800</lastBuildDate>
+    <pubDate>Wed, 03 Jan 2018 19:10:04 +0800</pubDate>
+    <lastBuildDate>Wed, 03 Jan 2018 19:10:04 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>区块链原理、技术与应用之一</title>
+        <description>&lt;h4 id=&quot;比特币构成&quot;&gt;比特币构成&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一个去中心化的点对点网络（比特币协议）&lt;/li&gt;
+  &lt;li&gt;一个公共的交易账簿（区块链）&lt;/li&gt;
+  &lt;li&gt;一个去中心化的、数学的、确定性的货币发行（分布式挖矿）&lt;/li&gt;
+  &lt;li&gt;一个去中心化的交易验证系统（交易脚本）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;比特币客户端&quot;&gt;比特币客户端&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;完整客户端。包含比特币整个交易历史，类似于一个独立的电子邮件服务器&lt;/li&gt;
+  &lt;li&gt;轻量级客户端。依赖第三方服务器才能进行交易，类似于电子邮件客户端&lt;/li&gt;
+  &lt;li&gt;在线客户端。通过网页浏览器在第三方服务器使用钱包，类似于在线邮件&lt;/li&gt;
+  &lt;li&gt;一个人可以有多个地址，这些地址可以都指向一个钱包&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;交易区块挖矿区块链&quot;&gt;交易、区块、挖矿、区块链&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;交易将钱从交易输入转向输出，交易产生的交易费归矿工。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;挖矿在构建区块时会产生新的比特币，大约10分钟解决一个区块，挖矿难度随区块链延长而增大。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 30 Dec 2017 04:40:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/29/block-chain-1/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/29/block-chain-1/</guid>
+        
+        <category>区块链</category>
+        
+        
+      </item>
     
       <item>
         <title>不止考试</title>
@@ -15,13 +55,13 @@
   &lt;p&gt;还是忙点好啊&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;考研已经结束几天了，魂不守舍。之前想做的种种事情变得索然无味，说到底还是忙点好。发了几份简历，不如找找寒假实习。&lt;/p&gt;
+&lt;p&gt;考研已经结束几天了，魂不守舍。之前想做的种种事情变得索然无味，说到底还是忙点好。发了几份简历，不如找找寒假实习。不出意外，第一次面试挂掉了哈哈哈，Java还是差些火候，学过的都还给老师了。&lt;/p&gt;
 
 &lt;p&gt;顺便趁着这个空档，终于把博客拾掇出来，“又”结束了没有地方写东西的日子，这次绝对不会没有备份就把自己服务器删掉。&lt;/p&gt;
 
 &lt;p&gt;今年下半年把朋友圈功能暂时关闭了。一来不想看戾气越来越重的言论，二来沉下心来考研。时至今日，效果还不错。只是不能看他们去哪里旅游或是去哪里学习，一些不常联系的人也不知道近况如何，要是以后发的朋友圈能分类该多好。&lt;/p&gt;
 
-&lt;p&gt;最后这个网页用的&lt;a href=&quot;https://github.com/Huxpro/huxpro.github.io&quot;&gt;huxpro的模板&lt;/a&gt;，挺合我胃口的，好看、简洁、大方，而且还可以加上DISQUS。感谢&lt;a href=&quot;https://github.com/Huxpro&quot;&gt;Huxpro&lt;/a&gt;有这么好的模板！&lt;/p&gt;
+&lt;p&gt;最后这个网页用的&lt;a href=&quot;https://github.com/Huxpro/huxpro.github.io&quot;&gt;Huxpro的模板&lt;/a&gt;，挺合我胃口的，好看、简洁、大方，而且还可以加上DISQUS。感谢&lt;a href=&quot;https://github.com/Huxpro&quot;&gt;Huxpro&lt;/a&gt;有这么好的模板！也欢迎各位在下方留言😁（DISQUS需要FQ）&lt;/p&gt;
 </description>
         <pubDate>Wed, 27 Dec 2017 20:00:00 +0800</pubDate>
         <link>http://localhost:4000/2017/12/27/more-than-exam/</link>
