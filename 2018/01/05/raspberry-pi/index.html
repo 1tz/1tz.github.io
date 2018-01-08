@@ -10,7 +10,7 @@
     <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
     <meta name="theme-color" content="#000000">
     
-    <title>不止考试 - 俄罗斯韬娃 | 1tz's Blog</title>
+    <title>折腾树莓派 - 俄罗斯韬娃 | 1tz's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2017/12/27/more-than-exam/">
+    <link rel="canonical" href="http://localhost:4000/2018/01/05/raspberry-pi/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -155,13 +155,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-sample-image.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-raspberry-pi.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-sample-image.jpg')
+        background-image: url('/img/post-raspberry-pi.jpg')
     }
 
     
@@ -174,17 +174,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#考研" title="考研">考研</a>
+                        <a class="tag" href="/tags/#树莓派" title="树莓派">树莓派</a>
                         
-                        <a class="tag" href="/tags/#流水账" title="流水账">流水账</a>
+                        <a class="tag" href="/tags/#校园网免流" title="校园网免流">校园网免流</a>
                         
                     </div>
-                    <h1>不止考试</h1>
+                    <h1>折腾树莓派</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by 1tz on December 27, 2017</span>
+                    <span class="meta">Posted by Leettt on January 5, 2018</span>
                 </div>
             </div>
         </div>
@@ -206,29 +206,105 @@
                 
 
 				<blockquote>
-  <p>还是忙点好啊</p>
+  <p>抱歉，路由器已经满足不了我了</p>
 </blockquote>
 
-<p>考研已经结束几天了，魂不守舍。之前想做的种种事情变得索然无味，说到底还是忙点好。发了几份简历，不如找找寒假实习。不出意外，第一次面试挂掉了哈哈哈，Java还是差些火候，学过的都还给老师了。</p>
+<p>自从考完研就心水树莓派，于是马上就买了个折腾折腾，想当个软路由，但是效果并没有想象中的那么好。暂时先搁着，闲暇时候折腾折腾，当个小玩具。慢慢更新，免得以后迷路。</p>
 
-<p>顺便趁着这个空档，终于把博客拾掇出来，“又”结束了没有地方写东西的日子，这次绝对不会没有备份就把自己服务器删掉。</p>
+<h3 id="1-准备工作">1. 准备工作</h3>
 
-<p>今年下半年把朋友圈功能暂时关闭了。一来不想看戾气越来越重的言论，二来沉下心来考研。时至今日，效果还不错。只是不能看他们去哪里旅游或是去哪里学习，一些不常联系的人也不知道近况如何，要是以后发的朋友圈能分类该多好。</p>
+<p>一根网线，一台电脑（只说 MAC OS 环境），一个 Raspberry Pi 3B，一个读卡器，一个8G及以上的 TF 卡，一个 Wi-Fi 环境，一个 USB 网线转换器</p>
 
-<p>最后这个网页用的<a href="https://github.com/Huxpro/huxpro.github.io">Huxpro的模板</a>，挺合我胃口的，好看、简洁、大方，而且还可以加上DISQUS。感谢<a href="https://github.com/Huxpro">Huxpro</a>有这么好的模板！也欢迎各位在下方留言😁（DISQUS需要FQ）</p>
+<h3 id="2-钦定系统-raspbian">2. 钦定系统 Raspbian</h3>
+
+<h4 id="21-烧录">2.1 烧录</h4>
+
+<p>下载官网的固件后，解压出 <code class="highlighter-rouge">.img</code> 格式的镜像文件后，插上读卡器。打开 iTerm / Terminal，输入以下指令查看当前挂载设备</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df <span class="nt">-h</span>
+</code></pre></div></div>
+
+<p>找到你U盘的路径 <code class="highlighter-rouge">[usb_device_path]</code> 然后输入以下指令卸载设备</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil unmount <span class="o">[</span>usb_device_path]
+</code></pre></div></div>
+
+<p>然后输入以下指令再找路径 <code class="highlighter-rouge">[device_path]</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil list
+</code></pre></div></div>
+
+<p>然后就可以烧录了</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dd <span class="nv">ds</span><span class="o">=</span>4m <span class="k">if</span><span class="o">=[</span>path_to_img] <span class="nv">of</span><span class="o">=[</span>device_path]
+</code></pre></div></div>
+
+<p>等待10分钟左右即可，烧录完成后进入U盘路径，并创建空文件 ssh 后保存退出</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="o">[</span>path_to_device]
+touch ssh
+</code></pre></div></div>
+
+<h4 id="22-连接">2.2 连接</h4>
+
+<p><code class="highlighter-rouge">系统偏好设置-&gt;共享-&gt;互联网共享</code> 把连接的Wi-Fi共享到USB端口，然后再打开 iTerm / Terminal 后输入以下指令</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arp <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>就可以找到树莓派的IP地址，一般是 <code class="highlighter-rouge">192.168.2.3</code> ，再使用SSH连接树莓派，密码是raspberry</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh root@[ip_address]
+</code></pre></div></div>
+
+<p>至此即可使用 ssh 控制树莓派</p>
+
+<h3 id="3-路由系统-lede">3. 路由系统 LEDE</h3>
+
+<h4 id="31-烧录">3.1 烧录</h4>
+
+<p>下载官网镜像，选择 <code class="highlighter-rouge">arm_cortex-a53_neon-vfpv4</code> 这个目录下面的固件，解压出 <code class="highlighter-rouge">.img</code> 格式的镜像文件后，插上读卡器。打开 iTerm / Terminal，输入以下指令查看当前挂载设备</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df <span class="nt">-h</span>
+</code></pre></div></div>
+
+<p>找到你U盘的路径 <code class="highlighter-rouge">[usb_device_path]</code> 然后输入以下指令卸载设备</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil unmount <span class="o">[</span>usb_device_path]
+</code></pre></div></div>
+
+<p>然后输入以下指令再找路径 <code class="highlighter-rouge">[device_path]</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil list
+</code></pre></div></div>
+
+<p>然后就可以烧录了</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dd <span class="nv">ds</span><span class="o">=</span>2m <span class="k">if</span><span class="o">=[</span>path_to_img] <span class="nv">of</span><span class="o">=[</span>device_path]
+</code></pre></div></div>
+
+<p>等待5分钟左右即可</p>
+
+<h4 id="32-连接">3.2 连接</h4>
+
+<p>现在官方的 LEDE 固件已经集成 LUCI ，并开启了 DHCP 。网线连到树莓派的网线口，关掉Wi-Fi，有IP地址后，登录 <code class="highlighter-rouge">192.168.1.1</code> 即可进行路由器设置</p>
+
+<h4 id="33-设置">3.3 设置</h4>
+
+<p>打开 LUCI 界面，开启树莓派的无线，然后用 Wi-Fi 连接树莓派。（未完待续）</p>
 
 
                 <hr style="visibility: hidden;">
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
+                    <li class="previous">
                         <a href="/2017/12/29/block-chain-1/" data-toggle="tooltip" data-placement="top" title="区块链原理、技术与应用之一">
-                        Next<br>
+                        Previous<br>
                         <span>区块链原理、技术与应用之一</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -290,8 +366,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "1tz";
-    var disqus_identifier = "/2017/12/27/more-than-exam";
-    var disqus_url = "http://localhost:4000/2017/12/27/more-than-exam/";
+    var disqus_identifier = "/2018/01/05/raspberry-pi";
+    var disqus_url = "http://localhost:4000/2018/01/05/raspberry-pi/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

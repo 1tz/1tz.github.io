@@ -203,7 +203,9 @@
                 <!-- Multi-Lingual -->
                 
 
-				<h4 id="比特币构成">比特币构成</h4>
+				<p>内容均来源于<a href="https://github.com/yeasy/blockchain_guide">blockchain_guide</a></p>
+
+<h4 id="比特币构成">比特币构成</h4>
 
 <ul>
   <li>一个去中心化的点对点网络（比特币协议）</li>
@@ -224,13 +226,19 @@
 <h4 id="交易区块挖矿区块链">交易、区块、挖矿、区块链</h4>
 
 <ul>
-  <li>
-    <p>交易将钱从交易输入转向输出，交易产生的交易费归矿工。</p>
-  </li>
-  <li>
-    <p>挖矿在构建区块时会产生新的比特币，大约10分钟解决一个区块，挖矿难度随区块链延长而增大。</p>
-  </li>
+  <li>交易将钱从交易输入转向输出，交易产生的交易费归矿工。</li>
+  <li>挖矿在构建区块时会产生新的比特币，大约10分钟解决一个区块，挖矿难度随区块链延长而增大。</li>
 </ul>
+
+<h4 id="密钥地址钱包">密钥、地址、钱包</h4>
+
+<p>一个比特币钱包中包含一系列密钥对，每个密钥对包含一个私钥和一个公钥。公钥用于接受比特币，私钥用于比特币支付时的交易签名。私钥是一个随机生成的256位的数，公钥由私钥计算得到，且不可逆	：K = k * G。已知公钥求私钥需要暴力搜索，非常困难。</p>
+
+<p><img src="../../../../img/in-post/block-chain-1.png" alt="block-chain-1" /></p>
+
+<p>下图是一个类似于比特币所用曲线的椭圆曲线。</p>
+
+<p><img src="../../../../img/in-post/block-chain-2.png" alt="block-chain-2" /></p>
 
 
                 <hr style="visibility: hidden;">
@@ -244,6 +252,13 @@
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2018/01/05/raspberry-pi/" data-toggle="tooltip" data-placement="top" title="折腾树莓派">
+                        Next<br>
+                        <span>折腾树莓派</span>
+                        </a>
+                    </li>
                     
                 </ul>
 
@@ -281,6 +296,10 @@
         				
                             
         				
+                            
+        				
+                            
+        				
         			</div>
                 </section>
                 
@@ -300,7 +319,7 @@
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "ilikemeat";
+    var disqus_shortname = "1tz";
     var disqus_identifier = "/2017/12/29/block-chain-1";
     var disqus_url = "http://localhost:4000/2017/12/29/block-chain-1/";
 

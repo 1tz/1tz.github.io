@@ -5,13 +5,116 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 03 Jan 2018 19:10:04 +0800</pubDate>
-    <lastBuildDate>Wed, 03 Jan 2018 19:10:04 +0800</lastBuildDate>
+    <pubDate>Mon, 08 Jan 2018 20:53:29 +0800</pubDate>
+    <lastBuildDate>Mon, 08 Jan 2018 20:53:29 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
+        <title>折腾树莓派</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;抱歉，路由器已经满足不了我了&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;自从考完研就心水树莓派，于是马上就买了个折腾折腾，想当个软路由，但是效果并没有想象中的那么好。暂时先搁着，闲暇时候折腾折腾，当个小玩具。慢慢更新，免得以后迷路。&lt;/p&gt;
+
+&lt;h3 id=&quot;1-准备工作&quot;&gt;1. 准备工作&lt;/h3&gt;
+
+&lt;p&gt;一根网线，一台电脑（只说 MAC OS 环境），一个 Raspberry Pi 3B，一个读卡器，一个8G及以上的 TF 卡，一个 Wi-Fi 环境，一个 USB 网线转换器&lt;/p&gt;
+
+&lt;h3 id=&quot;2-钦定系统-raspbian&quot;&gt;2. 钦定系统 Raspbian&lt;/h3&gt;
+
+&lt;h4 id=&quot;21-烧录&quot;&gt;2.1 烧录&lt;/h4&gt;
+
+&lt;p&gt;下载官网的固件后，解压出 &lt;code class=&quot;highlighter-rouge&quot;&gt;.img&lt;/code&gt; 格式的镜像文件后，插上读卡器。打开 iTerm / Terminal，输入以下指令查看当前挂载设备&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;找到你U盘的路径 &lt;code class=&quot;highlighter-rouge&quot;&gt;[usb_device_path]&lt;/code&gt; 然后输入以下指令卸载设备&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;diskutil unmount &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;usb_device_path]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后输入以下指令再找路径 &lt;code class=&quot;highlighter-rouge&quot;&gt;[device_path]&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;diskutil list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后就可以烧录了&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dd &lt;span class=&quot;nv&quot;&gt;ds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4m &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;path_to_img] &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;device_path]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;等待10分钟左右即可，烧录完成后进入U盘路径，并创建空文件 ssh 后保存退出&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;path_to_device]
+touch ssh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;22-连接&quot;&gt;2.2 连接&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;系统偏好设置-&amp;gt;共享-&amp;gt;互联网共享&lt;/code&gt; 把连接的Wi-Fi共享到USB端口，然后再打开 iTerm / Terminal 后输入以下指令&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arp &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;就可以找到树莓派的IP地址，一般是 &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.2.3&lt;/code&gt; ，再使用SSH连接树莓派，密码是raspberry&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh root@[ip_address]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;至此即可使用 ssh 控制树莓派&lt;/p&gt;
+
+&lt;h3 id=&quot;3-路由系统-lede&quot;&gt;3. 路由系统 LEDE&lt;/h3&gt;
+
+&lt;h4 id=&quot;31-烧录&quot;&gt;3.1 烧录&lt;/h4&gt;
+
+&lt;p&gt;下载官网镜像，选择 &lt;code class=&quot;highlighter-rouge&quot;&gt;arm_cortex-a53_neon-vfpv4&lt;/code&gt; 这个目录下面的固件，解压出 &lt;code class=&quot;highlighter-rouge&quot;&gt;.img&lt;/code&gt; 格式的镜像文件后，插上读卡器。打开 iTerm / Terminal，输入以下指令查看当前挂载设备&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;找到你U盘的路径 &lt;code class=&quot;highlighter-rouge&quot;&gt;[usb_device_path]&lt;/code&gt; 然后输入以下指令卸载设备&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;diskutil unmount &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;usb_device_path]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后输入以下指令再找路径 &lt;code class=&quot;highlighter-rouge&quot;&gt;[device_path]&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;diskutil list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后就可以烧录了&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dd &lt;span class=&quot;nv&quot;&gt;ds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2m &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;path_to_img] &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;device_path]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;等待5分钟左右即可&lt;/p&gt;
+
+&lt;h4 id=&quot;32-连接&quot;&gt;3.2 连接&lt;/h4&gt;
+
+&lt;p&gt;现在官方的 LEDE 固件已经集成 LUCI ，并开启了 DHCP 。网线连到树莓派的网线口，关掉Wi-Fi，有IP地址后，登录 &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.1.1&lt;/code&gt; 即可进行路由器设置&lt;/p&gt;
+
+&lt;h4 id=&quot;33-设置&quot;&gt;3.3 设置&lt;/h4&gt;
+
+&lt;p&gt;打开 LUCI 界面，开启树莓派的无线，然后用 Wi-Fi 连接树莓派。（未完待续）&lt;/p&gt;
+</description>
+        <pubDate>Sat, 06 Jan 2018 04:40:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/01/05/raspberry-pi/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/01/05/raspberry-pi/</guid>
+        
+        <category>树莓派</category>
+        
+        <category>校园网免流</category>
+        
+        
+      </item>
+    
+      <item>
         <title>区块链原理、技术与应用之一</title>
-        <description>&lt;h4 id=&quot;比特币构成&quot;&gt;比特币构成&lt;/h4&gt;
+        <description>&lt;p&gt;内容均来源于&lt;a href=&quot;https://github.com/yeasy/blockchain_guide&quot;&gt;blockchain_guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;比特币构成&quot;&gt;比特币构成&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;一个去中心化的点对点网络（比特币协议）&lt;/li&gt;
@@ -32,13 +135,19 @@
 &lt;h4 id=&quot;交易区块挖矿区块链&quot;&gt;交易、区块、挖矿、区块链&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;交易将钱从交易输入转向输出，交易产生的交易费归矿工。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;挖矿在构建区块时会产生新的比特币，大约10分钟解决一个区块，挖矿难度随区块链延长而增大。&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;交易将钱从交易输入转向输出，交易产生的交易费归矿工。&lt;/li&gt;
+  &lt;li&gt;挖矿在构建区块时会产生新的比特币，大约10分钟解决一个区块，挖矿难度随区块链延长而增大。&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h4 id=&quot;密钥地址钱包&quot;&gt;密钥、地址、钱包&lt;/h4&gt;
+
+&lt;p&gt;一个比特币钱包中包含一系列密钥对，每个密钥对包含一个私钥和一个公钥。公钥用于接受比特币，私钥用于比特币支付时的交易签名。私钥是一个随机生成的256位的数，公钥由私钥计算得到，且不可逆	：K = k * G。已知公钥求私钥需要暴力搜索，非常困难。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../img/in-post/block-chain-1.png&quot; alt=&quot;block-chain-1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下图是一个类似于比特币所用曲线的椭圆曲线。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../img/in-post/block-chain-2.png&quot; alt=&quot;block-chain-2&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 30 Dec 2017 04:40:00 +0800</pubDate>
         <link>http://localhost:4000/2017/12/29/block-chain-1/</link>
