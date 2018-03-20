@@ -10,7 +10,7 @@
     <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
     <meta name="theme-color" content="#000000">
     
-    <title>不止考试 - 俄罗斯韬娃 | 1tz's Blog</title>
+    <title>Mac OS下大数据工具环境搭建 - 俄罗斯韬娃 | 1tz's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2017/12/27/more-than-exam/">
+    <link rel="canonical" href="http://localhost:4000/2018/03/19/big-data-env/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -155,13 +155,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-sample-image.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-big-data-env.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-sample-image.jpg')
+        background-image: url('/img/post-big-data-env.jpg')
     }
 
     
@@ -174,15 +174,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#考研" title="考研">考研</a>
+                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
                         
                     </div>
-                    <h1>不止考试</h1>
+                    <h1>Mac OS下大数据工具环境搭建</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by 1tz on December 27, 2017</span>
+                    <span class="meta">Posted by 1tz on March 19, 2018</span>
                 </div>
             </div>
         </div>
@@ -204,29 +204,129 @@
                 
 
 				<blockquote>
-  <p>还是忙点好啊</p>
+  <p>本次配置具体运行环境如下：</p>
+
+  <p>macOS High Sierra 10.13.3</p>
+
+  <p>Java JDK 1.8.0</p>
+
+  <p>Hadoop 3.0.0</p>
+
+  <p>Scala 2.12.4</p>
+
+  <p>Spark 2.3.0</p>
 </blockquote>
 
-<p>考研已经结束几天了，魂不守舍。之前想做的种种事情变得索然无味，说到底还是忙点好。发了几份简历，不如找找寒假实习。不出意外，第一次面试挂掉了哈哈哈，Java还是差些火候，学过的都还给老师了。</p>
+<p>参考了很多帖子，然而很多并不适用。特此留下此马克，简洁易懂且适用，以便日后之需。</p>
 
-<p>顺便趁着这个空档，终于把博客拾掇出来，“又”结束了没有地方写东西的日子，这次绝对不会没有备份就把自己服务器删掉。</p>
+<h3 id="0-准备工作配置ssh查看java路径">0. 准备工作（配置ssh、查看Java路径）</h3>
 
-<p>今年下半年把朋友圈功能暂时关闭了。一来不想看戾气越来越重的言论，二来沉下心来考研。时至今日，效果还不错。只是不能看他们去哪里旅游或是去哪里学习，一些不常联系的人也不知道近况如何，要是以后发的朋友圈能分类该多好。</p>
+<ul>
+  <li>打开系统偏好设置-共享-远程登录，勾选远程登录</li>
+  <li>打开 iTerm</li>
+</ul>
 
-<p>最后这个网页用的<a href="https://github.com/Huxpro/huxpro.github.io">Huxpro的模板</a>，挺合我胃口的，好看、简洁、大方，而且还可以加上DISQUS。感谢<a href="https://github.com/Huxpro">Huxpro</a>有这么好的模板！也欢迎各位在下方留言😁（DISQUS需要FQ）</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看Java JDK路径，并记录</span>
+/usr/libexec/java_home <span class="nt">-V</span>
+<span class="c"># 使用 ssh-keygen 生成一对密钥，并将其用于免密登录</span>
+ssh-keygen
+<span class="nb">cd</span> ~/.ssh
+<span class="nb">cat </span>id_rsa.pub <span class="o">&gt;</span> authorized_keys
+<span class="c"># 判断是否成功免密登录</span>
+ssh localhost
+</code></pre></div></div>
+
+<p>下面均在 <code class="highlighter-rouge">ssh localhost</code> 之后操作</p>
+
+<h3 id="1-安装hadoop">1. 安装Hadoop</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Hadoop</span>
+brew install hadoop
+<span class="c"># 进入 Hadoop 路径，此处是 3.0.0 版本，其他版本自行更改命令</span>
+<span class="nb">cd</span> /usr/local/Cellar/hadoop/3.0.0/libexec/etc/hadoop
+
+vi hadoop-env.sh
+<span class="c"># 使用 /HADOOP_OPTS 查找到被注释的行，添加以下两行，第二行修改为 Java 路径，修改后保存退出</span>
+<span class="nb">export </span><span class="nv">HADOOP_OPTS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HADOOP_OPTS</span><span class="s2"> -Djava.net.preferIPv4Stack=true -Djava.security.krb5.realm= -Djava.security.krb5.kdc= "</span>
+<span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">"/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home"</span>
+
+vi hdfs-site.xml
+<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
+&lt;property&gt;
+	&lt;name&gt;dfs.replication&lt;/name&gt;
+	&lt;value&gt;1&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+	&lt;name&gt;dfs.http.address&lt;/name&gt;
+	&lt;value&gt;0.0.0.0:50070&lt;/value&gt;
+&lt;/property&gt;
+
+vi mapred-site.xml
+<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
+&lt;property&gt;
+	&lt;name&gt;mapred.job.tracker&lt;/name&gt;
+	&lt;value&gt;localhost:8021&lt;/value&gt;
+&lt;/property&gt;
+
+vi core-site.xml
+<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
+&lt;property&gt;
+	&lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+&lt;value&gt;/usr/local/Cellar/hadoop/hdfs/tmp&lt;/value&gt;
+    &lt;description&gt;A base <span class="k">for </span>other temporary directories.&lt;/description&gt;
+&lt;/property&gt;
+&lt;property&gt;
+	&lt;name&gt;fs.default.name&lt;/name&gt;
+    &lt;value&gt;hdfs://localhost:8020&lt;/value&gt;
+&lt;/property&gt;
+
+<span class="c"># 格式化后即可</span>
+hdfs namenode <span class="nt">-format</span>
+
+<span class="nb">cd</span> /usr/local/Cellar/hadoop/3.0.0/sbin
+<span class="c"># 启动 Hadoop，WARN 不用管，打开浏览器，查看 localhost 的 50070 端口和 8088 端口</span>
+./start-dfs.sh
+./start-yarn.sh
+<span class="c"># 停止 Hadoop</span>
+./stop-all.sh
+
+<span class="c"># 可以更改环境变量，之后可直接使用 start-dfs.sh 和 start-yarn.sh 来启动Hadoop</span>
+vi ~/.bash_profile
+<span class="c"># 添加以下在尾部，修改后保存退出</span>
+<span class="nb">export </span><span class="nv">HADOOP_HOME</span><span class="o">=</span>/usr/local/Cellar/hadoop/3.0.0
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HADOOP_HOME</span>/sbin:<span class="nv">$HADOOP_HOME</span>/bin
+
+<span class="nb">source</span> ~/.bash_profile
+</code></pre></div></div>
+
+<h3 id="2-安装scala">2. 安装Scala</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Scala</span>
+brew install scala
+<span class="c"># 测试 Scala 安装成功</span>
+scala
+</code></pre></div></div>
+
+<h3 id="3-安装spark">3. 安装Spark</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Spark</span>
+brew install apache-spark
+<span class="c"># 测试 Spark 安装成功</span>
+spark-shell
+</code></pre></div></div>
 
 
                 <hr style="visibility: hidden;">
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2017/12/29/block-chain-1/" data-toggle="tooltip" data-placement="top" title="区块链原理、技术与应用之一">
-                        Next<br>
-                        <span>区块链原理、技术与应用之一</span>
+                    <li class="previous">
+                        <a href="/2018/03/16/about-eep/" data-toggle="tooltip" data-placement="top" title="关于考研的碎碎念">
+                        Previous<br>
+                        <span>关于考研的碎碎念</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -292,8 +392,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "1tz";
-    var disqus_identifier = "/2017/12/27/more-than-exam";
-    var disqus_url = "http://localhost:4000/2017/12/27/more-than-exam/";
+    var disqus_identifier = "/2018/03/19/big-data-env";
+    var disqus_url = "http://localhost:4000/2018/03/19/big-data-env/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

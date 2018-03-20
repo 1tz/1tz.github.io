@@ -5,9 +5,132 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 17 Mar 2018 13:50:43 +0800</pubDate>
-    <lastBuildDate>Sat, 17 Mar 2018 13:50:43 +0800</lastBuildDate>
+    <pubDate>Tue, 20 Mar 2018 15:21:23 +0800</pubDate>
+    <lastBuildDate>Tue, 20 Mar 2018 15:21:23 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Mac OS下大数据工具环境搭建</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;本次配置具体运行环境如下：&lt;/p&gt;
+
+  &lt;p&gt;macOS High Sierra 10.13.3&lt;/p&gt;
+
+  &lt;p&gt;Java JDK 1.8.0&lt;/p&gt;
+
+  &lt;p&gt;Hadoop 3.0.0&lt;/p&gt;
+
+  &lt;p&gt;Scala 2.12.4&lt;/p&gt;
+
+  &lt;p&gt;Spark 2.3.0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;参考了很多帖子，然而很多并不适用。特此留下此马克，简洁易懂且适用，以便日后之需。&lt;/p&gt;
+
+&lt;h3 id=&quot;0-准备工作配置ssh查看java路径&quot;&gt;0. 准备工作（配置ssh、查看Java路径）&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;打开系统偏好设置-共享-远程登录，勾选远程登录&lt;/li&gt;
+  &lt;li&gt;打开 iTerm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 查看Java JDK路径，并记录&lt;/span&gt;
+/usr/libexec/java_home &lt;span class=&quot;nt&quot;&gt;-V&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 使用 ssh-keygen 生成一对密钥，并将其用于免密登录&lt;/span&gt;
+ssh-keygen
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/.ssh
+&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;id_rsa.pub &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; authorized_keys
+&lt;span class=&quot;c&quot;&gt;# 判断是否成功免密登录&lt;/span&gt;
+ssh localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;下面均在 &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh localhost&lt;/code&gt; 之后操作&lt;/p&gt;
+
+&lt;h3 id=&quot;1-安装hadoop&quot;&gt;1. 安装Hadoop&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 使用 Homebrew 安装 Hadoop&lt;/span&gt;
+brew install hadoop
+&lt;span class=&quot;c&quot;&gt;# 进入 Hadoop 路径，此处是 3.0.0 版本，其他版本自行更改命令&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/local/Cellar/hadoop/3.0.0/libexec/etc/hadoop
+
+vi hadoop-env.sh
+&lt;span class=&quot;c&quot;&gt;# 使用 /HADOOP_OPTS 查找到被注释的行，添加以下两行，第二行修改为 Java 路径，修改后保存退出&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HADOOP_OPTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HADOOP_OPTS&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -Djava.net.preferIPv4Stack=true -Djava.security.krb5.realm= -Djava.security.krb5.kdc= &quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home&quot;&lt;/span&gt;
+
+vi hdfs-site.xml
+&lt;span class=&quot;c&quot;&gt;# &amp;lt;configuration&amp;gt; 标签中添加以下内容，修改后保存退出&lt;/span&gt;
+&amp;lt;property&amp;gt;
+	&amp;lt;name&amp;gt;dfs.replication&amp;lt;/name&amp;gt;
+	&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;
+&amp;lt;/property&amp;gt;
+&amp;lt;property&amp;gt;
+	&amp;lt;name&amp;gt;dfs.http.address&amp;lt;/name&amp;gt;
+	&amp;lt;value&amp;gt;0.0.0.0:50070&amp;lt;/value&amp;gt;
+&amp;lt;/property&amp;gt;
+
+vi mapred-site.xml
+&lt;span class=&quot;c&quot;&gt;# &amp;lt;configuration&amp;gt; 标签中添加以下内容，修改后保存退出&lt;/span&gt;
+&amp;lt;property&amp;gt;
+	&amp;lt;name&amp;gt;mapred.job.tracker&amp;lt;/name&amp;gt;
+	&amp;lt;value&amp;gt;localhost:8021&amp;lt;/value&amp;gt;
+&amp;lt;/property&amp;gt;
+
+vi core-site.xml
+&lt;span class=&quot;c&quot;&gt;# &amp;lt;configuration&amp;gt; 标签中添加以下内容，修改后保存退出&lt;/span&gt;
+&amp;lt;property&amp;gt;
+	&amp;lt;name&amp;gt;hadoop.tmp.dir&amp;lt;/name&amp;gt;
+&amp;lt;value&amp;gt;/usr/local/Cellar/hadoop/hdfs/tmp&amp;lt;/value&amp;gt;
+    &amp;lt;description&amp;gt;A base &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;other temporary directories.&amp;lt;/description&amp;gt;
+&amp;lt;/property&amp;gt;
+&amp;lt;property&amp;gt;
+	&amp;lt;name&amp;gt;fs.default.name&amp;lt;/name&amp;gt;
+    &amp;lt;value&amp;gt;hdfs://localhost:8020&amp;lt;/value&amp;gt;
+&amp;lt;/property&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;# 格式化后即可&lt;/span&gt;
+hdfs namenode &lt;span class=&quot;nt&quot;&gt;-format&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/local/Cellar/hadoop/3.0.0/sbin
+&lt;span class=&quot;c&quot;&gt;# 启动 Hadoop，WARN 不用管，打开浏览器，查看 localhost 的 50070 端口和 8088 端口&lt;/span&gt;
+./start-dfs.sh
+./start-yarn.sh
+&lt;span class=&quot;c&quot;&gt;# 停止 Hadoop&lt;/span&gt;
+./stop-all.sh
+
+&lt;span class=&quot;c&quot;&gt;# 可以更改环境变量，之后可直接使用 start-dfs.sh 和 start-yarn.sh 来启动Hadoop&lt;/span&gt;
+vi ~/.bash_profile
+&lt;span class=&quot;c&quot;&gt;# 添加以下在尾部，修改后保存退出&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HADOOP_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local/Cellar/hadoop/3.0.0
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$HADOOP_HOME&lt;/span&gt;/sbin:&lt;span class=&quot;nv&quot;&gt;$HADOOP_HOME&lt;/span&gt;/bin
+
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-安装scala&quot;&gt;2. 安装Scala&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 使用 Homebrew 安装 Scala&lt;/span&gt;
+brew install scala
+&lt;span class=&quot;c&quot;&gt;# 测试 Scala 安装成功&lt;/span&gt;
+scala
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-安装spark&quot;&gt;3. 安装Spark&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 使用 Homebrew 安装 Spark&lt;/span&gt;
+brew install apache-spark
+&lt;span class=&quot;c&quot;&gt;# 测试 Spark 安装成功&lt;/span&gt;
+spark-shell
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 19 Mar 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/03/19/big-data-env/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/03/19/big-data-env/</guid>
+        
+        <category>大数据</category>
+        
+        
+      </item>
     
       <item>
         <title>关于考研的碎碎念</title>
@@ -259,8 +382,6 @@ touch ssh
         <guid isPermaLink="true">http://localhost:4000/2017/12/27/more-than-exam/</guid>
         
         <category>考研</category>
-        
-        <category>流水账</category>
         
         
       </item>
