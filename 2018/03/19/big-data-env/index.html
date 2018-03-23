@@ -221,22 +221,19 @@
 
 <h3 id="0-准备工作配置ssh查看java路径">0. 准备工作（配置ssh、查看Java路径）</h3>
 
-<ul>
-  <li>打开系统偏好设置-共享-远程登录，勾选远程登录</li>
-  <li>打开 iTerm</li>
-</ul>
+<p>首先，打开系统偏好设置-共享-远程登录，勾选远程登录。然后打开 iTerm</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看Java JDK路径，并记录</span>
 /usr/libexec/java_home <span class="nt">-V</span>
 <span class="c"># 使用 ssh-keygen 生成一对密钥，并将其用于免密登录</span>
-ssh-keygen
 <span class="nb">cd</span> ~/.ssh
+ssh-keygen
 <span class="nb">cat </span>id_rsa.pub <span class="o">&gt;</span> authorized_keys
 <span class="c"># 判断是否成功免密登录</span>
 ssh localhost
 </code></pre></div></div>
 
-<p>下面均在 <code class="highlighter-rouge">ssh localhost</code> 之后操作</p>
+<p>下面操作均在 <code class="highlighter-rouge">ssh localhost</code> 之后进行</p>
 
 <h3 id="1-安装hadoop">1. 安装Hadoop</h3>
 
@@ -362,8 +359,6 @@ spark-shell
                 				<a href="/tags/#考研" title="考研" rel="2">
                                     考研
                                 </a>
-                            
-        				
                             
         				
                             

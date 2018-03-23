@@ -5,8 +5,8 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 20 Mar 2018 16:10:31 +0800</pubDate>
-    <lastBuildDate>Tue, 20 Mar 2018 16:10:31 +0800</lastBuildDate>
+    <pubDate>Fri, 23 Mar 2018 20:32:38 +0800</pubDate>
+    <lastBuildDate>Fri, 23 Mar 2018 20:32:38 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -29,22 +29,19 @@
 
 &lt;h3 id=&quot;0-准备工作配置ssh查看java路径&quot;&gt;0. 准备工作（配置ssh、查看Java路径）&lt;/h3&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;打开系统偏好设置-共享-远程登录，勾选远程登录&lt;/li&gt;
-  &lt;li&gt;打开 iTerm&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;首先，打开系统偏好设置-共享-远程登录，勾选远程登录。然后打开 iTerm&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 查看Java JDK路径，并记录&lt;/span&gt;
 /usr/libexec/java_home &lt;span class=&quot;nt&quot;&gt;-V&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 使用 ssh-keygen 生成一对密钥，并将其用于免密登录&lt;/span&gt;
-ssh-keygen
 &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/.ssh
+ssh-keygen
 &lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;id_rsa.pub &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; authorized_keys
 &lt;span class=&quot;c&quot;&gt;# 判断是否成功免密登录&lt;/span&gt;
 ssh localhost
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;下面均在 &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh localhost&lt;/code&gt; 之后操作&lt;/p&gt;
+&lt;p&gt;下面操作均在 &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh localhost&lt;/code&gt; 之后进行&lt;/p&gt;
 
 &lt;h3 id=&quot;1-安装hadoop&quot;&gt;1. 安装Hadoop&lt;/h3&gt;
 
@@ -140,7 +137,7 @@ spark-shell
 
 &lt;p&gt;今年报考的是北京大学软件与微电子学院，金融大数据方向。从结果来看，这次报考算是偷波鸡，明年是否还是这个情况我也不清楚了。留着当个念想吧，说不定还能帮到今后的考研勇士。&lt;/p&gt;
 
-&lt;h3 id=&quot;初试&quot;&gt;初试&lt;/h3&gt;
+&lt;h3 id=&quot;一初试&quot;&gt;一、初试&lt;/h3&gt;
 
 &lt;p&gt;初始分也不算太高（政治59，英语71，数学110，专业课109，总分349），各位按照自己的计划进行，可能不太适合所有人。说实话我的专业课我的确考得不太好。&lt;/p&gt;
 
@@ -165,9 +162,9 @@ spark-shell
 &lt;h4 id=&quot;3-英语&quot;&gt;3. 英语&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;关于背单词：我当时看了恋恋有词，但是我觉得看了遗忘的比较多，而且比较费时间。我就下载的沪江开心英语这个APP，每天150个词，1个小时左右。每个词有解释的听解释，效率对我而言稍高一些。第二天复习的时候注意换个题型考察自己。&lt;/li&gt;
+  &lt;li&gt;关于背单词：我当时看了恋恋有词，但是我觉得看了遗忘的比较多，而且比较费时间。我就下载的沪江开心英语这个APP，每天150个词，1个小时左右。每个词有解释的听解释，效率对我而言稍高一些。第二天复习的时候注意换个题型考察自己。一些可以用到作文里的经典例句可以提前摘抄下来，以备练习作文时套用。&lt;/li&gt;
   &lt;li&gt;辅导书：做了黄剑的阅读理解150提高版，但是感觉书的质量离真题还是差了一些，要是愿意做也可以当个参考。还用了黄剑的历年真题和写作书（他的书全都是黄色的）。&lt;/li&gt;
-  &lt;li&gt;具体思路：每天花半个小时到一个小时背150个单词，考前都不能停下。暑假开始做考研英语真题，一套卷子拆成两三天慢慢做（不用做写作），最好用铅笔写，做完之后看解析，想自己思路哪里不对。全部做完了把笔迹擦掉，隔几天再做一遍，一两天一份（不用做写作）。做完了就一天一节黄剑阅读理解，这个书很怪，个人答案有些奇怪。不过也不用管，反正保持每天阅读就行了。考前一个月看一看他的作文书，背一背小作文模板，写写大作文（三天一篇），上考场就基本不慌了。&lt;/li&gt;
+  &lt;li&gt;具体思路：每天花半个小时到一个小时背150个单词，考前都不能停下。暑假开始做考研英语真题，一套卷子拆成两三天慢慢做（不用做写作），最好用铅笔写，做完之后看解析，想自己思路哪里不对。全部做完了把笔迹擦掉，隔几天再做一遍，一两天一份（不用做写作）。做完了就一天一节黄剑阅读理解，这个书很怪，个人答案有些奇怪。不过也不用管，反正保持每天阅读就行了。考前一个月看一看他的作文书，背一背小作文模板，练练大作文，上考场就基本不慌了。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;4-专业课&quot;&gt;4. 专业课&lt;/h4&gt;
@@ -182,7 +179,7 @@ spark-shell
 &lt;h4 id=&quot;5-关于网课视频&quot;&gt;5. 关于网课视频&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;我的视频基本都是在大傻考研网这个公众号找的（他也有微博号），这个更新的比较快。&lt;/li&gt;
+  &lt;li&gt;一般买书送的视频都不太靠谱，我的视频基本都是在大傻考研网这个公众号找的（他也有微博号），这个更新的比较快。&lt;/li&gt;
   &lt;li&gt;如果想要更及时的视频，请上&lt;strong&gt;B站&lt;/strong&gt;，多搜搜老师的名字有惊喜，特别是徐涛的视频。&lt;/li&gt;
   &lt;li&gt;如果现在找不到资源，数学可以看去年的，尤其是线性代数。&lt;/li&gt;
 &lt;/ul&gt;
@@ -190,8 +187,7 @@ spark-shell
 &lt;h4 id=&quot;6-关于流量&quot;&gt;6. 关于流量&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;如果你在公众号找的，就开个一年的百度云会员，200多块钱，去图书馆三楼机房下视频。&lt;/li&gt;
-  &lt;li&gt;如果你在B站找的，多买点流量或者去图书馆三楼机房看。&lt;/li&gt;
+  &lt;li&gt;开个一年的百度云会员，200多块钱，去图书馆三楼机房下视频或看B站视频。&lt;/li&gt;
   &lt;li&gt;最好搞个内网穿透，把这一年流量问题解决掉，但是稍微有些麻烦，没时间的话请忽略。&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -200,19 +196,19 @@ spark-shell
 &lt;ul&gt;
   &lt;li&gt;晚上七点半准时选第二天图书馆的座位，如果需要三楼的电脑，请早起抢座。&lt;/li&gt;
   &lt;li&gt;考试前一周是四六级考试，请抢好座位。&lt;/li&gt;
-  &lt;li&gt;年末背政治犯困，请移步一楼站着背书，一楼可能有点冷风，穿厚点，别感冒了。&lt;/li&gt;
-  &lt;li&gt;注意坐姿，眼镜干涩请备好眼药水。&lt;/li&gt;
+  &lt;li&gt;年末背政治犯困，可移步一楼站着背书，一楼可能有点冷风，穿厚点，别感冒了。&lt;/li&gt;
+  &lt;li&gt;注意坐姿，眼镜干涩备好眼药水。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;复试&quot;&gt;复试&lt;/h3&gt;
+&lt;h3 id=&quot;二复试&quot;&gt;二、复试&lt;/h3&gt;
 
-&lt;p&gt;考完初试，休息几天，就抓紧准备复试吧。看看报考方向需要的知识，最好看那么一两本完整的入门书，不至于到时候慌了阵脚。多做做OJ，即使没有进复试也是在积累，这个怎么着也不会亏。&lt;/p&gt;
+&lt;p&gt;考完初试，休息几天，就抓紧准备复试吧。看看报考方向需要的知识，最好看那么一两本完整的入门书，不至于到时候慌了阵脚。多做做OJ，即使没有进复试也是在为以后积累，这个怎么着也不亏。&lt;/p&gt;
 
-&lt;p&gt;具体过程。进去之后打招呼，问好。老师英语问看过什么大数据的书、什么金融的书，然后就开始聊项目了。讲了讲Adaboost算法的具体实现，但是我没有说得特别清楚，有些紧张。总的来说和上午的几个小伙伴差不多，问题都不算太刁钻。&lt;/p&gt;
+&lt;p&gt;具体过程。进去之后敲门、向老师们问好。老师英语问看过什么大数据的书、什么金融的书，既然没怎么看过金融的书为什么报这个方向（那就暑假在补呗……）。然后就开始聊项目了。讲了讲Adaboost算法原理和具体实现，但是具体实现没有说得特别清楚，有些紧张。总的来说和上午的几个小伙伴差不多，问题都不算太刁钻，都是顺着回答的不断深入地问。&lt;/p&gt;
 
-&lt;h3 id=&quot;后记&quot;&gt;后记&lt;/h3&gt;
+&lt;h3 id=&quot;三后记&quot;&gt;三、后记&lt;/h3&gt;
 
-&lt;p&gt;想想这半年多的确还是辛苦，走过了一些弯路，当然也得到了很多人的帮助，在此感谢爸爸妈妈、各位叔叔阿姨、各位老师同学的理解和支持。感谢舍友们对寝室两个考研的关照。也感谢肥猫一直陪我学习，要是没有肥猫的帮助，我不可能坚持下来。本来想着如果上不了，我也不打算再来一次了。结果3月16号复试结束，3月19日晚上就收到了拟录取通知，然而肥猫运气稍差了一些，还在努力地争取着自己的未来。&lt;/p&gt;
+&lt;p&gt;想想这半年多的确还是辛苦，从八月回学校真正开始看视频到十二月结束考试，走过了一些弯路，当然也得到了很多人的帮助。在此感谢爸爸妈妈、各位叔叔阿姨、各位老师同学的理解和支持。感谢舍友们对寝室两个考研党的关照。也感谢肥猫一直陪我学习，要是没有肥猫的帮助，我不可能坚持下来。本来想着如果上不了，我也不打算再来一次了。结果3月16号复试结束，3月19日晚上就收到了拟录取通知，然而肥猫运气稍差了一些，还在努力地争取着自己的未来。&lt;/p&gt;
 
 &lt;p&gt;顺境需谨慎，不顺才是是常态，愿你我都有光明的未来。&lt;/p&gt;
 </description>
@@ -320,8 +316,6 @@ touch ssh
         <guid isPermaLink="true">http://localhost:4000/2018/01/05/raspberry-pi/</guid>
         
         <category>树莓派</category>
-        
-        <category>校园网免流</category>
         
         
       </item>
