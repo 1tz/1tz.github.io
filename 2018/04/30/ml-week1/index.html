@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An undergraduate in Beijing Normal University">
+    <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Machine Learning Week 1 - 俄罗斯韬娃 | 1tz's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2018/04/30/ml-week1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    <!-- 数学公式 -->
+    <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">俄罗斯韬娃</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/portfolio/">Portfolio</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-big-data.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-big-data.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
+                        
+                    </div>
+                    <h1>Machine Learning Week 1</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by 1tz on April 30, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h2 id="1-introduction">1. Introduction</h2>
+
+<h3 id="11-what-is-machine-learning">1.1 What is Machine Learning?</h3>
+
+<p>Two definitions of Machine Learning are offered. Arthur Samuel described it as: “the field of study that gives computers the ability to learn without being explicitly programmed.” This is an older, informal definition.</p>
+
+<p>Tom Mitchell provides a more modern definition: “A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.”</p>
+
+<p>Example: playing checkers.</p>
+
+<p>E = the experience of playing many games of checkers</p>
+
+<p>T = the task of playing checkers.</p>
+
+<p>P = the probability that the program will win the next game.</p>
+
+<p>In general, any machine learning problem can be assigned to one of two broad classifications:</p>
+
+<p>Supervised learning and Unsupervised learning.</p>
+
+<h3 id="12-supervised-learning">1.2 Supervised Learning</h3>
+
+<p>In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output.</p>
+
+<p>Supervised learning problems are categorized into “regression” and “classification” problems. In a regression problem, we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function. In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<p>Given data about the size of houses on the real estate market, try to predict their price. Price as a function of size is a continuous output, so this is a regression problem.</p>
+
+<p>We could turn this example into a classification problem by instead making our output about whether the house “sells for more or less than the asking price.” Here we are classifying the houses based on price into two discrete categories.</p>
+
+<p><strong>Example 2</strong>:</p>
+
+<p>(a) Regression - Given a picture of a person, we have to predict their age on the basis of the given picture</p>
+
+<p>(b) Classification - Given a patient with a tumor, we have to predict whether the tumor is malignant or benign.</p>
+
+<h3 id="13-unsupervised-learning">1.3 Unsupervised Learning</h3>
+
+<p>Unsupervised learning allows us to approach problems with little or no idea what our results should look like. We can derive structure from data where we don’t necessarily know the effect of the variables.</p>
+
+<p>We can derive this structure by clustering the data based on relationships among the variables in the data.</p>
+
+<p>With unsupervised learning there is no feedback based on the prediction results.</p>
+
+<p><strong>Example:</strong></p>
+
+<p>Clustering: Take a collection of 1,000,000 different genes, and find a way to automatically group these genes into groups that are somehow similar or related by different variables, such as lifespan, location, roles, and so on.</p>
+
+<p>Non-clustering: The “Cocktail Party Algorithm”, allows you to find structure in a chaotic environment. (i.e. identifying individual voices and music from a mesh of sounds at a <a href="https://en.wikipedia.org/wiki/Cocktail_party_effect">cocktail party</a>).</p>
+
+<h2 id="2-linear-regression-with-one-variable">2. Linear Regression with One Variable</h2>
+
+<h3 id="21-model-representation">2.1 Model Representation</h3>
+
+<p>To establish notation for future use, we’ll use $x^{(i)}$ to denote the “input” variables (living area in this example), also called input features, and $y{(i)}$ to denote the “output” or target variable that we are trying to predict (price). A pair $(x^{(i)},y^{(i)})$ is called a training example, and the dataset that we’ll be using to learn—a list of m training examples $(x^{(i)},y^{(i)});i=1,…,m$—is called a training set. Note that the superscript “(i)” in the notation is simply an index into the training set, and has nothing to do with exponentiation. We will also use X to denote the space of input values, and Y to denote the space of output values. In this example, X = Y = ℝ.</p>
+
+<p>To describe the supervised learning problem slightly more formally, our goal is, given a training set, to learn a function h : X → Y so that h(x) is a “good” predictor for the corresponding value of y. For historical reasons, this function h is called a hypothesis. Seen pictorially, the process is therefore like this:</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fqqdi3zexhj30az078wes.jpg" alt="img" /></p>
+
+<p>When the target variable that we’re trying to predict is continuous, such as in our housing example, we call the learning problem a regression problem. When y can take on only a small number of discrete values (such as if, given the living area, we wanted to predict if a dwelling is a house or an apartment, say), we call it a classification problem.</p>
+
+<h3 id="22-the-hypothesis-function">2.2 The Hypothesis Function</h3>
+
+<p>Our hypothesis function has the general form:</p>
+
+<p>$\hat{y}=h_θ(x)=θ_0+θ_1x$</p>
+
+<p>Note that this is like the equation of a straight line. We give to $h_θ(x)$ values for $θ_0$ and $θ_1$ to get our estimated output $\hat{y}$. In other words, we are trying to create a function called $h_θ$ that is trying to map our input data (the x’s) to our output data (the y’s).</p>
+
+<p><strong>Example:</strong></p>
+
+<p>Suppose we have the following set of training data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>input x</th>
+      <th>output y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Now we can make a random guess about our hθ function: $θ_0=2$ and $θ_1=2$. The hypothesis function becomes $h_θ(x)=2+2x$.</p>
+
+<p>So for input of 1 to our hypothesis, y will be 4. This is off by 3. Note that we will be trying out various values of $θ_0$ and $θ_1$ to try to find values which provide the best possible “fit” or the most representative “straight line” through the data points mapped on the x-y plane.</p>
+
+<h3 id="23-cost-function">2.3 Cost Function</h3>
+
+<p>We can measure the accuracy of our hypothesis function by using a <strong>cost function</strong>. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x’s and the actual output y’s.</p>
+
+<script type="math/tex; mode=display">J(θ_0,θ_1)=\frac{1}{2m}\sum_{i=1}^{m}(\widehat{y}_i−y_i)^2=\frac{1}{2m}\sum_{i=1}^{m}(h_θ(x_i)−y_i)^2</script>
+
+<p>To break it apart, it is $\frac{1}{2} \bar x$ where $\bar x$ is the mean of the squares of $h_θ(x_i)−y_i$ , or the difference between the predicted value and the actual value.</p>
+
+<p>This function is otherwise called the “Squared error function”, or “Mean squared error”. The mean is halved $(\frac{1}{2m})​$ as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $(\frac{1}{2})​$ term. The following image summarizes what the cost function does:</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fqqdhwkrbhj30i60aatak.jpg" alt="img" /></p>
+
+<h3 id="24-cost-function---intuition-i">2.4 Cost Function - Intuition I</h3>
+
+<p>If we try to think of it in visual terms, our training data set is scattered on the x-y plane. We are trying to make a straight line (defined by $h_θ(x)$) which passes through these scattered data points.</p>
+
+<p>Our objective is to get the best possible line. The best possible line will be such so that the average squared vertical distances of the scattered points from the line will be the least. Ideally, the line should pass through all the points of our training data set. In such a case, the value of $J(θ_0,θ_1)$ will be 0. The following example shows the ideal situation where we have a cost function of 0.</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fqqe0hm9hyj30bf069dgo.jpg" alt="img" /></p>
+
+<p>When $θ_1=1$, we get a slope of 1 which goes through every single data point in our model. Conversely, when $θ_1=0.5$, we see the vertical distance from our fit to the data points increase.</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fqqe0kdkqrj30ba06adgi.jpg" alt="img" /></p>
+
+<p>This increases our cost function to 0.58. Plotting several other points yields to the following graph:</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqqe0mpd6jj308g081dge.jpg" alt="img" /></p>
+
+<p>Thus as a goal, we should try to minimize the cost function. In this case, $θ_1=1$ is our global minimum.</p>
+
+<h3 id="25-cost-function---intuition-ii">2.5 Cost Function - Intuition II</h3>
+
+<p>A contour plot is a graph that contains many contour lines. A contour line of a two variable function has a constant value at all points of the same line. An example of such a graph is the one to the right below.</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqqyl9uw92j30ic09qgo3.jpg" alt="img" /></p>
+
+<p>Taking any color and going along the ‘circle’, one would expect to get the same value of the cost function. For example, the three green points found on the green line above have the same value for $J(θ_0,θ_1)$ and as a result, they are found along the same line. The circled x displays the value of the cost function for the graph on the left when $θ_0 = 800$ and $θ_1= -0.15$. Taking another h(x) and plotting its contour plot, one gets the following graphs:</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqqylauengj30i50a476m.jpg" alt="img" /></p>
+
+<p>When $θ_0 = 360$ and $θ_1 = 0$, the value of $J(θ_0,θ_1)$ in the contour plot gets closer to the center thus reducing the cost function error. Now giving our hypothesis function a slightly positive slope results in a better fit of the data.</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqqyl8lrv8j30hy08qgns.jpg" alt="img" /></p>
+
+<p>The graph above minimizes the cost function as much as possible and consequently, the result of $θ_1$ and $θ_0$ tend to be around 0.12 and 250 respectively. Plotting those values on our graph to the right seems to put our point in the center of the inner most ‘circle’.</p>
+
+<h3 id="26-gradient-descent">2.6 Gradient Descent</h3>
+
+<p>So we have our hypothesis function and we have a way of measuring how well it fits into the data. Now we need to estimate the parameters in the hypothesis function. That’s where gradient descent comes in.</p>
+
+<p>Imagine that we graph our hypothesis function based on its fields $θ_0$ and $θ_1$ (actually we are graphing the cost function as a function of the parameter estimates). We are not graphing x and y itself, but the parameter range of our hypothesis function and the cost resulting from selecting a particular set of parameters.</p>
+
+<p>We put $θ_0$ on the x axis and $θ_1$ on the y axis, with the cost function on the vertical z axis. The points on our graph will be the result of the cost function using our hypothesis with those specific theta parameters. The graph below depicts such a setup.</p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqqzup3o06j30ft08etby.jpg" alt="img" /></p>
+
+<p>We will know that we have succeeded when our cost function is at the very bottom of the pits in our graph, i.e. when its value is the minimum. The red arrows show the minimum points in the graph.</p>
+
+<p>The way we do this is by taking the derivative (the tangential line to a function) of our cost function. The slope of the tangent is the derivative at that point and it will give us a direction to move towards. We make steps down the cost function in the direction with the steepest descent. The size of each step is determined by the parameter α, which is called the learning rate.</p>
+
+<p>For example, the distance between each ‘star’ in the graph above represents a step determined by our parameter α. A smaller α would result in a smaller step and a larger α results in a larger step. The direction in which the step is taken is determined by the partial derivative of J(θ0,θ1). Depending on where one starts on the graph, one could end up at different points. The image above shows us two different starting points that end up in two different places.</p>
+
+<p>The gradient descent algorithm is:</p>
+
+<p>repeat until convergence:</p>
+
+<p>$θ_j:=θ_j−α\frac {∂}{∂θ_j}J(θ_0,θ_1)$</p>
+
+<p>where</p>
+
+<p>j=0,1 represents the feature index number.</p>
+
+<p>At each iteration j, one should simultaneously update the parameters $θ_1,θ_2,…,θ_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation.</p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqqzulsm5oj30i903s75a.jpg" alt="img" /></p>
+
+<h3 id="27-gradient-descent-intuition">2.7 Gradient Descent Intuition</h3>
+
+<p>In this video we explored the scenario where we used one parameter $θ_1$ and plotted its cost function to implement a gradient descent. Our formula for a single parameter was :</p>
+
+<p>Repeat until convergence:</p>
+
+<p>$θ_1:=θ_1−α\frac {d}{dθ_1}J(θ_1)$</p>
+
+<p>Regardless of the slope’s sign for $\frac {d}{dθ_1}J(θ_1)$, $θ_1$ eventually converges to its minimum value. The following graph shows that when the slope is negative, the value of $θ_1$ increases and when it is positive, the value of $θ_1$ decreases.</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqqzuqgjgwj30ho0a4myg.jpg" alt="img" /></p>
+
+<p>On a side note, we should adjust our parameter α to ensure that the gradient descent algorithm converges in a reasonable time. Failure to converge or too much time to obtain the minimum value imply that our step size is wrong.</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fqqzuix1r2j30if0a5gmx.jpg" alt="img" /></p>
+
+<h4 id="271-how-does-gradient-descent-converge-with-a-fixed-step-size-α">2.7.1 How does gradient descent converge with a fixed step size $α$?</h4>
+
+<p>The intuition behind the convergence is that $\frac {d}{dθ_1}J(θ_1)$ approaches 0 as we approach the bottom of our convex function. At the minimum, the derivative will always be 0 and thus we get:</p>
+
+<p>$θ_1:=θ_1−α∗0$</p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqqzuftdncj30i60a2400.jpg" alt="img" /></p>
+
+<h3 id="28-gradient-descent-for-linear-regression">2.8 Gradient Descent For Linear Regression</h3>
+
+<p>When specifically applied to the case of linear regression, a new form of the gradient descent equation can be derived. We can substitute our actual cost function and our actual hypothesis function and modify the equation to :</p>
+
+<p>repeat until convergence: {</p>
+
+<script type="math/tex; mode=display">θ_0:=θ_0−α\frac {1}{m}∑_{i=1}^{m}(h_θ(x_i)−y_i)</script>
+
+<script type="math/tex; mode=display">θ_1:=θ_1−α\frac {1}{m}∑_{i=1}^{m}((h_θ(x_i)−y_i)*x_i)</script>
+
+<p>}</p>
+
+<p>where m is the size of the training set, $θ_0$ a constant that will be changing simultaneously with $θ_1$ and $x_i,y_i$ are values of the given training set (data).</p>
+
+<p>Note that we have separated out the two cases for $θ_j$ into separate equations for $θ_0$ and $θ_1$; and that for $θ_1$ we are multiplying $x_i$ at the end due to the derivative. The following is a derivation of $\frac{∂}{∂θ_j}J(θ)$ for a single example :</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fqr0etb4uzj309s05a3yt.jpg" alt="img" /></p>
+
+<p>The point of all this is that if we start with a guess for our hypothesis and then repeatedly apply these gradient descent equations, our hypothesis will become more and more accurate.</p>
+
+<p>So, this is simply gradient descent on the original cost function J. This method looks at every example in the entire training set on every step, and is called <strong>batch gradient descent</strong>. Note that, while gradient descent can be susceptible to local minima in general, the optimization problem we have posed here for linear regression has only one global, and no other local, optima; thus gradient descent always converges (assuming the learning rate α is not too large) to the global minimum. Indeed, J is a convex quadratic function. Here is an example of gradient descent as it is run to minimize a quadratic function.</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqr0eu9wxnj308s06ot9c.jpg" alt="img" /></p>
+
+<p>The ellipses shown above are the contours of a quadratic function. Also shown is the trajectory taken by gradient descent, which was initialized at (48,30). The x’s in the figure (joined by straight lines) mark the successive values of θ that gradient descent went through as it converged to its minimum.</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/03/19/big-data-env/" data-toggle="tooltip" data-placement="top" title="Mac OS下大数据工具环境搭建">
+                        Previous<br>
+                        <span>Mac OS下大数据工具环境搭建</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/04/30/ml-week2/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 2">
+                        Next<br>
+                        <span>Machine Learning Week 2</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#考研" title="考研" rel="2">
+                                    考研
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#机器学习" title="机器学习" rel="3">
+                                    机器学习
+                                </a>
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://lvxiaoxin.github.io/">lvxiaoxin</a></li>
+                    
+                        <li><a href="http://xuhongxu.com">Hongxu Xu</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "1tz";
+    var disqus_identifier = "/2018/04/30/ml-week1";
+    var disqus_url = "http://localhost:4000/2018/04/30/ml-week1/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/5761338752">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/1tz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 俄罗斯韬娃 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual
+        if ("") {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

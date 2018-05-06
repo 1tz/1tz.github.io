@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An undergraduate in Beijing Normal University">
+    <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Machine Learning Week 3 - 俄罗斯韬娃 | 1tz's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2018/04/30/ml-week3/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    <!-- 数学公式 -->
+    <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">俄罗斯韬娃</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/portfolio/">Portfolio</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-big-data.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-big-data.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
+                        
+                    </div>
+                    <h1>Machine Learning Week 3</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by 1tz on April 30, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h2 id="4-classification">4. Classification</h2>
+
+<p>To attempt classification, one method is to use linear regression and map all predictions greater than 0.5 as a 1 and all less than 0.5 as a 0. However, this method doesn’t work well because classification is not actually a linear function.</p>
+
+<p>The classification problem is just like the regression problem, except that the values we now want to predict take on only a small number of discrete values. For now, we will focus on the <strong>binary classification</strong> <strong>problem</strong> in which y can take on only two values, 0 and 1. (Most of what we say here will also generalize to the multiple-class case.) For instance, if we are trying to build a spam classifier for email, then $x^{(i)}$ may be some features of a piece of email, and y may be 1 if it is a piece of spam mail, and 0 otherwise. Hence, y∈{0,1}. 0 is also called the negative class, and 1 the positive class, and they are sometimes also denoted by the symbols “-” and “+.” Given $x^{(i)}$, the corresponding $y^{(i)}$ is also called the label for the training example.</p>
+
+<h3 id="41-hypothesis-representation">4.1 Hypothesis Representation</h3>
+
+<p>We could approach the classification problem ignoring the fact that y is discrete-valued, and use our old linear regression algorithm to try to predict y given x. However, it is easy to construct examples where this method performs very poorly. Intuitively, it also doesn’t make sense for hθ(x) to take values larger than 1 or smaller than 0 when we know that y ∈ {0, 1}. To fix this, let’s change the form for our hypotheses hθ(x)to satisfy 0≤hθ(x)≤1. This is accomplished by plugging θTx into the Logistic Function.</p>
+
+<p>Our new form uses the “Sigmoid Function,” also called the “Logistic Function”:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& h_\theta (x) = g ( \theta^T x ) \newline \newline& z = \theta^T x \newline& g(z) = \dfrac{1}{1 + e^{-z}}\end{align*} %]]></script>
+
+<p>The following image shows us what the sigmoid function looks like:</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fquoucaittj30my03k74g.jpg" alt="img" /></p>
+
+<p>The function g(z), shown here, maps any real number to the (0, 1) interval, making it useful for transforming an arbitrary-valued function into a function better suited for classification.</p>
+
+<p>hθ(x) will give us the <strong>probability</strong> that our output is 1. For example, $h_θ(x)=0.7$ gives us a probability of 70% that our output is 1. Our probability that our prediction is 0 is just the complement of our probability that it is 1 (e.g. if probability that it is 1 is 70%, then the probability that it is 0 is 30%).</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& h_\theta(x) = P(y=1 | x ; \theta) = 1 - P(y=0 | x ; \theta) \newline& P(y = 0 | x;\theta) + P(y = 1 | x ; \theta) = 1\end{align*} %]]></script>
+
+<h3 id="42-decision-boundary">4.2 Decision Boundary</h3>
+
+<p>In order to get our discrete 0 or 1 classification, we can translate the output of the hypothesis function as follows:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& h_\theta(x) \geq 0.5 \rightarrow y = 1 \newline& h_\theta(x) < 0.5 \rightarrow y = 0 \newline\end{align*} %]]></script>
+
+<p>The way our logistic function g behaves is that when its input is greater than or equal to zero, its output is greater than or equal to 0.5:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& g(z) \geq 0.5 \newline& when \; z \geq 0\end{align*} %]]></script>
+
+<p>Remember.</p>
+
+<script type="math/tex; mode=display">\begin{align*}z=0, e^{0}=1 \Rightarrow g(z)=1/2\newline z \to \infty, e^{-\infty} \to 0 \Rightarrow g(z)=1 \newline z \to -\infty, e^{\infty}\to \infty \Rightarrow g(z)=0 \end{align*}</script>
+
+<p>So if our input to g is θTX, then that means:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& h_\theta(x) = g(\theta^T x) \geq 0.5 \newline& when \; \theta^T x \geq 0\end{align*} %]]></script>
+
+<p>From these statements we can now say:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& \theta^T x \geq 0 \Rightarrow y = 1 \newline& \theta^T x < 0 \Rightarrow y = 0 \newline\end{align*} %]]></script>
+
+<p>The <strong>decision boundary</strong> is the line that separates the area where y = 0 and where y = 1. It is created by our hypothesis function.</p>
+
+<p><strong>Example</strong>:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& \theta = \begin{bmatrix}5 \newline -1 \newline 0\end{bmatrix} \newline & y = 1 \; if \; 5 + (-1) x_1 + 0 x_2 \geq 0 \newline & 5 - x_1 \geq 0 \newline & - x_1 \geq -5 \newline& x_1 \leq 5 \newline \end{align*} %]]></script>
+
+<p>In this case, our decision boundary is a straight vertical line placed on the graph where $x_1=5$, and everything to the left of that denotes y = 1, while everything to the right denotes y = 0.</p>
+
+<p>Again, the input to the sigmoid function g(z) (e.g. $θ^TX$) doesn’t need to be linear, and could be a function that describes a circle (e.g. $z=θ_0+θ_1x^2_1+θ_2x^2_2$) or any shape to fit our data.</p>
+
+<h3 id="43-cost-function">4.3 Cost Function</h3>
+
+<p>We cannot use the same cost function that we use for linear regression because the Logistic Function will cause the output to be wavy, causing many local optima. In other words, it will not be a convex function.</p>
+
+<p>Instead, our cost function for logistic regression looks like:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& J(\theta) = \dfrac{1}{m} \sum_{i=1}^m \mathrm{Cost}(h_\theta(x^{(i)}),y^{(i)}) \newline & \mathrm{Cost}(h_\theta(x),y) = -\log(h_\theta(x)) \; & \text{if y = 1} \newline & \mathrm{Cost}(h_\theta(x),y) = -\log(1-h_\theta(x)) \; & \text{if y = 0}\end{align*} %]]></script>
+
+<p>When y = 1, we get the following plot for $J(θ)$ vs $h_θ(x)$:</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqx182bk1vj308c06s0t7.jpg" alt="img" /></p>
+
+<p>Similarly, when y = 0, we get the following plot for $J(θ)$ vs $h_θ(x)$:</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fqx1839j8fj308b07sdg8.jpg" alt="img" /></p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& \mathrm{Cost}(h_\theta(x),y) = 0 \text{ if } h_\theta(x) = y \newline & \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty \text{ if } y = 0 \; \mathrm{and} \; h_\theta(x) \rightarrow 1 \newline & \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty \text{ if } y = 1 \; \mathrm{and} \; h_\theta(x) \rightarrow 0 \newline \end{align*} %]]></script>
+
+<p>If our correct answer ‘y’ is 0, then the cost function will be 0 if our hypothesis function also outputs 0. If our hypothesis approaches 1, then the cost function will approach infinity.</p>
+
+<p>If our correct answer ‘y’ is 1, then the cost function will be 0 if our hypothesis function outputs 1. If our hypothesis approaches 0, then the cost function will approach infinity.</p>
+
+<p>Note that writing the cost function in this way guarantees that J(θ) is convex for logistic regression.</p>
+
+<h3 id="44-simplified-cost-function-and-gradient-descent">4.4 Simplified Cost Function and Gradient Descent</h3>
+
+<p>We can compress our cost function’s two conditional cases into one case:</p>
+
+<script type="math/tex; mode=display">Cost(h_θ(x),y)=−ylog(h_θ(x))−(1−y)log(1−h_θ(x))</script>
+
+<p>Notice that when y is equal to 1, then the second term (1−y)log(1−hθ(x)) will be zero and will not affect the result. If y is equal to 0, then the first term −ylog(hθ(x)) will be zero and will not affect the result.</p>
+
+<p>We can fully write out our entire cost function as follows:</p>
+
+<script type="math/tex; mode=display">J(\theta) = - \frac{1}{m} \displaystyle \sum_{i=1}^m [y^{(i)}\log (h_\theta (x^{(i)})) + (1 - y^{(i)})\log (1 - h_\theta(x^{(i)}))]</script>
+
+<p>A vectorized implementation is:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} & h = g(X\theta)\newline & J(\theta) = \frac{1}{m} \cdot \left(-y^{T}\log(h)-(1-y)^{T}\log(1-h)\right) \end{align*} %]]></script>
+
+<h3 id="45-gradient-descent"><strong>4.5 Gradient Descent</strong></h3>
+
+<p>Remember that the general form of gradient descent is:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& Repeat \; \lbrace \newline & \; \theta_j := \theta_j - \alpha \dfrac{\partial}{\partial \theta_j}J(\theta) \newline & \rbrace\end{align*} %]]></script>
+
+<p>We can work out the derivative part using calculus to get:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} & Repeat \; \lbrace \newline & \; \theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \newline & \rbrace \end{align*} %]]></script>
+
+<p>Notice that this algorithm is identical to the one we used in linear regression. We still have to simultaneously update all values in theta.</p>
+
+<p>A vectorized implementation is:</p>
+
+<script type="math/tex; mode=display">θ:=θ−\frac{α}{m}X^T(g(Xθ)−\hat{y})</script>
+
+<h3 id="46-advanced-optimization">4.6 Advanced Optimization</h3>
+
+<p>“Conjugate gradient”, “BFGS”, and “L-BFGS” are more sophisticated, faster ways to optimize $θ$ that can be used instead of gradient descent. We suggest that you should not write these more sophisticated algorithms yourself (unless you are an expert in numerical computing) but use the libraries instead, as they’re already tested and highly optimized. Octave provides them.</p>
+
+<p>We first need to provide a function that evaluates the following two functions for a given input value θ:</p>
+
+<p><script type="math/tex">J(θ)</script>
+<script type="math/tex">\frac{∂}{∂θ_j}J(θ)</script></p>
+
+<p>We can write a single function that returns both of these:</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">jVal</span><span class="p">,</span> <span class="nb">gradient</span><span class="p">]</span> <span class="o">=</span> <span class="n">costFunction</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+  <span class="n">jVal</span> <span class="o">=</span> <span class="p">[</span><span class="k">...</span><span class="c">code to compute J(theta)...];</span>
+  <span class="nb">gradient</span> <span class="o">=</span> <span class="p">[</span><span class="k">...</span><span class="c">code to compute derivative of J(theta)...];</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Then we can use octave’s “fminunc()” optimization algorithm along with the “optimset()” function that creates an object containing the options we want to send to “fminunc()”.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span> <span class="o">=</span> <span class="nb">optimset</span><span class="p">(</span><span class="s1">'GradObj'</span><span class="p">,</span> <span class="s1">'on'</span><span class="p">,</span> <span class="s1">'MaxIter'</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">initialTheta</span> <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+   <span class="p">[</span><span class="n">optTheta</span><span class="p">,</span> <span class="n">functionVal</span><span class="p">,</span> <span class="n">exitFlag</span><span class="p">]</span> <span class="o">=</span> <span class="n">fminunc</span><span class="p">(</span><span class="o">@</span><span class="n">costFunction</span><span class="p">,</span> <span class="n">initialTheta</span><span class="p">,</span> 
+     <span class="n">options</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>We give to the function “fminunc()” our cost function, our initial vector of theta values, and the “options” object that we created beforehand.</p>
+
+<h3 id="47-multiclass-classification-one-vs-all">4.7 Multiclass Classification: One-vs-all</h3>
+
+<p>Now we will approach the classification of data when we have more than two categories. Instead of y = {0,1} we will expand our definition so that y = {0,1…n}.</p>
+
+<p>Since y = {0,1…n}, we divide our problem into n+1 (+1 because the index starts at 0) binary classification problems; in each one, we predict the probability that ‘y’ is a member of one of our classes.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& y \in \lbrace0, 1 ... n\rbrace \newline& h_\theta^{(0)}(x) = P(y = 0 | x ; \theta) \newline& h_\theta^{(1)}(x) = P(y = 1 | x ; \theta) \newline& \cdots \newline& h_\theta^{(n)}(x) = P(y = n | x ; \theta) \newline& \mathrm{prediction} = \max_i( h_\theta ^{(i)}(x) )\newline\end{align*} %]]></script>
+
+<p>We are basically choosing one class and then lumping all the others into a single second class. We do this repeatedly, applying binary logistic regression to each case, and then use the hypothesis that returned the highest value as our prediction.</p>
+
+<p>The following image shows how one could classify 3 classes:</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fqx182rhj0j30d507agmp.jpg" alt="img" /></p>
+
+<p><strong>To summarize:</strong></p>
+
+<p>Train a logistic regression classifier $h_θ(x)$ for each class￼ to predict the probability that ￼ ￼y = i￼ ￼.</p>
+
+<p>To make a prediction on a new x, pick the class ￼that maximizes $h_θ(x)$</p>
+
+<h3 id="48-the-problem-of-overfitting">4.8 The Problem of Overfitting</h3>
+
+<p>Consider the problem of predicting y from x ∈ R. The leftmost figure below shows the result of fitting a $y = θ_0+θ_1x$ to a dataset. We see that the data doesn’t really lie on straight line, and so the fit is not very good.</p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqy3d4x38dj30f0046dg2.jpg" alt="img" /></p>
+
+<p>Instead, if we had added an extra feature $x^2$ , and fit $y=θ_0+θ_1x+θ_2x^2$ , then we obtain a slightly better fit to the data (See middle figure). Naively, it might seem that the more features we add, the better. However, there is also a danger in adding too many features: The rightmost figure is the result of fitting a 5th order polynomial $y=∑^{5}_{j=0}θ_jx^j$. We see that even though the fitted curve passes through the data perfectly, we would not expect this to be a very good predictor of, say, housing prices (y) for different living areas (x). Without formally defining what these terms mean, we’ll say the figure on the left shows an instance of <strong>underfitting</strong>—in which the data clearly shows structure not captured by the model—and the figure on the right is an example of <strong>overfitting</strong>.</p>
+
+<p>Underfitting, or high bias, is when the form of our hypothesis function h maps poorly to the trend of the data. It is usually caused by a function that is too simple or uses too few features. At the other extreme, overfitting, or high variance, is caused by a hypothesis function that fits the available data but does not generalize well to predict new data. It is usually caused by a complicated function that creates a lot of unnecessary curves and angles unrelated to the data.</p>
+
+<p>This terminology is applied to both linear and logistic regression. There are two main options to address the issue of overfitting:</p>
+
+<p>1) Reduce the number of features:</p>
+
+<ul>
+  <li>Manually select which features to keep.</li>
+  <li>Use a model selection algorithm (studied later in the course).</li>
+</ul>
+
+<p>2) Regularization</p>
+
+<ul>
+  <li>Keep all the features, but reduce the magnitude of parameters $θ_j$.</li>
+  <li>Regularization works well when we have a lot of slightly useful features.</li>
+</ul>
+
+<h3 id="49-cost-function">4.9 Cost Function</h3>
+
+<p>If we have overfitting from our hypothesis function, we can reduce the weight that some of the terms in our function carry by increasing their cost.</p>
+
+<p>Say we wanted to make the following function more quadratic:</p>
+
+<script type="math/tex; mode=display">θ_0+θ_1x+θ_2x^2+θ_3x^3+θ_4x^4</script>
+
+<p>We’ll want to eliminate the influence of $θ_3x^3$ and $θ_4x^4$ . Without actually getting rid of these features or changing the form of our hypothesis, we can instead modify our <strong>cost function</strong>:</p>
+
+<script type="math/tex; mode=display">min_θ \frac{1}{2m}∑^m_{i=1}(h_θ(x^{(i)})−y^{(i)})^2+1000⋅θ^2_3+1000⋅θ^2_4</script>
+
+<p>We’ve added two extra terms at the end to inflate the cost of $θ_3$ and $θ_4$. Now, in order for the cost function to get close to zero, we will have to reduce the values of $θ_3$ and $θ_4$ to near zero. This will in turn greatly reduce the values of $θ_3x^3$ and $θ_4x^4$ in our hypothesis function. As a result, we see that the new hypothesis (depicted by the pink curve) looks like a quadratic function but fits the data better due to the extra small terms $θ_3x^3$ and $θ_4x^4$.</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fr0rrwonzxj30gh091wfl.jpg" alt="img" /></p>
+
+<p>We could also regularize all of our theta parameters in a single summation as:</p>
+
+<script type="math/tex; mode=display">min_\theta\ \dfrac{1}{2m}\  [ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\ \sum_{j=1}^n \theta_j^2 ]</script>
+
+<p>The $λ​$, or lambda, is the <strong>regularization parameter</strong>. It determines how much the costs of our theta parameters are inflated.</p>
+
+<p>Using the above cost function with the extra summation, we can smooth the output of our hypothesis function to reduce overfitting. If lambda is chosen to be too large, it may smooth out the function too much and cause underfitting. Hence, what would happen if $λ=0$ or is too small ? If $λ$ is very small, $θ$ will not be restricted. So it will cause overfitting.</p>
+
+<h3 id="410-regularized-linear-regression">4.10 Regularized Linear Regression</h3>
+
+<p>We can apply regularization to both linear regression and logistic regression. We will approach linear regression first.</p>
+
+<h4 id="4101-gradient-descent">4.10.1 Gradient Descent</h4>
+
+<p>We will modify our gradient descent function to separate out θ0 from the rest of the parameters because we do not want to penalize $θ_0$.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} & \text{Repeat}\ \lbrace \newline & \ \ \ \ \theta_0 := \theta_0 - \alpha\ \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_0^{(i)} \newline & \ \ \ \ \theta_j := \theta_j - \alpha\ \left[ \left( \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)} \right) + \frac{\lambda}{m}\theta_j \right] &\ \ \ \ \ \ \ \ \ \ j \in \lbrace 1,2...n\rbrace\newline & \rbrace \end{align*} %]]></script>
+
+<p>The term $\frac{λ}{m}θ_j$ performs our regularization. With some manipulation our update rule can also be represented as:</p>
+
+<script type="math/tex; mode=display">θ_j:=θ_j(1−α\frac{λ}{m})−α\frac{1}{m}∑^m_{i=1}(h_θ(x^{(i)})−y^{(i)})x^{(i)}_j</script>
+
+<p>The first term in the above equation, $1−α\frac{λ}m$ will always be less than 1. Intuitively you can see it as reducing the value of $θ_j$ by some amount on every update. Notice that the second term is now exactly the same as it was before.</p>
+
+<h4 id="4102-normal-equation"><strong>4.10.2 Normal Equation</strong></h4>
+
+<p>Now let’s approach regularization using the alternate method of the non-iterative normal equation.</p>
+
+<p>To add in regularization, the equation is the same as our original, except that we add another term inside the parentheses:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& \theta = \left( X^TX + \lambda \cdot L \right)^{-1} X^Ty \newline& \text{where}\ \ L = \begin{bmatrix} 0 & & & & \newline & 1 & & & \newline & & 1 & & \newline & & & \ddots & \newline & & & & 1 \newline\end{bmatrix}\end{align*} %]]></script>
+
+<p>L is a matrix with 0 at the top left and 1’s down the diagonal, with 0’s everywhere else. It should have dimension (n+1)×(n+1). Intuitively, this is the identity matrix (though we are not including $x_0$), multiplied with a single real number λ.</p>
+
+<p>Recall that if m &lt; n, then $X^TX$ is non-invertible. However, when we add the term λ⋅L, then $X^TX + λ⋅L$ becomes invertible.</p>
+
+<h3 id="411-regularized-logistic-regression">4.11 Regularized Logistic Regression</h3>
+
+<p>We can regularize logistic regression in a similar way that we regularize linear regression. As a result, we can avoid overfitting. The following image shows how the regularized function, displayed by the pink line, is less likely to overfit than the non-regularized function represented by the blue line:</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fr0rr7x64lj30do07edh2.jpg" alt="img" /></p>
+
+<h4 id="4111-cost-function">4.11.1 Cost Function</h4>
+
+<p>Recall that our cost function for logistic regression was:</p>
+
+<script type="math/tex; mode=display">J(θ)=−\frac1m∑^m_{i=1}[y^{(i)} log(h_θ(x^{(i)}))+(1−y^{(i)}) log(1−h_θ(x^{(i)}))]</script>
+
+<p>We can regularize this equation by adding a term to the end:</p>
+
+<script type="math/tex; mode=display">J(\theta) = - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)}))\large] + \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2</script>
+
+<p>The second sum, $∑^n_{j=1}θ^2_j$ <strong>means to explicitly exclude</strong> the bias term, $θ_0$. I.e. the θ vector is indexed from 0 to n (holding n+1 values, $θ_0$ through $θ_n$), and this sum explicitly skips $θ_0$, by running from 1 to n, skipping 0. Thus, when computing the equation, we should continuously update the two following equations:</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fqy6zag3yhj30de06h75k.jpg" alt="img" /></p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/04/30/ml-week2/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 2">
+                        Previous<br>
+                        <span>Machine Learning Week 2</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/05/03/lhtl/" data-toggle="tooltip" data-placement="top" title="学习如何学习">
+                        Next<br>
+                        <span>学习如何学习</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#考研" title="考研" rel="2">
+                                    考研
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#机器学习" title="机器学习" rel="3">
+                                    机器学习
+                                </a>
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://lvxiaoxin.github.io/">lvxiaoxin</a></li>
+                    
+                        <li><a href="http://xuhongxu.com">Hongxu Xu</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "1tz";
+    var disqus_identifier = "/2018/04/30/ml-week3";
+    var disqus_url = "http://localhost:4000/2018/04/30/ml-week3/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/5761338752">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/1tz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 俄罗斯韬娃 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual
+        if ("") {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

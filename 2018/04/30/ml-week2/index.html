@@ -10,7 +10,7 @@
     <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
     <meta name="theme-color" content="#000000">
     
-    <title>Mac OS下大数据工具环境搭建 - 俄罗斯韬娃 | 1tz's Blog</title>
+    <title>Machine Learning Week 2 - 俄罗斯韬娃 | 1tz's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2018/03/19/big-data-env/">
+    <link rel="canonical" href="http://localhost:4000/2018/04/30/ml-week2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,15 +184,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
+                        <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
                         
                     </div>
-                    <h1>Mac OS下大数据工具环境搭建</h1>
+                    <h1>Machine Learning Week 2</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by 1tz on March 19, 2018</span>
+                    <span class="meta">Posted by 1tz on April 30, 2018</span>
                 </div>
             </div>
         </div>
@@ -213,114 +213,190 @@
                 <!-- Multi-Lingual -->
                 
 
-				<blockquote>
-  <p>本次配置具体运行环境如下：</p>
+				<h2 id="3-linear-regression-with-multiple-variables">3. Linear Regression with Multiple Variables</h2>
 
-  <p>macOS High Sierra 10.13.3</p>
+<h3 id="31-multiple-features">3.1 Multiple Features</h3>
 
-  <p>Java JDK 1.8.0</p>
+<p>Linear regression with multiple variables is also known as “multivariate linear regression”.</p>
 
-  <p>Hadoop 3.0.0</p>
+<p>We now introduce notation for equations where we can have any number of input variables.</p>
 
-  <p>Scala 2.12.4</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}x_j^{(i)} &= \text{value of feature } j \text{ in the }i^{th}\text{ training example} \newline x^{(i)}& = \text{the column vector of all the feature inputs of the }i^{th}\text{ training example} \newline m &= \text{the number of training examples} \newline n &= \left| x^{(i)} \right| ; \text{(the number of features)} \end{align*}​ %]]></script>
 
-  <p>Spark 2.3.0</p>
-</blockquote>
+<p>The multivariable form of the hypothesis function accommodating these multiple features is as follows:</p>
 
-<p>参考了很多帖子，然而很多并不适用。特此留下此马克，简洁易懂且适用，以便日后之需。</p>
+<script type="math/tex; mode=display">h_θ(x)=θ_0+θ_1x_1+θ_2x_2+θ_3x_3+⋯+θ_nx_n</script>
 
-<h3 id="准备工作配置ssh查看java路径">准备工作（配置ssh、查看Java路径）</h3>
+<p>In order to develop intuition about this function, we can think about $θ_0$ as the basic price of a house, $θ_1$ as the price per square meter, $θ_2$ as the price per floor, etc. $x_1$ will be the number of square meters in the house, $x_2$ the number of floors, etc.</p>
 
-<p>首先，打开系统偏好设置-共享-远程登录，勾选远程登录。然后打开 iTerm</p>
+<p>Using the definition of matrix multiplication, our multivariable hypothesis function can be concisely represented as:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看Java JDK路径，并记录</span>
-/usr/libexec/java_home <span class="nt">-V</span>
-<span class="c"># 使用 ssh-keygen 生成一对密钥，并将其用于免密登录</span>
-<span class="nb">cd</span> ~/.ssh
-ssh-keygen
-<span class="nb">cat </span>id_rsa.pub <span class="o">&gt;</span> authorized_keys
-<span class="c"># 判断是否成功免密登录</span>
-ssh localhost
-</code></pre></div></div>
+<script type="math/tex; mode=display">% <![CDATA[
+h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\…\\x_n\end{bmatrix}=θ^Tx %]]></script>
 
-<p>下面操作均在 <code class="highlighter-rouge">ssh localhost</code> 之后进行</p>
+<p>This is a vectorization of our hypothesis function for one training example; see the lessons on vectorization to learn more.</p>
 
-<h3 id="1-安装hadoop">1. 安装Hadoop</h3>
+<p>Remark: Note that for convenience reasons in this course we assume $x^{(i)}_0=1$ for $(i∈1,…,m)$.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Hadoop</span>
-brew install hadoop
-<span class="c"># 进入 Hadoop 路径，此处是 3.0.0 版本，其他版本自行更改命令</span>
-<span class="nb">cd</span> /usr/local/Cellar/hadoop/3.0.0/libexec/etc/hadoop
+<p>[<strong>Note</strong>: So that we can do matrix operations with theta and x, we will set $x^{(i)}<em>0 = 1$, for all values of i. This makes the two vectors ‘theta’ and $x</em>{(i)}$ match each other element-wise  (that is, have the same number of elements: n+1).]</p>
 
-vi hadoop-env.sh
-<span class="c"># 使用 /HADOOP_OPTS 查找到被注释的行，添加以下两行，第二行修改为 Java 路径，修改后保存退出</span>
-<span class="nb">export </span><span class="nv">HADOOP_OPTS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HADOOP_OPTS</span><span class="s2"> -Djava.net.preferIPv4Stack=true -Djava.security.krb5.realm= -Djava.security.krb5.kdc= "</span>
-<span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">"/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home"</span>
+<p>The training examples are stored in X row-wise, like such:</p>
 
-vi hdfs-site.xml
-<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
-&lt;property&gt;
-	&lt;name&gt;dfs.replication&lt;/name&gt;
-	&lt;value&gt;1&lt;/value&gt;
-&lt;/property&gt;
-&lt;property&gt;
-	&lt;name&gt;dfs.http.address&lt;/name&gt;
-	&lt;value&gt;0.0.0.0:50070&lt;/value&gt;
-&lt;/property&gt;
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}X = \begin{bmatrix}x^{(1)}_0 & x^{(1)}_1  \newline x^{(2)}_0 & x^{(2)}_1  \newline x^{(3)}_0 & x^{(3)}_1 \end{bmatrix}&,\theta = \begin{bmatrix}\theta_0 \newline \theta_1 \newline\end{bmatrix}\end{align*} %]]></script>
 
-vi mapred-site.xml
-<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
-&lt;property&gt;
-	&lt;name&gt;mapred.job.tracker&lt;/name&gt;
-	&lt;value&gt;localhost:8021&lt;/value&gt;
-&lt;/property&gt;
+<p>You can calculate the hypothesis as a column vector of size (m x 1) with:</p>
 
-vi core-site.xml
-<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
-&lt;property&gt;
-	&lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-&lt;value&gt;/usr/local/Cellar/hadoop/hdfs/tmp&lt;/value&gt;
-    &lt;description&gt;A base <span class="k">for </span>other temporary directories.&lt;/description&gt;
-&lt;/property&gt;
-&lt;property&gt;
-	&lt;name&gt;fs.default.name&lt;/name&gt;
-    &lt;value&gt;hdfs://localhost:8020&lt;/value&gt;
-&lt;/property&gt;
+<script type="math/tex; mode=display">h_θ(X)=Xθ</script>
 
-<span class="c"># 格式化后即可</span>
-hdfs namenode <span class="nt">-format</span>
+<p><strong>For the rest of these notes, and other lecture notes, X will represent a matrix of training examples</strong> $x_{(i)}$ <strong>stored row-wise.</strong></p>
 
-<span class="nb">cd</span> /usr/local/Cellar/hadoop/3.0.0/sbin
-<span class="c"># 启动 Hadoop，WARN 不用管，打开浏览器，查看 localhost 的 50070 端口和 8088 端口</span>
-./start-dfs.sh
-./start-yarn.sh
-<span class="c"># 停止 Hadoop</span>
-./stop-all.sh
+<h3 id="32-cost-function"><strong>3.2 Cost function</strong></h3>
 
-<span class="c"># 可以更改环境变量，之后可直接使用 start-dfs.sh 和 start-yarn.sh 来启动Hadoop</span>
-vi ~/.bash_profile
-<span class="c"># 添加以下在尾部，修改后保存退出</span>
-<span class="nb">export </span><span class="nv">HADOOP_HOME</span><span class="o">=</span>/usr/local/Cellar/hadoop/3.0.0
-<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HADOOP_HOME</span>/sbin:<span class="nv">$HADOOP_HOME</span>/bin
+<p>For the parameter vector θ (of type $ℝ^{n+1}$ or in $ℝ^{(n+1)×1}$, the cost function is:</p>
 
-<span class="nb">source</span> ~/.bash_profile
-</code></pre></div></div>
+<script type="math/tex; mode=display">J(θ)=\frac {1}{2m}∑_{i=1}^m(hθ(x(i))−y(i))^2</script>
 
-<h3 id="2-安装scala">2. 安装Scala</h3>
+<p>The vectorized version is:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Scala</span>
-brew install scala
-<span class="c"># 测试 Scala 安装成功</span>
-scala
-</code></pre></div></div>
+<script type="math/tex; mode=display">J(θ)=\frac{1}{2m}(Xθ−\hat y )^T(Xθ−\hat y )</script>
 
-<h3 id="3-安装spark">3. 安装Spark</h3>
+<p>Where $\hat{y}$ denotes the vector of all y values.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Spark</span>
-brew install apache-spark
-<span class="c"># 测试 Spark 安装成功</span>
-spark-shell
-</code></pre></div></div>
+<h3 id="33-gradient-descent-for-multiple-variables"><strong>3.3 Gradient Descent for Multiple Variables</strong></h3>
+
+<p>The gradient descent equation itself is generally the same form; we just have to repeat it for our ‘n’ features:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} & \text{repeat until convergence:} \; \lbrace \newline \; & \theta_0 := \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}\newline \; & \theta_1 := \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_1^{(i)} \newline \; & \theta_2 := \theta_2 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_2^{(i)} \newline & \cdots \newline \rbrace \end{align*} %]]></script>
+
+<p>In other words:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& \text{repeat until convergence:} \; \lbrace \newline \; & \theta_j := \theta_j - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)} \; & \text{for j := 0...n}\newline \rbrace\end{align*} %]]></script>
+
+<p>The following image compares gradient descent with one variable to gradient descent with multiple variables:</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fqs784zggaj30g508ttam.jpg" alt="img" /></p>
+
+<h3 id="34-gradient-descent-in-practice-i---feature-scaling">3.4 Gradient Descent in Practice I - Feature Scaling</h3>
+
+<p>We can speed up gradient descent by having each of our input values in roughly the same range. This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven.</p>
+
+<p>The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same. Ideally:</p>
+
+<script type="math/tex; mode=display">−1 ≤ x_{(i)} ≤ 1</script>
+
+<p>or</p>
+
+<script type="math/tex; mode=display">−0.5 ≤ x_{(i)} ≤ 0.5</script>
+
+<p>These aren’t exact requirements; we are only trying to speed things up. The goal is to get all input variables into roughly one of these ranges, give or take a few.</p>
+
+<p>Two techniques to help with this are <strong>feature scaling</strong> and <strong>mean normalization</strong>. Feature scaling involves dividing the input values by the range (i.e. the maximum value minus the minimum value) of the input variable, resulting in a new range of just 1. Mean normalization involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero. To implement both of these techniques, adjust your input values as shown in this formula:</p>
+
+<script type="math/tex; mode=display">xi:=\frac {x_i−μ_i}{s_i}</script>
+
+<p>Where $μ_i$ is the <strong>average</strong> of all the values for feature (i) and $s_i$ is the range of values (max - min), or si is the standard deviation.</p>
+
+<p>Note that dividing by the range, or dividing by the standard deviation, give different results. The quizzes in this course use range - the programming exercises use standard deviation.</p>
+
+<p>For example, if xi represents housing prices with a range of 100 to 2000 and a mean value of 1000, then, $xi:=\frac {price−1000}{1900}$.</p>
+
+<h3 id="35-gradient-descent-in-practice-ii---learning-rate">3.5 Gradient Descent in Practice II - Learning Rate</h3>
+
+<p><strong>Debugging gradient descent.</strong> Make a plot with <em>number of iterations</em> on the x-axis. Now plot the cost function, J(θ) over the number of iterations of gradient descent. If J(θ) ever increases, then you probably need to decrease α.</p>
+
+<p><strong>Automatic convergence test.</strong> Declare convergence if J(θ) decreases by less than E in one iteration, where E is some small value such as $10^{−3}$. However in practice it’s difficult to choose this threshold value.</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fqscb3p3vsj30eg07wt9v.jpg" alt="img" /></p>
+
+<p>It has been proven that if learning rate α is sufficiently small, then J(θ) will decrease on every iteration.</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fqscb4de3zj30e807pjsd.jpg" alt="img" /></p>
+
+<p>To summarize:</p>
+
+<p>If α is too small: slow convergence.</p>
+
+<p>If α is too large: ￼may not decrease on every iteration and thus may not converge.</p>
+
+<h3 id="36-features-and-polynomial-regression">3.6 Features and Polynomial Regression</h3>
+
+<p>We can improve our features and the form of our hypothesis function in a couple different ways.</p>
+
+<p>We can <strong>combine</strong> multiple features into one. For example, we can combine $x_1$ and $x_2$ into a new feature $x_3$ by taking $x_1⋅x_2$.</p>
+
+<h4 id="361-polynomial-regression">3.6.1 Polynomial Regression</h4>
+
+<p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
+
+<p>We can <strong>change the behavior or curve</strong> of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).</p>
+
+<p>For example, if our hypothesis function is $h_θ(x)=θ_0+θ_1x_1$ then we can create additional features based on $x_1$, to get the quadratic function $h_θ(x)=θ_0+θ_1x_1+θ_2x^2_1$ or the cubic function $h_θ(x)=θ_0+θ_1x_1+θ_2x^2_1+θ_3x^3_1$</p>
+
+<p>In the cubic version, we have created new features $x_2$ and $x_3$ where $x_2=x^2_1$ and $x_3=x^3_1$.</p>
+
+<p>To make it a square root function, we could do: $h_θ(x)=θ_0+θ_1x_1+θ_2\sqrt{x_1}$</p>
+
+<p>One important thing to keep in mind is, if you choose your features this way then feature scaling becomes very important.</p>
+
+<p>eg. if $x_1$ has range 1 - 1000 then range of $x^2_1$ becomes 1 - 1000000 and that of $x^3_1$ becomes 1 - 1000000000</p>
+
+<h3 id="37-normal-equation">3.7 Normal Equation</h3>
+
+<p>Gradient descent gives one way of minimizing J. Let’s discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In the “Normal Equation” method, we will minimize J by explicitly taking its derivatives with respect to the $θ_j$ ’s, and setting them to zero. This allows us to find the optimum theta without iteration. The normal equation formula is given below:</p>
+
+<script type="math/tex; mode=display">θ=(X^TX)^{−1}X^Ty</script>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fqsdxv5p9zj30gq09dgn1.jpg" alt="img" /></p>
+
+<p>There is <strong>no need</strong> to do feature scaling with the normal equation.</p>
+
+<p>The following is a comparison of gradient descent and the normal equation:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gradient Descent</th>
+      <th>Normal Equation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Need to choose alpha</td>
+      <td>No need to choose alpha</td>
+    </tr>
+    <tr>
+      <td>Needs many iterations</td>
+      <td>No need to iterate</td>
+    </tr>
+    <tr>
+      <td>$O (kn^2)$</td>
+      <td>$O (n^3)$, need to calculate inverse of $X^TX$</td>
+    </tr>
+    <tr>
+      <td>Works well when n is large</td>
+      <td>Slow if n is very large</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>With the normal equation, computing the inversion has complexity $O(n^3)$. So if we have a very large number of features, the normal equation will be slow. In practice, when n exceeds 10,000 it might be a good time to go from a normal solution to an iterative process.</p>
+
+<h4 id="371-normal-equation-noninvertibility">3.7.1 Normal Equation Noninvertibility</h4>
+
+<p>When implementing the normal equation in octave we want to use the ‘pinv’ function rather than <code class="highlighter-rouge">inv </code> . The <code class="highlighter-rouge">pinv</code> function will give you a value of $θ$ even if $X^TX$ is not invertible.</p>
+
+<p>If $X^TX$ is <strong>noninvertible,</strong> the common causes might be having :</p>
+
+<ul>
+  <li>Redundant features, where two features are very closely related (i.e. they are linearly dependent)</li>
+  <li>Too many features (e.g. m ≤ n). In this case, delete some features or use “regularization” (to be explained in a later lesson).</li>
+</ul>
+
+<p>Solutions to the above problems include deleting a feature that is linearly dependent with another or deleting one or more features when there are too many features.</p>
 
 
                 <hr style="visibility: hidden;">
@@ -328,17 +404,17 @@ spark-shell
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/16/about-eep/" data-toggle="tooltip" data-placement="top" title="大学生能力测试">
+                        <a href="/2018/04/30/ml-week1/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 1">
                         Previous<br>
-                        <span>大学生能力测试</span>
+                        <span>Machine Learning Week 1</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/04/30/ml-week1/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 1">
+                        <a href="/2018/04/30/ml-week3/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 3">
                         Next<br>
-                        <span>Machine Learning Week 1</span>
+                        <span>Machine Learning Week 3</span>
                         </a>
                     </li>
                     
@@ -357,6 +433,20 @@ spark-shell
             </div>
 
     <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
     <!-- Sidebar Container -->
@@ -422,8 +512,8 @@ spark-shell
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "1tz";
-    var disqus_identifier = "/2018/03/19/big-data-env";
-    var disqus_url = "http://localhost:4000/2018/03/19/big-data-env/";
+    var disqus_identifier = "/2018/04/30/ml-week2";
+    var disqus_url = "http://localhost:4000/2018/04/30/ml-week2/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -595,6 +685,64 @@ spark-shell
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual
+        if ("") {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 

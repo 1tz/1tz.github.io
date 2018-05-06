@@ -5,9 +5,884 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 30 Apr 2018 10:02:28 +0800</pubDate>
-    <lastBuildDate>Mon, 30 Apr 2018 10:02:28 +0800</lastBuildDate>
+    <pubDate>Sun, 06 May 2018 21:31:33 +0800</pubDate>
+    <lastBuildDate>Sun, 06 May 2018 21:31:33 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>学习如何学习</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;活到老，学到老&lt;/p&gt;
+
+  &lt;p&gt;学习如何学习是Coursera的一门课，详见&lt;a href=&quot;https://www.coursera.org/learn/learning-how-to-learn&quot;&gt;此处&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;去掉了一些鸡汤，留下来了一点鸡胸，慢慢嚼吧&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1-集中与发散思维&quot;&gt;1. 集中与发散思维&lt;/h2&gt;
+
+&lt;p&gt;人有两种思维模式：专注模式和发散模式。这两种思维模式只能同时激活其中之一。大脑需要练习这两种模式的切换，以针对不同的问题。这样，才能发挥这两种思维模式的各自优势。通常，发散模式在大脑较为放松的时候被激活，而专注模式在完成一系列相关过程时被激活。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-拖延症记忆与睡眠&quot;&gt;2. 拖延症、记忆与睡眠&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-拖延症&quot;&gt;2.1 拖延症&lt;/h3&gt;
+
+&lt;p&gt;当人们遇到一件极其不愿意做的事情时，大脑中与疼痛感相关的区域被激活。自然而然，大脑就会寻找停止这种负面刺激的方式，即将注意力转移到其他事情上。但是当人们能够面对这些不愿意做的事情时，这种不适感很快就消失了。使用番茄工作法可以解决拖延症，一个番茄时钟完成后一定要给自己奖励、放松放松，这样才能不断激励自己。&lt;/p&gt;
+
+&lt;h3 id=&quot;22-记忆&quot;&gt;2.2 记忆&lt;/h3&gt;
+
+&lt;p&gt;记忆主要分为工作记忆和长期记忆两种。工作记忆是大脑即时、有意识处理信息时的记忆，它只能储存大约四个组块的信息。长期记忆则是一个记忆仓库，能够存储很多记忆。将工作记忆转入长期记忆仓库，需要间隔重复。&lt;/p&gt;
+
+&lt;p&gt;数学和理论科学中的思想和概念普遍抽象。越是抽象的东西，越要反复练习、加强，记忆就会不断加深。学习不是一蹴而就的，学习一段时间后，休息一下，把注意力转移到其他东西上。这期间，大脑的发散模式在后台不断固化对概念的理解。这样建立起来的知识体系才是牢固的。&lt;/p&gt;
+
+&lt;h3 id=&quot;23-睡眠&quot;&gt;2.3 睡眠&lt;/h3&gt;
+
+&lt;p&gt;睡眠能够祛除大脑产生的有毒物质。在睡梦中，大脑会把学习到的东西反复演练，清楚一些记忆中不太重要的部分，增强想要记住的记忆。&lt;/p&gt;
+
+&lt;h2 id=&quot;3-组块要领&quot;&gt;3. 组块——要领&lt;/h2&gt;
+
+&lt;h3 id=&quot;31-何为组块&quot;&gt;3.1 何为组块&lt;/h3&gt;
+
+&lt;p&gt;组块就是把信息碎片拼接起来的的过程。组块化让新的信息更容易记忆，也更容易将其整合到大框架内。&lt;/p&gt;
+
+&lt;h3 id=&quot;32-如何构成组块&quot;&gt;3.2 如何构成组块&lt;/h3&gt;
+
+&lt;p&gt;首先，需要对待组块化的信息保持注意力。然后，要求对建立组块的对象有基本了解，只有在自己实际操作和完全掌握的情况下才能建立起组块。其次，要获取背景知识。背景认识意味着学会在特定的时候使用正确的方法。最后，熟能生巧。通过练习，不论是由上而下的认识，还是由下而上的组块化，都能够让你更熟练地运用这个组块。&lt;/p&gt;
+
+&lt;h3 id=&quot;33-能力错觉&quot;&gt;3.3 能力错觉&lt;/h3&gt;
+
+&lt;p&gt;阅读会让人产生能力错觉。仅仅扫一眼答案而不代入题目中并没有什么作用。同样，做笔记时，高亮和下划线标记需要谨慎，否则也会让自己误认为已经记住这些概念。如果要做标记，试着在勾画前找到中心思想，并试着尽量减少划线和高亮的内容，每段不超过一句。除此之外，空白处总结关键概念是一种很好的办法 。&lt;/p&gt;
+
+&lt;p&gt;回顾，即在心中检索关键概念，可以使学习更加专注和高效，也能够避免部分能力错觉。回顾需要间隔时间，需要潜意识在大脑中不断巩固。在不同场景回顾学习的东西，与会帮助加深对学习内容的理解。&lt;/p&gt;
+
+&lt;h2 id=&quot;4-看到全局&quot;&gt;4. 看到全局&lt;/h2&gt;
+
+&lt;h3 id=&quot;41-组块库的价值&quot;&gt;4.1 组块库的价值&lt;/h3&gt;
+
+&lt;p&gt;组块越多、运用越熟练，能更容易地解决问题。即使是理解不同领域的新概念，组块还能起到迁移的作用。组块能够在不熟悉新知识的情况下，给发散模式带来直觉，再由专注模式小心求证。&lt;/p&gt;
+
+&lt;h3 id=&quot;42-过度学习抑制思维定式与交叉&quot;&gt;4.2 过度学习、抑制、思维定式与交叉&lt;/h3&gt;
+
+&lt;p&gt;当学会一个东西时，在那段时间内不断重复并不能加强关于它的长期记忆，反而容易造成能力错觉——让人误以为掌握了所有内容，但是实际只了解个皮毛。这时，应该把精力集中于困难的部分，使用刻意训练。&lt;/p&gt;
+
+&lt;p&gt;原先的思维模式，加上专注模式，会形成思维定势，这会阻止你走向可能发现解法的新区域。所以在学习新事物的时候，你必须摒弃错误的旧思想和方法。&lt;/p&gt;
+
+&lt;p&gt;当你掌握了某一技巧的基本概念时，你应该开始将其交叉于不同类别的问题、方法、概念、过程和学科中。交叉学习让大脑更具有灵活性和创造性，让大脑学会独立思考。&lt;/p&gt;
+
+&lt;h2 id=&quot;5-拖延症&quot;&gt;5. 拖延症&lt;/h2&gt;
+
+&lt;h3 id=&quot;51-我们都需要治疗拖延症&quot;&gt;5.1 我们都需要治疗拖延症&lt;/h3&gt;
+
+&lt;p&gt;拖延症如同饮鸩止渴，短时间看似解决了问题，实则更糟。&lt;/p&gt;
+
+&lt;h3 id=&quot;52-习惯&quot;&gt;5.2 习惯&lt;/h3&gt;
+
+&lt;p&gt;习惯可以分成四个阶段：&lt;/p&gt;
+
+&lt;p&gt;信号（cue）。本身无所谓好坏，重要的是我们对信号做出的反应&lt;/p&gt;
+
+&lt;p&gt;惯式（routine）。大脑接收到信号后做出的习惯反应。&lt;/p&gt;
+
+&lt;p&gt;奖励（reward）。任何一种习惯的养成都是因为这种习惯可以给我们带来好处。&lt;/p&gt;
+
+&lt;p&gt;信念（belief）。坚信习惯，习惯就回变得强大，想要改变习惯，就必须改变潜藏其中的信念。&lt;/p&gt;
+
+&lt;h3 id=&quot;53-过程与结果&quot;&gt;5.3 过程与结果&lt;/h3&gt;
+
+&lt;p&gt;拖延的一个原因就是，人们经常把注意力放在结果上。为防止拖延，应把注意力集中在过程上。过程与一个个小习惯相关，这些小习惯可以帮助完成不愉快但是必须完成的任务。越是注重结果，越会适得其反。&lt;/p&gt;
+
+&lt;p&gt;使用番茄时钟，为自己制定这一时间段的工作过程，而不是必须完成的任务，可以让人专注于过程。当然，使用降噪耳机为自己提供安静的学习环境也可以帮助集中注意力。&lt;/p&gt;
+
+&lt;h3 id=&quot;54-利用僵尸意识来帮助自己&quot;&gt;5.4 利用僵尸意识来帮助自己&lt;/h3&gt;
+
+&lt;p&gt;习惯的第一个要素是信号。克服一个习惯的诀窍就是改变你对某个信号的反应，唯一需要毅力的地方就是改变对这个信号的反应。拖延的问题在于自己意识不到自己正在拖延。你可以关闭对你时常有诱惑力的东西，来隔离那些最具杀伤力的信号。&lt;/p&gt;
+
+&lt;p&gt;第二个要素是惯式。拖延时，经常把注意力转移到一些不那么痛苦的事情上去，大脑便会自动进入这个惯式。你必须主动重设旧习惯的反应信号，其关键是制订一个计划、养成一个新习惯。&lt;/p&gt;
+
+&lt;p&gt;第三个是奖励。需要在摆脱拖延后，给自己一些奖励：毫无罪意地刷剧、看一场电影或是喝一瓶肥仔快乐水。当完成事情的效果越好，这件事情带来的愉悦感也越强，好好奖励奖励自己吧。&lt;/p&gt;
+
+&lt;p&gt;最后是信念。可能事情越棘手时，越想回到拖延的常态中，但是新习惯的养成，能够让你坚持下去。&lt;/p&gt;
+
+&lt;h3 id=&quot;55-应对生活与学习&quot;&gt;5.5 应对生活与学习&lt;/h3&gt;
+
+&lt;p&gt;前一天晚上写下第二天的计划，这样就不会占用你的工作记忆。&lt;/p&gt;
+
+&lt;p&gt;设定番茄时钟，劳逸结合，设置结束时间同样重要。&lt;/p&gt;
+
+&lt;p&gt;最好睡前回忆复习一遍学习的新鲜事物。&lt;/p&gt;
+
+&lt;h2 id=&quot;6-复兴式学习释放潜力&quot;&gt;6. 复兴式学习、释放潜力&lt;/h2&gt;
+
+&lt;h3 id=&quot;61-怎样成为更好的学习者&quot;&gt;6.1 怎样成为更好的学习者&lt;/h3&gt;
+
+&lt;p&gt;我们不能局限于学习狭义的课堂上的知识，学习如何学习是一种任何人都能掌握的技巧。&lt;/p&gt;
+
+&lt;h3 id=&quot;62-创建生动的视觉比喻或类比&quot;&gt;6.2 创建生动的视觉比喻或类比&lt;/h3&gt;
+
+&lt;p&gt;学习中引入比喻或类比，有助于记忆和理解概念，还能摆脱思维定式，将其运用在其他领域。&lt;/p&gt;
+
+&lt;h3 id=&quot;63-团队合作的价值&quot;&gt;6.3 团队合作的价值&lt;/h3&gt;
+
+&lt;p&gt;人的右脑能够帮助反观全局，发现其不合常理的地方，不断质疑。人的左脑则让人容易变得自满。最容易欺骗的人是自己。找到自己盲点和误区的最好方式之一，就是与同领域的人精诚合作。但是也要注意学习小组的效率，尽量减少闲聊、避免迟到。&lt;/p&gt;
+
+&lt;h3 id=&quot;64-清单&quot;&gt;6.4 清单&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;你是否认真努力地去理解过课文？ 仅仅是找出课文里有解答过程的例题不算&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;你是否跟同学讨论过作业中的问题或是至少和其他人对过答案？&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;你是否尝试过在和同学讨论之前，先列出每道作业的解题大纲？&lt;/li&gt;
+  &lt;li&gt;你是否积极参与作业小组中的讨论、贡献自己的观点并提出问题？&lt;/li&gt;
+  &lt;li&gt;当你遇到问题的时候，是否会去咨询讲师或助教？&lt;/li&gt;
+  &lt;li&gt;交作业的时候，你是否已经弄清了所有问题的答案？&lt;/li&gt;
+  &lt;li&gt;对于作业中不明白的问题，你是否在课上提出疑问寻求解答？&lt;/li&gt;
+  &lt;li&gt;如果你有辅导书，在考试前你是否已经认真通读它，并且相信自己弄明白了书上所有的问题？&lt;/li&gt;
+  &lt;li&gt;你是否尝试略过具体计算，直接快速写出一些问题的解题思路？&lt;/li&gt;
+  &lt;li&gt;你是否和同学一起复习过辅导书上的内容和其他问题并相互提问？&lt;/li&gt;
+  &lt;li&gt;如果考前有复习课，你是否参加过，并对自己不确定的部分提出疑问？&lt;/li&gt;
+  &lt;li&gt;考试前睡眠时间安排是否合理？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;65-先难后易&quot;&gt;6.5 先难后易&lt;/h3&gt;
+
+&lt;p&gt;难题能够唤起发散模式中的创造力，一两分钟内无法解决就迅速切换，做几道简单的后再来挑战。这个方法也可以有效帮你避开思维定势，或是避免陷入错误思维的泥沼，因为你将有机会从不同的角度看待这些问题。&lt;/p&gt;
+
+&lt;h3 id=&quot;66-有用的有关测验的最后提示&quot;&gt;6.6 有用的、有关测验的最后提示&lt;/h3&gt;
+
+&lt;p&gt;在考试或测试前一天，最后快速浏览一遍资料、温习所学知识。不要为自己似乎没在大考前一天拼命复习而自责，不要为自己似乎没在大考前一天拼命复习而自责。如果你好好准备了，考前稍稍放松就是一种自然反应，就像下意识地节省脑力一样。考试时，你也应该谨记：你的大脑还会欺骗你。你应该时刻擦亮眼睛 ，转移注意力并再次检查，从全局角度核对你的答案。多问问自己：这样做真的合乎逻辑吗？在你检查时，由后至前的顺序往往更能给大脑一个新鲜的视角，让你更容易揪出错误。当你充分准备、勤奋练习、储备知识，考试时再注意技巧，你就会发现好运气会逐渐地出现在你面前。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 03 May 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/05/03/lhtl/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/05/03/lhtl/</guid>
+        
+        <category>学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Machine Learning Week 3</title>
+        <description>&lt;h2 id=&quot;4-classification&quot;&gt;4. Classification&lt;/h2&gt;
+
+&lt;p&gt;To attempt classification, one method is to use linear regression and map all predictions greater than 0.5 as a 1 and all less than 0.5 as a 0. However, this method doesn’t work well because classification is not actually a linear function.&lt;/p&gt;
+
+&lt;p&gt;The classification problem is just like the regression problem, except that the values we now want to predict take on only a small number of discrete values. For now, we will focus on the &lt;strong&gt;binary classification&lt;/strong&gt; &lt;strong&gt;problem&lt;/strong&gt; in which y can take on only two values, 0 and 1. (Most of what we say here will also generalize to the multiple-class case.) For instance, if we are trying to build a spam classifier for email, then $x^{(i)}$ may be some features of a piece of email, and y may be 1 if it is a piece of spam mail, and 0 otherwise. Hence, y∈{0,1}. 0 is also called the negative class, and 1 the positive class, and they are sometimes also denoted by the symbols “-” and “+.” Given $x^{(i)}$, the corresponding $y^{(i)}$ is also called the label for the training example.&lt;/p&gt;
+
+&lt;h3 id=&quot;41-hypothesis-representation&quot;&gt;4.1 Hypothesis Representation&lt;/h3&gt;
+
+&lt;p&gt;We could approach the classification problem ignoring the fact that y is discrete-valued, and use our old linear regression algorithm to try to predict y given x. However, it is easy to construct examples where this method performs very poorly. Intuitively, it also doesn’t make sense for hθ(x) to take values larger than 1 or smaller than 0 when we know that y ∈ {0, 1}. To fix this, let’s change the form for our hypotheses hθ(x)to satisfy 0≤hθ(x)≤1. This is accomplished by plugging θTx into the Logistic Function.&lt;/p&gt;
+
+&lt;p&gt;Our new form uses the “Sigmoid Function,” also called the “Logistic Function”:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; h_\theta (x) = g ( \theta^T x ) \newline \newline&amp; z = \theta^T x \newline&amp; g(z) = \dfrac{1}{1 + e^{-z}}\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;The following image shows us what the sigmoid function looks like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fquoucaittj30my03k74g.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The function g(z), shown here, maps any real number to the (0, 1) interval, making it useful for transforming an arbitrary-valued function into a function better suited for classification.&lt;/p&gt;
+
+&lt;p&gt;hθ(x) will give us the &lt;strong&gt;probability&lt;/strong&gt; that our output is 1. For example, $h_θ(x)=0.7$ gives us a probability of 70% that our output is 1. Our probability that our prediction is 0 is just the complement of our probability that it is 1 (e.g. if probability that it is 1 is 70%, then the probability that it is 0 is 30%).&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; h_\theta(x) = P(y=1 | x ; \theta) = 1 - P(y=0 | x ; \theta) \newline&amp; P(y = 0 | x;\theta) + P(y = 1 | x ; \theta) = 1\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;h3 id=&quot;42-decision-boundary&quot;&gt;4.2 Decision Boundary&lt;/h3&gt;
+
+&lt;p&gt;In order to get our discrete 0 or 1 classification, we can translate the output of the hypothesis function as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; h_\theta(x) \geq 0.5 \rightarrow y = 1 \newline&amp; h_\theta(x) &lt; 0.5 \rightarrow y = 0 \newline\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;The way our logistic function g behaves is that when its input is greater than or equal to zero, its output is greater than or equal to 0.5:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; g(z) \geq 0.5 \newline&amp; when \; z \geq 0\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Remember.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*}z=0, e^{0}=1 \Rightarrow g(z)=1/2\newline z \to \infty, e^{-\infty} \to 0 \Rightarrow g(z)=1 \newline z \to -\infty, e^{\infty}\to \infty \Rightarrow g(z)=0 \end{align*}&lt;/script&gt;
+
+&lt;p&gt;So if our input to g is θTX, then that means:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; h_\theta(x) = g(\theta^T x) \geq 0.5 \newline&amp; when \; \theta^T x \geq 0\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;From these statements we can now say:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; \theta^T x \geq 0 \Rightarrow y = 1 \newline&amp; \theta^T x &lt; 0 \Rightarrow y = 0 \newline\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;The &lt;strong&gt;decision boundary&lt;/strong&gt; is the line that separates the area where y = 0 and where y = 1. It is created by our hypothesis function.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; \theta = \begin{bmatrix}5 \newline -1 \newline 0\end{bmatrix} \newline &amp; y = 1 \; if \; 5 + (-1) x_1 + 0 x_2 \geq 0 \newline &amp; 5 - x_1 \geq 0 \newline &amp; - x_1 \geq -5 \newline&amp; x_1 \leq 5 \newline \end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;In this case, our decision boundary is a straight vertical line placed on the graph where $x_1=5$, and everything to the left of that denotes y = 1, while everything to the right denotes y = 0.&lt;/p&gt;
+
+&lt;p&gt;Again, the input to the sigmoid function g(z) (e.g. $θ^TX$) doesn’t need to be linear, and could be a function that describes a circle (e.g. $z=θ_0+θ_1x^2_1+θ_2x^2_2$) or any shape to fit our data.&lt;/p&gt;
+
+&lt;h3 id=&quot;43-cost-function&quot;&gt;4.3 Cost Function&lt;/h3&gt;
+
+&lt;p&gt;We cannot use the same cost function that we use for linear regression because the Logistic Function will cause the output to be wavy, causing many local optima. In other words, it will not be a convex function.&lt;/p&gt;
+
+&lt;p&gt;Instead, our cost function for logistic regression looks like:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; J(\theta) = \dfrac{1}{m} \sum_{i=1}^m \mathrm{Cost}(h_\theta(x^{(i)}),y^{(i)}) \newline &amp; \mathrm{Cost}(h_\theta(x),y) = -\log(h_\theta(x)) \; &amp; \text{if y = 1} \newline &amp; \mathrm{Cost}(h_\theta(x),y) = -\log(1-h_\theta(x)) \; &amp; \text{if y = 0}\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;When y = 1, we get the following plot for $J(θ)$ vs $h_θ(x)$:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fqx182bk1vj308c06s0t7.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Similarly, when y = 0, we get the following plot for $J(θ)$ vs $h_θ(x)$:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fqx1839j8fj308b07sdg8.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; \mathrm{Cost}(h_\theta(x),y) = 0 \text{ if } h_\theta(x) = y \newline &amp; \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty \text{ if } y = 0 \; \mathrm{and} \; h_\theta(x) \rightarrow 1 \newline &amp; \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty \text{ if } y = 1 \; \mathrm{and} \; h_\theta(x) \rightarrow 0 \newline \end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;If our correct answer ‘y’ is 0, then the cost function will be 0 if our hypothesis function also outputs 0. If our hypothesis approaches 1, then the cost function will approach infinity.&lt;/p&gt;
+
+&lt;p&gt;If our correct answer ‘y’ is 1, then the cost function will be 0 if our hypothesis function outputs 1. If our hypothesis approaches 0, then the cost function will approach infinity.&lt;/p&gt;
+
+&lt;p&gt;Note that writing the cost function in this way guarantees that J(θ) is convex for logistic regression.&lt;/p&gt;
+
+&lt;h3 id=&quot;44-simplified-cost-function-and-gradient-descent&quot;&gt;4.4 Simplified Cost Function and Gradient Descent&lt;/h3&gt;
+
+&lt;p&gt;We can compress our cost function’s two conditional cases into one case:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Cost(h_θ(x),y)=−ylog(h_θ(x))−(1−y)log(1−h_θ(x))&lt;/script&gt;
+
+&lt;p&gt;Notice that when y is equal to 1, then the second term (1−y)log(1−hθ(x)) will be zero and will not affect the result. If y is equal to 0, then the first term −ylog(hθ(x)) will be zero and will not affect the result.&lt;/p&gt;
+
+&lt;p&gt;We can fully write out our entire cost function as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(\theta) = - \frac{1}{m} \displaystyle \sum_{i=1}^m [y^{(i)}\log (h_\theta (x^{(i)})) + (1 - y^{(i)})\log (1 - h_\theta(x^{(i)}))]&lt;/script&gt;
+
+&lt;p&gt;A vectorized implementation is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*} &amp; h = g(X\theta)\newline &amp; J(\theta) = \frac{1}{m} \cdot \left(-y^{T}\log(h)-(1-y)^{T}\log(1-h)\right) \end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;h3 id=&quot;45-gradient-descent&quot;&gt;&lt;strong&gt;4.5 Gradient Descent&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Remember that the general form of gradient descent is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; Repeat \; \lbrace \newline &amp; \; \theta_j := \theta_j - \alpha \dfrac{\partial}{\partial \theta_j}J(\theta) \newline &amp; \rbrace\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;We can work out the derivative part using calculus to get:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*} &amp; Repeat \; \lbrace \newline &amp; \; \theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \newline &amp; \rbrace \end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Notice that this algorithm is identical to the one we used in linear regression. We still have to simultaneously update all values in theta.&lt;/p&gt;
+
+&lt;p&gt;A vectorized implementation is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ:=θ−\frac{α}{m}X^T(g(Xθ)−\hat{y})&lt;/script&gt;
+
+&lt;h3 id=&quot;46-advanced-optimization&quot;&gt;4.6 Advanced Optimization&lt;/h3&gt;
+
+&lt;p&gt;“Conjugate gradient”, “BFGS”, and “L-BFGS” are more sophisticated, faster ways to optimize $θ$ that can be used instead of gradient descent. We suggest that you should not write these more sophisticated algorithms yourself (unless you are an expert in numerical computing) but use the libraries instead, as they’re already tested and highly optimized. Octave provides them.&lt;/p&gt;
+
+&lt;p&gt;We first need to provide a function that evaluates the following two functions for a given input value θ:&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;J(θ)&lt;/script&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\frac{∂}{∂θ_j}J(θ)&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;We can write a single function that returns both of these:&lt;/p&gt;
+
+&lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jVal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;costFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;jVal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;code to compute J(theta)...];&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;gradient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;code to compute derivative of J(theta)...];&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then we can use octave’s “fminunc()” optimization algorithm along with the “optimset()” function that creates an object containing the options we want to send to “fminunc()”.&lt;/p&gt;
+
+&lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;optimset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'GradObj'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'on'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'MaxIter'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;initialTheta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optTheta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;functionVal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exitFlag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fminunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;costFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initialTheta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+     &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We give to the function “fminunc()” our cost function, our initial vector of theta values, and the “options” object that we created beforehand.&lt;/p&gt;
+
+&lt;h3 id=&quot;47-multiclass-classification-one-vs-all&quot;&gt;4.7 Multiclass Classification: One-vs-all&lt;/h3&gt;
+
+&lt;p&gt;Now we will approach the classification of data when we have more than two categories. Instead of y = {0,1} we will expand our definition so that y = {0,1…n}.&lt;/p&gt;
+
+&lt;p&gt;Since y = {0,1…n}, we divide our problem into n+1 (+1 because the index starts at 0) binary classification problems; in each one, we predict the probability that ‘y’ is a member of one of our classes.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; y \in \lbrace0, 1 ... n\rbrace \newline&amp; h_\theta^{(0)}(x) = P(y = 0 | x ; \theta) \newline&amp; h_\theta^{(1)}(x) = P(y = 1 | x ; \theta) \newline&amp; \cdots \newline&amp; h_\theta^{(n)}(x) = P(y = n | x ; \theta) \newline&amp; \mathrm{prediction} = \max_i( h_\theta ^{(i)}(x) )\newline\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;We are basically choosing one class and then lumping all the others into a single second class. We do this repeatedly, applying binary logistic regression to each case, and then use the hypothesis that returned the highest value as our prediction.&lt;/p&gt;
+
+&lt;p&gt;The following image shows how one could classify 3 classes:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fqx182rhj0j30d507agmp.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;To summarize:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Train a logistic regression classifier $h_θ(x)$ for each class￼ to predict the probability that ￼ ￼y = i￼ ￼.&lt;/p&gt;
+
+&lt;p&gt;To make a prediction on a new x, pick the class ￼that maximizes $h_θ(x)$&lt;/p&gt;
+
+&lt;h3 id=&quot;48-the-problem-of-overfitting&quot;&gt;4.8 The Problem of Overfitting&lt;/h3&gt;
+
+&lt;p&gt;Consider the problem of predicting y from x ∈ R. The leftmost figure below shows the result of fitting a $y = θ_0+θ_1x$ to a dataset. We see that the data doesn’t really lie on straight line, and so the fit is not very good.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fqy3d4x38dj30f0046dg2.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Instead, if we had added an extra feature $x^2$ , and fit $y=θ_0+θ_1x+θ_2x^2$ , then we obtain a slightly better fit to the data (See middle figure). Naively, it might seem that the more features we add, the better. However, there is also a danger in adding too many features: The rightmost figure is the result of fitting a 5th order polynomial $y=∑^{5}_{j=0}θ_jx^j$. We see that even though the fitted curve passes through the data perfectly, we would not expect this to be a very good predictor of, say, housing prices (y) for different living areas (x). Without formally defining what these terms mean, we’ll say the figure on the left shows an instance of &lt;strong&gt;underfitting&lt;/strong&gt;—in which the data clearly shows structure not captured by the model—and the figure on the right is an example of &lt;strong&gt;overfitting&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Underfitting, or high bias, is when the form of our hypothesis function h maps poorly to the trend of the data. It is usually caused by a function that is too simple or uses too few features. At the other extreme, overfitting, or high variance, is caused by a hypothesis function that fits the available data but does not generalize well to predict new data. It is usually caused by a complicated function that creates a lot of unnecessary curves and angles unrelated to the data.&lt;/p&gt;
+
+&lt;p&gt;This terminology is applied to both linear and logistic regression. There are two main options to address the issue of overfitting:&lt;/p&gt;
+
+&lt;p&gt;1) Reduce the number of features:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Manually select which features to keep.&lt;/li&gt;
+  &lt;li&gt;Use a model selection algorithm (studied later in the course).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2) Regularization&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Keep all the features, but reduce the magnitude of parameters $θ_j$.&lt;/li&gt;
+  &lt;li&gt;Regularization works well when we have a lot of slightly useful features.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;49-cost-function&quot;&gt;4.9 Cost Function&lt;/h3&gt;
+
+&lt;p&gt;If we have overfitting from our hypothesis function, we can reduce the weight that some of the terms in our function carry by increasing their cost.&lt;/p&gt;
+
+&lt;p&gt;Say we wanted to make the following function more quadratic:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_0+θ_1x+θ_2x^2+θ_3x^3+θ_4x^4&lt;/script&gt;
+
+&lt;p&gt;We’ll want to eliminate the influence of $θ_3x^3$ and $θ_4x^4$ . Without actually getting rid of these features or changing the form of our hypothesis, we can instead modify our &lt;strong&gt;cost function&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;min_θ \frac{1}{2m}∑^m_{i=1}(h_θ(x^{(i)})−y^{(i)})^2+1000⋅θ^2_3+1000⋅θ^2_4&lt;/script&gt;
+
+&lt;p&gt;We’ve added two extra terms at the end to inflate the cost of $θ_3$ and $θ_4$. Now, in order for the cost function to get close to zero, we will have to reduce the values of $θ_3$ and $θ_4$ to near zero. This will in turn greatly reduce the values of $θ_3x^3$ and $θ_4x^4$ in our hypothesis function. As a result, we see that the new hypothesis (depicted by the pink curve) looks like a quadratic function but fits the data better due to the extra small terms $θ_3x^3$ and $θ_4x^4$.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tKfTcly1fr0rrwonzxj30gh091wfl.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We could also regularize all of our theta parameters in a single summation as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;min_\theta\ \dfrac{1}{2m}\  [ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\ \sum_{j=1}^n \theta_j^2 ]&lt;/script&gt;
+
+&lt;p&gt;The $λ​$, or lambda, is the &lt;strong&gt;regularization parameter&lt;/strong&gt;. It determines how much the costs of our theta parameters are inflated.&lt;/p&gt;
+
+&lt;p&gt;Using the above cost function with the extra summation, we can smooth the output of our hypothesis function to reduce overfitting. If lambda is chosen to be too large, it may smooth out the function too much and cause underfitting. Hence, what would happen if $λ=0$ or is too small ? If $λ$ is very small, $θ$ will not be restricted. So it will cause overfitting.&lt;/p&gt;
+
+&lt;h3 id=&quot;410-regularized-linear-regression&quot;&gt;4.10 Regularized Linear Regression&lt;/h3&gt;
+
+&lt;p&gt;We can apply regularization to both linear regression and logistic regression. We will approach linear regression first.&lt;/p&gt;
+
+&lt;h4 id=&quot;4101-gradient-descent&quot;&gt;4.10.1 Gradient Descent&lt;/h4&gt;
+
+&lt;p&gt;We will modify our gradient descent function to separate out θ0 from the rest of the parameters because we do not want to penalize $θ_0$.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*} &amp; \text{Repeat}\ \lbrace \newline &amp; \ \ \ \ \theta_0 := \theta_0 - \alpha\ \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_0^{(i)} \newline &amp; \ \ \ \ \theta_j := \theta_j - \alpha\ \left[ \left( \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)} \right) + \frac{\lambda}{m}\theta_j \right] &amp;\ \ \ \ \ \ \ \ \ \ j \in \lbrace 1,2...n\rbrace\newline &amp; \rbrace \end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;The term $\frac{λ}{m}θ_j$ performs our regularization. With some manipulation our update rule can also be represented as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_j:=θ_j(1−α\frac{λ}{m})−α\frac{1}{m}∑^m_{i=1}(h_θ(x^{(i)})−y^{(i)})x^{(i)}_j&lt;/script&gt;
+
+&lt;p&gt;The first term in the above equation, $1−α\frac{λ}m$ will always be less than 1. Intuitively you can see it as reducing the value of $θ_j$ by some amount on every update. Notice that the second term is now exactly the same as it was before.&lt;/p&gt;
+
+&lt;h4 id=&quot;4102-normal-equation&quot;&gt;&lt;strong&gt;4.10.2 Normal Equation&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Now let’s approach regularization using the alternate method of the non-iterative normal equation.&lt;/p&gt;
+
+&lt;p&gt;To add in regularization, the equation is the same as our original, except that we add another term inside the parentheses:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; \theta = \left( X^TX + \lambda \cdot L \right)^{-1} X^Ty \newline&amp; \text{where}\ \ L = \begin{bmatrix} 0 &amp; &amp; &amp; &amp; \newline &amp; 1 &amp; &amp; &amp; \newline &amp; &amp; 1 &amp; &amp; \newline &amp; &amp; &amp; \ddots &amp; \newline &amp; &amp; &amp; &amp; 1 \newline\end{bmatrix}\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;L is a matrix with 0 at the top left and 1’s down the diagonal, with 0’s everywhere else. It should have dimension (n+1)×(n+1). Intuitively, this is the identity matrix (though we are not including $x_0$), multiplied with a single real number λ.&lt;/p&gt;
+
+&lt;p&gt;Recall that if m &amp;lt; n, then $X^TX$ is non-invertible. However, when we add the term λ⋅L, then $X^TX + λ⋅L$ becomes invertible.&lt;/p&gt;
+
+&lt;h3 id=&quot;411-regularized-logistic-regression&quot;&gt;4.11 Regularized Logistic Regression&lt;/h3&gt;
+
+&lt;p&gt;We can regularize logistic regression in a similar way that we regularize linear regression. As a result, we can avoid overfitting. The following image shows how the regularized function, displayed by the pink line, is less likely to overfit than the non-regularized function represented by the blue line:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fr0rr7x64lj30do07edh2.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;4111-cost-function&quot;&gt;4.11.1 Cost Function&lt;/h4&gt;
+
+&lt;p&gt;Recall that our cost function for logistic regression was:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ)=−\frac1m∑^m_{i=1}[y^{(i)} log(h_θ(x^{(i)}))+(1−y^{(i)}) log(1−h_θ(x^{(i)}))]&lt;/script&gt;
+
+&lt;p&gt;We can regularize this equation by adding a term to the end:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(\theta) = - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)}))\large] + \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2&lt;/script&gt;
+
+&lt;p&gt;The second sum, $∑^n_{j=1}θ^2_j$ &lt;strong&gt;means to explicitly exclude&lt;/strong&gt; the bias term, $θ_0$. I.e. the θ vector is indexed from 0 to n (holding n+1 values, $θ_0$ through $θ_n$), and this sum explicitly skips $θ_0$, by running from 1 to n, skipping 0. Thus, when computing the equation, we should continuously update the two following equations:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fqy6zag3yhj30de06h75k.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Apr 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/04/30/ml-week3/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/04/30/ml-week3/</guid>
+        
+        <category>机器学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Machine Learning Week 2</title>
+        <description>&lt;h2 id=&quot;3-linear-regression-with-multiple-variables&quot;&gt;3. Linear Regression with Multiple Variables&lt;/h2&gt;
+
+&lt;h3 id=&quot;31-multiple-features&quot;&gt;3.1 Multiple Features&lt;/h3&gt;
+
+&lt;p&gt;Linear regression with multiple variables is also known as “multivariate linear regression”.&lt;/p&gt;
+
+&lt;p&gt;We now introduce notation for equations where we can have any number of input variables.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}x_j^{(i)} &amp;= \text{value of feature } j \text{ in the }i^{th}\text{ training example} \newline x^{(i)}&amp; = \text{the column vector of all the feature inputs of the }i^{th}\text{ training example} \newline m &amp;= \text{the number of training examples} \newline n &amp;= \left| x^{(i)} \right| ; \text{(the number of features)} \end{align*}​ %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;The multivariable form of the hypothesis function accommodating these multiple features is as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_θ(x)=θ_0+θ_1x_1+θ_2x_2+θ_3x_3+⋯+θ_nx_n&lt;/script&gt;
+
+&lt;p&gt;In order to develop intuition about this function, we can think about $θ_0$ as the basic price of a house, $θ_1$ as the price per square meter, $θ_2$ as the price per floor, etc. $x_1$ will be the number of square meters in the house, $x_2$ the number of floors, etc.&lt;/p&gt;
+
+&lt;p&gt;Using the definition of matrix multiplication, our multivariable hypothesis function can be concisely represented as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\…\\x_n\end{bmatrix}=θ^Tx %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;This is a vectorization of our hypothesis function for one training example; see the lessons on vectorization to learn more.&lt;/p&gt;
+
+&lt;p&gt;Remark: Note that for convenience reasons in this course we assume $x^{(i)}_0=1$ for $(i∈1,…,m)$.&lt;/p&gt;
+
+&lt;p&gt;[&lt;strong&gt;Note&lt;/strong&gt;: So that we can do matrix operations with theta and x, we will set $x^{(i)}&lt;em&gt;0 = 1$, for all values of i. This makes the two vectors ‘theta’ and $x&lt;/em&gt;{(i)}$ match each other element-wise  (that is, have the same number of elements: n+1).]&lt;/p&gt;
+
+&lt;p&gt;The training examples are stored in X row-wise, like such:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}X = \begin{bmatrix}x^{(1)}_0 &amp; x^{(1)}_1  \newline x^{(2)}_0 &amp; x^{(2)}_1  \newline x^{(3)}_0 &amp; x^{(3)}_1 \end{bmatrix}&amp;,\theta = \begin{bmatrix}\theta_0 \newline \theta_1 \newline\end{bmatrix}\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;You can calculate the hypothesis as a column vector of size (m x 1) with:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_θ(X)=Xθ&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;For the rest of these notes, and other lecture notes, X will represent a matrix of training examples&lt;/strong&gt; $x_{(i)}$ &lt;strong&gt;stored row-wise.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;32-cost-function&quot;&gt;&lt;strong&gt;3.2 Cost function&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;For the parameter vector θ (of type $ℝ^{n+1}$ or in $ℝ^{(n+1)×1}$, the cost function is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ)=\frac {1}{2m}∑_{i=1}^m(hθ(x(i))−y(i))^2&lt;/script&gt;
+
+&lt;p&gt;The vectorized version is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ)=\frac{1}{2m}(Xθ−\hat y )^T(Xθ−\hat y )&lt;/script&gt;
+
+&lt;p&gt;Where $\hat{y}$ denotes the vector of all y values.&lt;/p&gt;
+
+&lt;h3 id=&quot;33-gradient-descent-for-multiple-variables&quot;&gt;&lt;strong&gt;3.3 Gradient Descent for Multiple Variables&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;The gradient descent equation itself is generally the same form; we just have to repeat it for our ‘n’ features:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*} &amp; \text{repeat until convergence:} \; \lbrace \newline \; &amp; \theta_0 := \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}\newline \; &amp; \theta_1 := \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_1^{(i)} \newline \; &amp; \theta_2 := \theta_2 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_2^{(i)} \newline &amp; \cdots \newline \rbrace \end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;In other words:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; \text{repeat until convergence:} \; \lbrace \newline \; &amp; \theta_j := \theta_j - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)} \; &amp; \text{for j := 0...n}\newline \rbrace\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;The following image compares gradient descent with one variable to gradient descent with multiple variables:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fqs784zggaj30g508ttam.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;34-gradient-descent-in-practice-i---feature-scaling&quot;&gt;3.4 Gradient Descent in Practice I - Feature Scaling&lt;/h3&gt;
+
+&lt;p&gt;We can speed up gradient descent by having each of our input values in roughly the same range. This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven.&lt;/p&gt;
+
+&lt;p&gt;The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same. Ideally:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;−1 ≤ x_{(i)} ≤ 1&lt;/script&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;−0.5 ≤ x_{(i)} ≤ 0.5&lt;/script&gt;
+
+&lt;p&gt;These aren’t exact requirements; we are only trying to speed things up. The goal is to get all input variables into roughly one of these ranges, give or take a few.&lt;/p&gt;
+
+&lt;p&gt;Two techniques to help with this are &lt;strong&gt;feature scaling&lt;/strong&gt; and &lt;strong&gt;mean normalization&lt;/strong&gt;. Feature scaling involves dividing the input values by the range (i.e. the maximum value minus the minimum value) of the input variable, resulting in a new range of just 1. Mean normalization involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero. To implement both of these techniques, adjust your input values as shown in this formula:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;xi:=\frac {x_i−μ_i}{s_i}&lt;/script&gt;
+
+&lt;p&gt;Where $μ_i$ is the &lt;strong&gt;average&lt;/strong&gt; of all the values for feature (i) and $s_i$ is the range of values (max - min), or si is the standard deviation.&lt;/p&gt;
+
+&lt;p&gt;Note that dividing by the range, or dividing by the standard deviation, give different results. The quizzes in this course use range - the programming exercises use standard deviation.&lt;/p&gt;
+
+&lt;p&gt;For example, if xi represents housing prices with a range of 100 to 2000 and a mean value of 1000, then, $xi:=\frac {price−1000}{1900}$.&lt;/p&gt;
+
+&lt;h3 id=&quot;35-gradient-descent-in-practice-ii---learning-rate&quot;&gt;3.5 Gradient Descent in Practice II - Learning Rate&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Debugging gradient descent.&lt;/strong&gt; Make a plot with &lt;em&gt;number of iterations&lt;/em&gt; on the x-axis. Now plot the cost function, J(θ) over the number of iterations of gradient descent. If J(θ) ever increases, then you probably need to decrease α.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Automatic convergence test.&lt;/strong&gt; Declare convergence if J(θ) decreases by less than E in one iteration, where E is some small value such as $10^{−3}$. However in practice it’s difficult to choose this threshold value.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tKfTcly1fqscb3p3vsj30eg07wt9v.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It has been proven that if learning rate α is sufficiently small, then J(θ) will decrease on every iteration.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tKfTcly1fqscb4de3zj30e807pjsd.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To summarize:&lt;/p&gt;
+
+&lt;p&gt;If α is too small: slow convergence.&lt;/p&gt;
+
+&lt;p&gt;If α is too large: ￼may not decrease on every iteration and thus may not converge.&lt;/p&gt;
+
+&lt;h3 id=&quot;36-features-and-polynomial-regression&quot;&gt;3.6 Features and Polynomial Regression&lt;/h3&gt;
+
+&lt;p&gt;We can improve our features and the form of our hypothesis function in a couple different ways.&lt;/p&gt;
+
+&lt;p&gt;We can &lt;strong&gt;combine&lt;/strong&gt; multiple features into one. For example, we can combine $x_1$ and $x_2$ into a new feature $x_3$ by taking $x_1⋅x_2$.&lt;/p&gt;
+
+&lt;h4 id=&quot;361-polynomial-regression&quot;&gt;3.6.1 Polynomial Regression&lt;/h4&gt;
+
+&lt;p&gt;Our hypothesis function need not be linear (a straight line) if that does not fit the data well.&lt;/p&gt;
+
+&lt;p&gt;We can &lt;strong&gt;change the behavior or curve&lt;/strong&gt; of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).&lt;/p&gt;
+
+&lt;p&gt;For example, if our hypothesis function is $h_θ(x)=θ_0+θ_1x_1$ then we can create additional features based on $x_1$, to get the quadratic function $h_θ(x)=θ_0+θ_1x_1+θ_2x^2_1$ or the cubic function $h_θ(x)=θ_0+θ_1x_1+θ_2x^2_1+θ_3x^3_1$&lt;/p&gt;
+
+&lt;p&gt;In the cubic version, we have created new features $x_2$ and $x_3$ where $x_2=x^2_1$ and $x_3=x^3_1$.&lt;/p&gt;
+
+&lt;p&gt;To make it a square root function, we could do: $h_θ(x)=θ_0+θ_1x_1+θ_2\sqrt{x_1}$&lt;/p&gt;
+
+&lt;p&gt;One important thing to keep in mind is, if you choose your features this way then feature scaling becomes very important.&lt;/p&gt;
+
+&lt;p&gt;eg. if $x_1$ has range 1 - 1000 then range of $x^2_1$ becomes 1 - 1000000 and that of $x^3_1$ becomes 1 - 1000000000&lt;/p&gt;
+
+&lt;h3 id=&quot;37-normal-equation&quot;&gt;3.7 Normal Equation&lt;/h3&gt;
+
+&lt;p&gt;Gradient descent gives one way of minimizing J. Let’s discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In the “Normal Equation” method, we will minimize J by explicitly taking its derivatives with respect to the $θ_j$ ’s, and setting them to zero. This allows us to find the optimum theta without iteration. The normal equation formula is given below:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ=(X^TX)^{−1}X^Ty&lt;/script&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tKfTcly1fqsdxv5p9zj30gq09dgn1.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There is &lt;strong&gt;no need&lt;/strong&gt; to do feature scaling with the normal equation.&lt;/p&gt;
+
+&lt;p&gt;The following is a comparison of gradient descent and the normal equation:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Gradient Descent&lt;/th&gt;
+      &lt;th&gt;Normal Equation&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Need to choose alpha&lt;/td&gt;
+      &lt;td&gt;No need to choose alpha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Needs many iterations&lt;/td&gt;
+      &lt;td&gt;No need to iterate&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$O (kn^2)$&lt;/td&gt;
+      &lt;td&gt;$O (n^3)$, need to calculate inverse of $X^TX$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Works well when n is large&lt;/td&gt;
+      &lt;td&gt;Slow if n is very large&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;With the normal equation, computing the inversion has complexity $O(n^3)$. So if we have a very large number of features, the normal equation will be slow. In practice, when n exceeds 10,000 it might be a good time to go from a normal solution to an iterative process.&lt;/p&gt;
+
+&lt;h4 id=&quot;371-normal-equation-noninvertibility&quot;&gt;3.7.1 Normal Equation Noninvertibility&lt;/h4&gt;
+
+&lt;p&gt;When implementing the normal equation in octave we want to use the ‘pinv’ function rather than &lt;code class=&quot;highlighter-rouge&quot;&gt;inv &lt;/code&gt; . The &lt;code class=&quot;highlighter-rouge&quot;&gt;pinv&lt;/code&gt; function will give you a value of $θ$ even if $X^TX$ is not invertible.&lt;/p&gt;
+
+&lt;p&gt;If $X^TX$ is &lt;strong&gt;noninvertible,&lt;/strong&gt; the common causes might be having :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Redundant features, where two features are very closely related (i.e. they are linearly dependent)&lt;/li&gt;
+  &lt;li&gt;Too many features (e.g. m ≤ n). In this case, delete some features or use “regularization” (to be explained in a later lesson).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Solutions to the above problems include deleting a feature that is linearly dependent with another or deleting one or more features when there are too many features.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Apr 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/04/30/ml-week2/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/04/30/ml-week2/</guid>
+        
+        <category>机器学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Machine Learning Week 1</title>
+        <description>&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-what-is-machine-learning&quot;&gt;1.1 What is Machine Learning?&lt;/h3&gt;
+
+&lt;p&gt;Two definitions of Machine Learning are offered. Arthur Samuel described it as: “the field of study that gives computers the ability to learn without being explicitly programmed.” This is an older, informal definition.&lt;/p&gt;
+
+&lt;p&gt;Tom Mitchell provides a more modern definition: “A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.”&lt;/p&gt;
+
+&lt;p&gt;Example: playing checkers.&lt;/p&gt;
+
+&lt;p&gt;E = the experience of playing many games of checkers&lt;/p&gt;
+
+&lt;p&gt;T = the task of playing checkers.&lt;/p&gt;
+
+&lt;p&gt;P = the probability that the program will win the next game.&lt;/p&gt;
+
+&lt;p&gt;In general, any machine learning problem can be assigned to one of two broad classifications:&lt;/p&gt;
+
+&lt;p&gt;Supervised learning and Unsupervised learning.&lt;/p&gt;
+
+&lt;h3 id=&quot;12-supervised-learning&quot;&gt;1.2 Supervised Learning&lt;/h3&gt;
+
+&lt;p&gt;In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output.&lt;/p&gt;
+
+&lt;p&gt;Supervised learning problems are categorized into “regression” and “classification” problems. In a regression problem, we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function. In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Given data about the size of houses on the real estate market, try to predict their price. Price as a function of size is a continuous output, so this is a regression problem.&lt;/p&gt;
+
+&lt;p&gt;We could turn this example into a classification problem by instead making our output about whether the house “sells for more or less than the asking price.” Here we are classifying the houses based on price into two discrete categories.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 2&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;(a) Regression - Given a picture of a person, we have to predict their age on the basis of the given picture&lt;/p&gt;
+
+&lt;p&gt;(b) Classification - Given a patient with a tumor, we have to predict whether the tumor is malignant or benign.&lt;/p&gt;
+
+&lt;h3 id=&quot;13-unsupervised-learning&quot;&gt;1.3 Unsupervised Learning&lt;/h3&gt;
+
+&lt;p&gt;Unsupervised learning allows us to approach problems with little or no idea what our results should look like. We can derive structure from data where we don’t necessarily know the effect of the variables.&lt;/p&gt;
+
+&lt;p&gt;We can derive this structure by clustering the data based on relationships among the variables in the data.&lt;/p&gt;
+
+&lt;p&gt;With unsupervised learning there is no feedback based on the prediction results.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Clustering: Take a collection of 1,000,000 different genes, and find a way to automatically group these genes into groups that are somehow similar or related by different variables, such as lifespan, location, roles, and so on.&lt;/p&gt;
+
+&lt;p&gt;Non-clustering: The “Cocktail Party Algorithm”, allows you to find structure in a chaotic environment. (i.e. identifying individual voices and music from a mesh of sounds at a &lt;a href=&quot;https://en.wikipedia.org/wiki/Cocktail_party_effect&quot;&gt;cocktail party&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&quot;2-linear-regression-with-one-variable&quot;&gt;2. Linear Regression with One Variable&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-model-representation&quot;&gt;2.1 Model Representation&lt;/h3&gt;
+
+&lt;p&gt;To establish notation for future use, we’ll use $x^{(i)}$ to denote the “input” variables (living area in this example), also called input features, and $y{(i)}$ to denote the “output” or target variable that we are trying to predict (price). A pair $(x^{(i)},y^{(i)})$ is called a training example, and the dataset that we’ll be using to learn—a list of m training examples $(x^{(i)},y^{(i)});i=1,…,m$—is called a training set. Note that the superscript “(i)” in the notation is simply an index into the training set, and has nothing to do with exponentiation. We will also use X to denote the space of input values, and Y to denote the space of output values. In this example, X = Y = ℝ.&lt;/p&gt;
+
+&lt;p&gt;To describe the supervised learning problem slightly more formally, our goal is, given a training set, to learn a function h : X → Y so that h(x) is a “good” predictor for the corresponding value of y. For historical reasons, this function h is called a hypothesis. Seen pictorially, the process is therefore like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fqqdi3zexhj30az078wes.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When the target variable that we’re trying to predict is continuous, such as in our housing example, we call the learning problem a regression problem. When y can take on only a small number of discrete values (such as if, given the living area, we wanted to predict if a dwelling is a house or an apartment, say), we call it a classification problem.&lt;/p&gt;
+
+&lt;h3 id=&quot;22-the-hypothesis-function&quot;&gt;2.2 The Hypothesis Function&lt;/h3&gt;
+
+&lt;p&gt;Our hypothesis function has the general form:&lt;/p&gt;
+
+&lt;p&gt;$\hat{y}=h_θ(x)=θ_0+θ_1x$&lt;/p&gt;
+
+&lt;p&gt;Note that this is like the equation of a straight line. We give to $h_θ(x)$ values for $θ_0$ and $θ_1$ to get our estimated output $\hat{y}$. In other words, we are trying to create a function called $h_θ$ that is trying to map our input data (the x’s) to our output data (the y’s).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Suppose we have the following set of training data:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;input x&lt;/th&gt;
+      &lt;th&gt;output y&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Now we can make a random guess about our hθ function: $θ_0=2$ and $θ_1=2$. The hypothesis function becomes $h_θ(x)=2+2x$.&lt;/p&gt;
+
+&lt;p&gt;So for input of 1 to our hypothesis, y will be 4. This is off by 3. Note that we will be trying out various values of $θ_0$ and $θ_1$ to try to find values which provide the best possible “fit” or the most representative “straight line” through the data points mapped on the x-y plane.&lt;/p&gt;
+
+&lt;h3 id=&quot;23-cost-function&quot;&gt;2.3 Cost Function&lt;/h3&gt;
+
+&lt;p&gt;We can measure the accuracy of our hypothesis function by using a &lt;strong&gt;cost function&lt;/strong&gt;. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x’s and the actual output y’s.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ_0,θ_1)=\frac{1}{2m}\sum_{i=1}^{m}(\widehat{y}_i−y_i)^2=\frac{1}{2m}\sum_{i=1}^{m}(h_θ(x_i)−y_i)^2&lt;/script&gt;
+
+&lt;p&gt;To break it apart, it is $\frac{1}{2} \bar x$ where $\bar x$ is the mean of the squares of $h_θ(x_i)−y_i$ , or the difference between the predicted value and the actual value.&lt;/p&gt;
+
+&lt;p&gt;This function is otherwise called the “Squared error function”, or “Mean squared error”. The mean is halved $(\frac{1}{2m})​$ as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $(\frac{1}{2})​$ term. The following image summarizes what the cost function does:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fqqdhwkrbhj30i60aatak.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;24-cost-function---intuition-i&quot;&gt;2.4 Cost Function - Intuition I&lt;/h3&gt;
+
+&lt;p&gt;If we try to think of it in visual terms, our training data set is scattered on the x-y plane. We are trying to make a straight line (defined by $h_θ(x)$) which passes through these scattered data points.&lt;/p&gt;
+
+&lt;p&gt;Our objective is to get the best possible line. The best possible line will be such so that the average squared vertical distances of the scattered points from the line will be the least. Ideally, the line should pass through all the points of our training data set. In such a case, the value of $J(θ_0,θ_1)$ will be 0. The following example shows the ideal situation where we have a cost function of 0.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fqqe0hm9hyj30bf069dgo.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When $θ_1=1$, we get a slope of 1 which goes through every single data point in our model. Conversely, when $θ_1=0.5$, we see the vertical distance from our fit to the data points increase.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fqqe0kdkqrj30ba06adgi.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This increases our cost function to 0.58. Plotting several other points yields to the following graph:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fqqe0mpd6jj308g081dge.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Thus as a goal, we should try to minimize the cost function. In this case, $θ_1=1$ is our global minimum.&lt;/p&gt;
+
+&lt;h3 id=&quot;25-cost-function---intuition-ii&quot;&gt;2.5 Cost Function - Intuition II&lt;/h3&gt;
+
+&lt;p&gt;A contour plot is a graph that contains many contour lines. A contour line of a two variable function has a constant value at all points of the same line. An example of such a graph is the one to the right below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fqqyl9uw92j30ic09qgo3.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Taking any color and going along the ‘circle’, one would expect to get the same value of the cost function. For example, the three green points found on the green line above have the same value for $J(θ_0,θ_1)$ and as a result, they are found along the same line. The circled x displays the value of the cost function for the graph on the left when $θ_0 = 800$ and $θ_1= -0.15$. Taking another h(x) and plotting its contour plot, one gets the following graphs:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fqqylauengj30i50a476m.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When $θ_0 = 360$ and $θ_1 = 0$, the value of $J(θ_0,θ_1)$ in the contour plot gets closer to the center thus reducing the cost function error. Now giving our hypothesis function a slightly positive slope results in a better fit of the data.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fqqyl8lrv8j30hy08qgns.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The graph above minimizes the cost function as much as possible and consequently, the result of $θ_1$ and $θ_0$ tend to be around 0.12 and 250 respectively. Plotting those values on our graph to the right seems to put our point in the center of the inner most ‘circle’.&lt;/p&gt;
+
+&lt;h3 id=&quot;26-gradient-descent&quot;&gt;2.6 Gradient Descent&lt;/h3&gt;
+
+&lt;p&gt;So we have our hypothesis function and we have a way of measuring how well it fits into the data. Now we need to estimate the parameters in the hypothesis function. That’s where gradient descent comes in.&lt;/p&gt;
+
+&lt;p&gt;Imagine that we graph our hypothesis function based on its fields $θ_0$ and $θ_1$ (actually we are graphing the cost function as a function of the parameter estimates). We are not graphing x and y itself, but the parameter range of our hypothesis function and the cost resulting from selecting a particular set of parameters.&lt;/p&gt;
+
+&lt;p&gt;We put $θ_0$ on the x axis and $θ_1$ on the y axis, with the cost function on the vertical z axis. The points on our graph will be the result of the cost function using our hypothesis with those specific theta parameters. The graph below depicts such a setup.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fqqzup3o06j30ft08etby.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We will know that we have succeeded when our cost function is at the very bottom of the pits in our graph, i.e. when its value is the minimum. The red arrows show the minimum points in the graph.&lt;/p&gt;
+
+&lt;p&gt;The way we do this is by taking the derivative (the tangential line to a function) of our cost function. The slope of the tangent is the derivative at that point and it will give us a direction to move towards. We make steps down the cost function in the direction with the steepest descent. The size of each step is determined by the parameter α, which is called the learning rate.&lt;/p&gt;
+
+&lt;p&gt;For example, the distance between each ‘star’ in the graph above represents a step determined by our parameter α. A smaller α would result in a smaller step and a larger α results in a larger step. The direction in which the step is taken is determined by the partial derivative of J(θ0,θ1). Depending on where one starts on the graph, one could end up at different points. The image above shows us two different starting points that end up in two different places.&lt;/p&gt;
+
+&lt;p&gt;The gradient descent algorithm is:&lt;/p&gt;
+
+&lt;p&gt;repeat until convergence:&lt;/p&gt;
+
+&lt;p&gt;$θ_j:=θ_j−α\frac {∂}{∂θ_j}J(θ_0,θ_1)$&lt;/p&gt;
+
+&lt;p&gt;where&lt;/p&gt;
+
+&lt;p&gt;j=0,1 represents the feature index number.&lt;/p&gt;
+
+&lt;p&gt;At each iteration j, one should simultaneously update the parameters $θ_1,θ_2,…,θ_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fqqzulsm5oj30i903s75a.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;27-gradient-descent-intuition&quot;&gt;2.7 Gradient Descent Intuition&lt;/h3&gt;
+
+&lt;p&gt;In this video we explored the scenario where we used one parameter $θ_1$ and plotted its cost function to implement a gradient descent. Our formula for a single parameter was :&lt;/p&gt;
+
+&lt;p&gt;Repeat until convergence:&lt;/p&gt;
+
+&lt;p&gt;$θ_1:=θ_1−α\frac {d}{dθ_1}J(θ_1)$&lt;/p&gt;
+
+&lt;p&gt;Regardless of the slope’s sign for $\frac {d}{dθ_1}J(θ_1)$, $θ_1$ eventually converges to its minimum value. The following graph shows that when the slope is negative, the value of $θ_1$ increases and when it is positive, the value of $θ_1$ decreases.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fqqzuqgjgwj30ho0a4myg.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On a side note, we should adjust our parameter α to ensure that the gradient descent algorithm converges in a reasonable time. Failure to converge or too much time to obtain the minimum value imply that our step size is wrong.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fqqzuix1r2j30if0a5gmx.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;271-how-does-gradient-descent-converge-with-a-fixed-step-size-α&quot;&gt;2.7.1 How does gradient descent converge with a fixed step size $α$?&lt;/h4&gt;
+
+&lt;p&gt;The intuition behind the convergence is that $\frac {d}{dθ_1}J(θ_1)$ approaches 0 as we approach the bottom of our convex function. At the minimum, the derivative will always be 0 and thus we get:&lt;/p&gt;
+
+&lt;p&gt;$θ_1:=θ_1−α∗0$&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fqqzuftdncj30i60a2400.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;28-gradient-descent-for-linear-regression&quot;&gt;2.8 Gradient Descent For Linear Regression&lt;/h3&gt;
+
+&lt;p&gt;When specifically applied to the case of linear regression, a new form of the gradient descent equation can be derived. We can substitute our actual cost function and our actual hypothesis function and modify the equation to :&lt;/p&gt;
+
+&lt;p&gt;repeat until convergence: {&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_0:=θ_0−α\frac {1}{m}∑_{i=1}^{m}(h_θ(x_i)−y_i)&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_1:=θ_1−α\frac {1}{m}∑_{i=1}^{m}((h_θ(x_i)−y_i)*x_i)&lt;/script&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;where m is the size of the training set, $θ_0$ a constant that will be changing simultaneously with $θ_1$ and $x_i,y_i$ are values of the given training set (data).&lt;/p&gt;
+
+&lt;p&gt;Note that we have separated out the two cases for $θ_j$ into separate equations for $θ_0$ and $θ_1$; and that for $θ_1$ we are multiplying $x_i$ at the end due to the derivative. The following is a derivation of $\frac{∂}{∂θ_j}J(θ)$ for a single example :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fqr0etb4uzj309s05a3yt.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The point of all this is that if we start with a guess for our hypothesis and then repeatedly apply these gradient descent equations, our hypothesis will become more and more accurate.&lt;/p&gt;
+
+&lt;p&gt;So, this is simply gradient descent on the original cost function J. This method looks at every example in the entire training set on every step, and is called &lt;strong&gt;batch gradient descent&lt;/strong&gt;. Note that, while gradient descent can be susceptible to local minima in general, the optimization problem we have posed here for linear regression has only one global, and no other local, optima; thus gradient descent always converges (assuming the learning rate α is not too large) to the global minimum. Indeed, J is a convex quadratic function. Here is an example of gradient descent as it is run to minimize a quadratic function.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fqr0eu9wxnj308s06ot9c.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The ellipses shown above are the contours of a quadratic function. Also shown is the trajectory taken by gradient descent, which was initialized at (48,30). The x’s in the figure (joined by straight lines) mark the successive values of θ that gradient descent went through as it converged to its minimum.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Apr 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/04/30/ml-week1/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/04/30/ml-week1/</guid>
+        
+        <category>机器学习</category>
+        
+        
+      </item>
     
       <item>
         <title>Mac OS下大数据工具环境搭建</title>

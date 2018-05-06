@@ -10,7 +10,7 @@
     <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
     <meta name="theme-color" content="#000000">
     
-    <title>Mac OS下大数据工具环境搭建 - 俄罗斯韬娃 | 1tz's Blog</title>
+    <title>学习如何学习 - 俄罗斯韬娃 | 1tz's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2018/03/19/big-data-env/">
+    <link rel="canonical" href="http://localhost:4000/2018/05/03/lhtl/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,13 +165,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-big-data.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-lhtl.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-big-data.jpg')
+        background-image: url('/img/post-lhtl.jpg')
     }
 
     
@@ -184,15 +184,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
+                        <a class="tag" href="/tags/#学习" title="学习">学习</a>
                         
                     </div>
-                    <h1>Mac OS下大数据工具环境搭建</h1>
+                    <h1>学习如何学习</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by 1tz on March 19, 2018</span>
+                    <span class="meta">Posted by 1tz on May 3, 2018</span>
                 </div>
             </div>
         </div>
@@ -214,113 +214,145 @@
                 
 
 				<blockquote>
-  <p>本次配置具体运行环境如下：</p>
+  <p>活到老，学到老</p>
 
-  <p>macOS High Sierra 10.13.3</p>
+  <p>学习如何学习是Coursera的一门课，详见<a href="https://www.coursera.org/learn/learning-how-to-learn">此处</a></p>
 
-  <p>Java JDK 1.8.0</p>
-
-  <p>Hadoop 3.0.0</p>
-
-  <p>Scala 2.12.4</p>
-
-  <p>Spark 2.3.0</p>
+  <p>去掉了一些鸡汤，留下来了一点鸡胸，慢慢嚼吧</p>
 </blockquote>
 
-<p>参考了很多帖子，然而很多并不适用。特此留下此马克，简洁易懂且适用，以便日后之需。</p>
+<h2 id="1-集中与发散思维">1. 集中与发散思维</h2>
 
-<h3 id="准备工作配置ssh查看java路径">准备工作（配置ssh、查看Java路径）</h3>
+<p>人有两种思维模式：专注模式和发散模式。这两种思维模式只能同时激活其中之一。大脑需要练习这两种模式的切换，以针对不同的问题。这样，才能发挥这两种思维模式的各自优势。通常，发散模式在大脑较为放松的时候被激活，而专注模式在完成一系列相关过程时被激活。</p>
 
-<p>首先，打开系统偏好设置-共享-远程登录，勾选远程登录。然后打开 iTerm</p>
+<h2 id="2-拖延症记忆与睡眠">2. 拖延症、记忆与睡眠</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看Java JDK路径，并记录</span>
-/usr/libexec/java_home <span class="nt">-V</span>
-<span class="c"># 使用 ssh-keygen 生成一对密钥，并将其用于免密登录</span>
-<span class="nb">cd</span> ~/.ssh
-ssh-keygen
-<span class="nb">cat </span>id_rsa.pub <span class="o">&gt;</span> authorized_keys
-<span class="c"># 判断是否成功免密登录</span>
-ssh localhost
-</code></pre></div></div>
+<h3 id="21-拖延症">2.1 拖延症</h3>
 
-<p>下面操作均在 <code class="highlighter-rouge">ssh localhost</code> 之后进行</p>
+<p>当人们遇到一件极其不愿意做的事情时，大脑中与疼痛感相关的区域被激活。自然而然，大脑就会寻找停止这种负面刺激的方式，即将注意力转移到其他事情上。但是当人们能够面对这些不愿意做的事情时，这种不适感很快就消失了。使用番茄工作法可以解决拖延症，一个番茄时钟完成后一定要给自己奖励、放松放松，这样才能不断激励自己。</p>
 
-<h3 id="1-安装hadoop">1. 安装Hadoop</h3>
+<h3 id="22-记忆">2.2 记忆</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Hadoop</span>
-brew install hadoop
-<span class="c"># 进入 Hadoop 路径，此处是 3.0.0 版本，其他版本自行更改命令</span>
-<span class="nb">cd</span> /usr/local/Cellar/hadoop/3.0.0/libexec/etc/hadoop
+<p>记忆主要分为工作记忆和长期记忆两种。工作记忆是大脑即时、有意识处理信息时的记忆，它只能储存大约四个组块的信息。长期记忆则是一个记忆仓库，能够存储很多记忆。将工作记忆转入长期记忆仓库，需要间隔重复。</p>
 
-vi hadoop-env.sh
-<span class="c"># 使用 /HADOOP_OPTS 查找到被注释的行，添加以下两行，第二行修改为 Java 路径，修改后保存退出</span>
-<span class="nb">export </span><span class="nv">HADOOP_OPTS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HADOOP_OPTS</span><span class="s2"> -Djava.net.preferIPv4Stack=true -Djava.security.krb5.realm= -Djava.security.krb5.kdc= "</span>
-<span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">"/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home"</span>
+<p>数学和理论科学中的思想和概念普遍抽象。越是抽象的东西，越要反复练习、加强，记忆就会不断加深。学习不是一蹴而就的，学习一段时间后，休息一下，把注意力转移到其他东西上。这期间，大脑的发散模式在后台不断固化对概念的理解。这样建立起来的知识体系才是牢固的。</p>
 
-vi hdfs-site.xml
-<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
-&lt;property&gt;
-	&lt;name&gt;dfs.replication&lt;/name&gt;
-	&lt;value&gt;1&lt;/value&gt;
-&lt;/property&gt;
-&lt;property&gt;
-	&lt;name&gt;dfs.http.address&lt;/name&gt;
-	&lt;value&gt;0.0.0.0:50070&lt;/value&gt;
-&lt;/property&gt;
+<h3 id="23-睡眠">2.3 睡眠</h3>
 
-vi mapred-site.xml
-<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
-&lt;property&gt;
-	&lt;name&gt;mapred.job.tracker&lt;/name&gt;
-	&lt;value&gt;localhost:8021&lt;/value&gt;
-&lt;/property&gt;
+<p>睡眠能够祛除大脑产生的有毒物质。在睡梦中，大脑会把学习到的东西反复演练，清楚一些记忆中不太重要的部分，增强想要记住的记忆。</p>
 
-vi core-site.xml
-<span class="c"># &lt;configuration&gt; 标签中添加以下内容，修改后保存退出</span>
-&lt;property&gt;
-	&lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-&lt;value&gt;/usr/local/Cellar/hadoop/hdfs/tmp&lt;/value&gt;
-    &lt;description&gt;A base <span class="k">for </span>other temporary directories.&lt;/description&gt;
-&lt;/property&gt;
-&lt;property&gt;
-	&lt;name&gt;fs.default.name&lt;/name&gt;
-    &lt;value&gt;hdfs://localhost:8020&lt;/value&gt;
-&lt;/property&gt;
+<h2 id="3-组块要领">3. 组块——要领</h2>
 
-<span class="c"># 格式化后即可</span>
-hdfs namenode <span class="nt">-format</span>
+<h3 id="31-何为组块">3.1 何为组块</h3>
 
-<span class="nb">cd</span> /usr/local/Cellar/hadoop/3.0.0/sbin
-<span class="c"># 启动 Hadoop，WARN 不用管，打开浏览器，查看 localhost 的 50070 端口和 8088 端口</span>
-./start-dfs.sh
-./start-yarn.sh
-<span class="c"># 停止 Hadoop</span>
-./stop-all.sh
+<p>组块就是把信息碎片拼接起来的的过程。组块化让新的信息更容易记忆，也更容易将其整合到大框架内。</p>
 
-<span class="c"># 可以更改环境变量，之后可直接使用 start-dfs.sh 和 start-yarn.sh 来启动Hadoop</span>
-vi ~/.bash_profile
-<span class="c"># 添加以下在尾部，修改后保存退出</span>
-<span class="nb">export </span><span class="nv">HADOOP_HOME</span><span class="o">=</span>/usr/local/Cellar/hadoop/3.0.0
-<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HADOOP_HOME</span>/sbin:<span class="nv">$HADOOP_HOME</span>/bin
+<h3 id="32-如何构成组块">3.2 如何构成组块</h3>
 
-<span class="nb">source</span> ~/.bash_profile
-</code></pre></div></div>
+<p>首先，需要对待组块化的信息保持注意力。然后，要求对建立组块的对象有基本了解，只有在自己实际操作和完全掌握的情况下才能建立起组块。其次，要获取背景知识。背景认识意味着学会在特定的时候使用正确的方法。最后，熟能生巧。通过练习，不论是由上而下的认识，还是由下而上的组块化，都能够让你更熟练地运用这个组块。</p>
 
-<h3 id="2-安装scala">2. 安装Scala</h3>
+<h3 id="33-能力错觉">3.3 能力错觉</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Scala</span>
-brew install scala
-<span class="c"># 测试 Scala 安装成功</span>
-scala
-</code></pre></div></div>
+<p>阅读会让人产生能力错觉。仅仅扫一眼答案而不代入题目中并没有什么作用。同样，做笔记时，高亮和下划线标记需要谨慎，否则也会让自己误认为已经记住这些概念。如果要做标记，试着在勾画前找到中心思想，并试着尽量减少划线和高亮的内容，每段不超过一句。除此之外，空白处总结关键概念是一种很好的办法 。</p>
 
-<h3 id="3-安装spark">3. 安装Spark</h3>
+<p>回顾，即在心中检索关键概念，可以使学习更加专注和高效，也能够避免部分能力错觉。回顾需要间隔时间，需要潜意识在大脑中不断巩固。在不同场景回顾学习的东西，与会帮助加深对学习内容的理解。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使用 Homebrew 安装 Spark</span>
-brew install apache-spark
-<span class="c"># 测试 Spark 安装成功</span>
-spark-shell
-</code></pre></div></div>
+<h2 id="4-看到全局">4. 看到全局</h2>
+
+<h3 id="41-组块库的价值">4.1 组块库的价值</h3>
+
+<p>组块越多、运用越熟练，能更容易地解决问题。即使是理解不同领域的新概念，组块还能起到迁移的作用。组块能够在不熟悉新知识的情况下，给发散模式带来直觉，再由专注模式小心求证。</p>
+
+<h3 id="42-过度学习抑制思维定式与交叉">4.2 过度学习、抑制、思维定式与交叉</h3>
+
+<p>当学会一个东西时，在那段时间内不断重复并不能加强关于它的长期记忆，反而容易造成能力错觉——让人误以为掌握了所有内容，但是实际只了解个皮毛。这时，应该把精力集中于困难的部分，使用刻意训练。</p>
+
+<p>原先的思维模式，加上专注模式，会形成思维定势，这会阻止你走向可能发现解法的新区域。所以在学习新事物的时候，你必须摒弃错误的旧思想和方法。</p>
+
+<p>当你掌握了某一技巧的基本概念时，你应该开始将其交叉于不同类别的问题、方法、概念、过程和学科中。交叉学习让大脑更具有灵活性和创造性，让大脑学会独立思考。</p>
+
+<h2 id="5-拖延症">5. 拖延症</h2>
+
+<h3 id="51-我们都需要治疗拖延症">5.1 我们都需要治疗拖延症</h3>
+
+<p>拖延症如同饮鸩止渴，短时间看似解决了问题，实则更糟。</p>
+
+<h3 id="52-习惯">5.2 习惯</h3>
+
+<p>习惯可以分成四个阶段：</p>
+
+<p>信号（cue）。本身无所谓好坏，重要的是我们对信号做出的反应</p>
+
+<p>惯式（routine）。大脑接收到信号后做出的习惯反应。</p>
+
+<p>奖励（reward）。任何一种习惯的养成都是因为这种习惯可以给我们带来好处。</p>
+
+<p>信念（belief）。坚信习惯，习惯就回变得强大，想要改变习惯，就必须改变潜藏其中的信念。</p>
+
+<h3 id="53-过程与结果">5.3 过程与结果</h3>
+
+<p>拖延的一个原因就是，人们经常把注意力放在结果上。为防止拖延，应把注意力集中在过程上。过程与一个个小习惯相关，这些小习惯可以帮助完成不愉快但是必须完成的任务。越是注重结果，越会适得其反。</p>
+
+<p>使用番茄时钟，为自己制定这一时间段的工作过程，而不是必须完成的任务，可以让人专注于过程。当然，使用降噪耳机为自己提供安静的学习环境也可以帮助集中注意力。</p>
+
+<h3 id="54-利用僵尸意识来帮助自己">5.4 利用僵尸意识来帮助自己</h3>
+
+<p>习惯的第一个要素是信号。克服一个习惯的诀窍就是改变你对某个信号的反应，唯一需要毅力的地方就是改变对这个信号的反应。拖延的问题在于自己意识不到自己正在拖延。你可以关闭对你时常有诱惑力的东西，来隔离那些最具杀伤力的信号。</p>
+
+<p>第二个要素是惯式。拖延时，经常把注意力转移到一些不那么痛苦的事情上去，大脑便会自动进入这个惯式。你必须主动重设旧习惯的反应信号，其关键是制订一个计划、养成一个新习惯。</p>
+
+<p>第三个是奖励。需要在摆脱拖延后，给自己一些奖励：毫无罪意地刷剧、看一场电影或是喝一瓶肥仔快乐水。当完成事情的效果越好，这件事情带来的愉悦感也越强，好好奖励奖励自己吧。</p>
+
+<p>最后是信念。可能事情越棘手时，越想回到拖延的常态中，但是新习惯的养成，能够让你坚持下去。</p>
+
+<h3 id="55-应对生活与学习">5.5 应对生活与学习</h3>
+
+<p>前一天晚上写下第二天的计划，这样就不会占用你的工作记忆。</p>
+
+<p>设定番茄时钟，劳逸结合，设置结束时间同样重要。</p>
+
+<p>最好睡前回忆复习一遍学习的新鲜事物。</p>
+
+<h2 id="6-复兴式学习释放潜力">6. 复兴式学习、释放潜力</h2>
+
+<h3 id="61-怎样成为更好的学习者">6.1 怎样成为更好的学习者</h3>
+
+<p>我们不能局限于学习狭义的课堂上的知识，学习如何学习是一种任何人都能掌握的技巧。</p>
+
+<h3 id="62-创建生动的视觉比喻或类比">6.2 创建生动的视觉比喻或类比</h3>
+
+<p>学习中引入比喻或类比，有助于记忆和理解概念，还能摆脱思维定式，将其运用在其他领域。</p>
+
+<h3 id="63-团队合作的价值">6.3 团队合作的价值</h3>
+
+<p>人的右脑能够帮助反观全局，发现其不合常理的地方，不断质疑。人的左脑则让人容易变得自满。最容易欺骗的人是自己。找到自己盲点和误区的最好方式之一，就是与同领域的人精诚合作。但是也要注意学习小组的效率，尽量减少闲聊、避免迟到。</p>
+
+<h3 id="64-清单">6.4 清单</h3>
+
+<ul>
+  <li>你是否认真努力地去理解过课文？ 仅仅是找出课文里有解答过程的例题不算</li>
+  <li>
+    <p>你是否跟同学讨论过作业中的问题或是至少和其他人对过答案？</p>
+  </li>
+  <li>你是否尝试过在和同学讨论之前，先列出每道作业的解题大纲？</li>
+  <li>你是否积极参与作业小组中的讨论、贡献自己的观点并提出问题？</li>
+  <li>当你遇到问题的时候，是否会去咨询讲师或助教？</li>
+  <li>交作业的时候，你是否已经弄清了所有问题的答案？</li>
+  <li>对于作业中不明白的问题，你是否在课上提出疑问寻求解答？</li>
+  <li>如果你有辅导书，在考试前你是否已经认真通读它，并且相信自己弄明白了书上所有的问题？</li>
+  <li>你是否尝试略过具体计算，直接快速写出一些问题的解题思路？</li>
+  <li>你是否和同学一起复习过辅导书上的内容和其他问题并相互提问？</li>
+  <li>如果考前有复习课，你是否参加过，并对自己不确定的部分提出疑问？</li>
+  <li>考试前睡眠时间安排是否合理？</li>
+</ul>
+
+<h3 id="65-先难后易">6.5 先难后易</h3>
+
+<p>难题能够唤起发散模式中的创造力，一两分钟内无法解决就迅速切换，做几道简单的后再来挑战。这个方法也可以有效帮你避开思维定势，或是避免陷入错误思维的泥沼，因为你将有机会从不同的角度看待这些问题。</p>
+
+<h3 id="66-有用的有关测验的最后提示">6.6 有用的、有关测验的最后提示</h3>
+
+<p>在考试或测试前一天，最后快速浏览一遍资料、温习所学知识。不要为自己似乎没在大考前一天拼命复习而自责，不要为自己似乎没在大考前一天拼命复习而自责。如果你好好准备了，考前稍稍放松就是一种自然反应，就像下意识地节省脑力一样。考试时，你也应该谨记：你的大脑还会欺骗你。你应该时刻擦亮眼睛 ，转移注意力并再次检查，从全局角度核对你的答案。多问问自己：这样做真的合乎逻辑吗？在你检查时，由后至前的顺序往往更能给大脑一个新鲜的视角，让你更容易揪出错误。当你充分准备、勤奋练习、储备知识，考试时再注意技巧，你就会发现好运气会逐渐地出现在你面前。</p>
 
 
                 <hr style="visibility: hidden;">
@@ -328,19 +360,12 @@ spark-shell
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/16/about-eep/" data-toggle="tooltip" data-placement="top" title="大学生能力测试">
+                        <a href="/2018/04/30/ml-week3/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 3">
                         Previous<br>
-                        <span>大学生能力测试</span>
+                        <span>Machine Learning Week 3</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2018/04/30/ml-week1/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 1">
-                        Next<br>
-                        <span>Machine Learning Week 1</span>
-                        </a>
-                    </li>
                     
                 </ul>
 
@@ -357,6 +382,20 @@ spark-shell
             </div>
 
     <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
     <!-- Sidebar Container -->
@@ -422,8 +461,8 @@ spark-shell
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "1tz";
-    var disqus_identifier = "/2018/03/19/big-data-env";
-    var disqus_url = "http://localhost:4000/2018/03/19/big-data-env/";
+    var disqus_identifier = "/2018/05/03/lhtl";
+    var disqus_url = "http://localhost:4000/2018/05/03/lhtl/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -595,6 +634,64 @@ spark-shell
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual
+        if ("") {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
