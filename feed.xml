@@ -5,8 +5,8 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 06 May 2018 21:31:33 +0800</pubDate>
-    <lastBuildDate>Sun, 06 May 2018 21:31:33 +0800</lastBuildDate>
+    <pubDate>Tue, 22 May 2018 19:29:36 +0800</pubDate>
+    <lastBuildDate>Tue, 22 May 2018 19:29:36 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -162,14 +162,415 @@
       </item>
     
       <item>
+        <title>Machine Learning Week 5</title>
+        <description>&lt;h1 id=&quot;7-neural-networks-learning&quot;&gt;7. Neural Networks: Learning&lt;/h1&gt;
+
+&lt;h2 id=&quot;71-backpropagation&quot;&gt;7.1 Backpropagation&lt;/h2&gt;
+
+&lt;h3 id=&quot;711-cost-function&quot;&gt;7.1.1 Cost Function&lt;/h3&gt;
+
+&lt;p&gt;Let’s first define a few variables that we will need to use:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;L = total number of layers in the network&lt;/li&gt;
+  &lt;li&gt;$s_l$ = number of units (not counting bias unit) in layer l&lt;/li&gt;
+  &lt;li&gt;K = number of output units/classes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Recall that in neural networks, we may have many output nodes. We denote $h_\Theta(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ)=−\frac{1}{m}∑_{i=1}^m[y^{(i)} log(h_\theta(x^{(i)}))+(1−y^{(i)}) log(1−h_\theta(x^{(i)}))]+\frac\lambda{2m}∑_{j=1}^nθ_j^2&lt;/script&gt;
+
+&lt;p&gt;For neural networks, it is going to be slightly more complicated:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}&lt;/script&gt;
+
+&lt;p&gt;We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes.&lt;/p&gt;
+
+&lt;p&gt;In the regularization part, after the square brackets, we must account for multiple theta matrices. The number of columns in our current theta matrix is equal to the number of nodes in our current layer (including the bias unit). The number of rows in our current theta matrix is equal to the number of nodes in the next layer (excluding the bias unit). As before with logistic regression, we square every term.&lt;/p&gt;
+
+&lt;p&gt;Note:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the double sum simply adds up the logistic regression costs calculated for each cell in the output layer&lt;/li&gt;
+  &lt;li&gt;the triple sum simply adds up the squares of all the individual Θs in the entire network.&lt;/li&gt;
+  &lt;li&gt;the i in the triple sum does &lt;strong&gt;not&lt;/strong&gt; refer to training example i&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;712-backpropagation-algorithm&quot;&gt;7.1.2 Backpropagation Algorithm&lt;/h3&gt;
+
+&lt;p&gt;“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\min_\Theta J(\Theta)&lt;/script&gt;
+
+&lt;p&gt;That is, we want to minimize our cost function J using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of J(Θ):&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)&lt;/script&gt;
+
+&lt;p&gt;To do so, we use the following algorithm:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tKfTcgy1fredq4s50ij30om0d9gs6.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Back propagation Algorithm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Given training set $\lbrace (x^{(1)}, y^{(1)}) \cdots (x^{(m)}, y^{(m)})\rbrace$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set $\Delta^{(l)}_{i,j} := 0$ for all (l,i,j), (hence you end up having a matrix full of zeros)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For training example t =1 to m:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Set $a^{(1)} := x^{(t)}$&lt;/li&gt;
+  &lt;li&gt;Perform forward propagation to compute $a^{(l)}$ for l=2,3,…,L&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/bYLgwteoEeaX9Qr89uJd1A_73f280ff78695f84ae512f19acfa29a3_Screenshot-2017-01-10-18.16.50.png?expiry=1526688000000&amp;amp;hmac=pjGr-LckXaFVidc6Y0G7dqpToq_b1oLdedYp-USUYK4&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Using $y^{(t)}$, compute $\delta^{(L)} = a^{(L)} - y^{(t)}$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Where L is our total number of layers and $a^{(L)}$ is the vector of outputs of the activation units for the last layer. So our “error values” for the last layer are simply the differences of our actual results in the last layer and the correct outputs in y. To get the delta values of the layers before the last layer, we can use an equation that steps us back from right to left:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Compute $\delta^{(L-1)}, \delta^{(L-2)},\dots,\delta^{(2)}$ using $\delta^{(l)} = ((\Theta^{(l)})^T \delta^{(l+1)})\ .&lt;em&gt;\ a^{(l)}\ .&lt;/em&gt;\ (1 - a^{(l)})$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The delta values of layer l are calculated by multiplying the delta values in the next layer with the theta matrix of layer l. We then element-wise multiply that with a function called g’, or g-prime, which is the derivative of the activation function g evaluated with the input values given by $z^{(l)}$.&lt;/p&gt;
+
+&lt;p&gt;The g-prime derivative terms can also be written out as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;g'(z^{(l)}) = a^{(l)}\ .*\ (1 - a^{(l)})&lt;/script&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;$\Delta^{(l)}&lt;em&gt;{i,j} := \Delta^{(l)}&lt;/em&gt;{i,j} + a_j^{(l)} \delta_i^{(l+1)}$ or with vectorization, $\Delta^{(l)} := \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^T$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Hence we update our new $\Delta$ matrix.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$D^{(l)}&lt;em&gt;{i,j} := \dfrac{1}{m}\left(\Delta^{(l)}&lt;/em&gt;{i,j} + \lambda\Theta^{(l)}_{i,j}\right)$, if j≠0.&lt;/li&gt;
+  &lt;li&gt;$D^{(l)}&lt;em&gt;{i,j} := \dfrac{1}{m}\Delta^{(l)}&lt;/em&gt;{i,j}$ If j=0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The capital-delta matrix D is used as an “accumulator” to add up our values as we go along and eventually compute our partial derivative. Thus we get $\frac \partial {\partial \Theta_{ij}^{(l)}} J(\Theta)= D_{ij}^{(l)}$&lt;/p&gt;
+
+&lt;h3 id=&quot;713-backpropagation-intuition&quot;&gt;7.1.3 Backpropagation Intuition&lt;/h3&gt;
+
+&lt;p&gt;Recall that the cost function for a neural network is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}&lt;/script&gt;
+
+&lt;p&gt;If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;cost(t)=y^{(t)}log(h_\Theta(x^{(t)}))+(1-y^{(t)})log(1-h_\Theta(x^{(t)}))&lt;/script&gt;
+
+&lt;p&gt;Intuitively, $\delta_j^{(l)}$ is the “error” for $a^{(l)}_j$ (unit j in layer l). More formally, the delta values are actually the derivative of the cost function:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\delta_j^{(l)}=\frac \partial {\partial z_j^{(l)}}cost(t)&lt;/script&gt;
+
+&lt;p&gt;Recall that our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are. Let us consider the following neural network below and see how we could calculate some $\delta_j^{(l)}$:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1frekhy8t1bj30k00b9wi3.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the image above, to calculate $\delta_2^{(2)}$, we multiply the weights $\Theta_{12}^{(2)}$ and $\Theta_{22}^{(2)}$ by their respective $\delta$ values found to the right of each edge. So we get $\delta_2^{(2)}= \Theta_{12}^{(2)}&lt;em&gt;\delta_1^{(3)}+\Theta_{22}^{(2)}&lt;/em&gt;\delta_2^{(3)}$. To calculate every single possible $\delta_j^{(l)}$, we could start from the right of our diagram. We can think of our edges as our $\Theta_{ij}$. Going from right to left, to calculate the value of $\delta_j^{(l)}$, you can just take the over all sum of each weight times the $\delta$ it is coming from. Hence, another example would be $\delta_2^{(3)}=\Theta_{12}^{(3)}*\delta_1^{(4)}$.&lt;/p&gt;
+
+&lt;h2 id=&quot;72-backpropagation-in-practice&quot;&gt;7.2 Backpropagation in Practice&lt;/h2&gt;
+
+&lt;h3 id=&quot;721-implementation-note-unrolling-parameters&quot;&gt;7.2.1 Implementation Note: Unrolling Parameters&lt;/h3&gt;
+
+&lt;p&gt;With neural networks, we are working with sets of matrices:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*} \Theta^{(1)}, \Theta^{(2)}, \Theta^{(3)}, \dots \newline D^{(1)}, D^{(2)}, D^{(3)}, \dots \end{align*}&lt;/script&gt;
+
+&lt;p&gt;In order to use optimizing functions such as “fminunc()”, we will want to “unroll” all the elements and put them into one long vector:&lt;/p&gt;
+
+&lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;thetaVector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;deltaVector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11, then we can get back our original matrices from the “unrolled” versions as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Theta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thetaVector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Theta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thetaVector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;220&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Theta3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thetaVector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;221&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;231&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To summarize:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tKfTcly1frekyv4avsj30ey06aq57.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;722-gradient-checking&quot;&gt;7.2.2 Gradient Checking&lt;/h3&gt;
+
+&lt;p&gt;Gradient checking will assure that our backpropagation works as intended. We can approximate the derivative of our cost function with:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial}{\partial\Theta}J(\Theta) \approx \dfrac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}&lt;/script&gt;
+
+&lt;p&gt;With multiple theta matrices, we can approximate the derivative &lt;strong&gt;with respect to&lt;/strong&gt; Θ_jΘj as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial}{\partial\Theta_j}J(\Theta) \approx \dfrac{J(\Theta_1, \dots, \Theta_j + \epsilon, \dots, \Theta_n) - J(\Theta_1, \dots, \Theta_j - \epsilon, \dots, \Theta_n)}{2\epsilon}&lt;/script&gt;
+
+&lt;p&gt;A small value for ${\epsilon}$ (epsilon) such as ${\epsilon = 10^{-4}}$, guarantees that the math works out properly. If the value for $\epsilon$ is too small, we can end up with numerical problems.&lt;/p&gt;
+
+&lt;p&gt;Hence, we are only adding or subtracting epsilon to the $\Theta_j$ matrix. In octave we can do it as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;epsilon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;thetaPlus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;thetaPlus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epsilon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;thetaMinus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;thetaMinus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epsilon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gradApprox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thetaPlus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thetaMinus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))/(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epsilon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We previously saw how to calculate the deltaVector. So once we compute our gradApprox vector, we can check that gradApprox $ \approx$ deltaVector.&lt;/p&gt;
+
+&lt;p&gt;Once you have verified &lt;strong&gt;once&lt;/strong&gt; that your backpropagation algorithm is correct, you don’t need to compute gradApprox again. The code to compute gradApprox can be very slow.&lt;/p&gt;
+
+&lt;h3 id=&quot;723-random-initialization&quot;&gt;7.2.3 Random Initialization&lt;/h3&gt;
+
+&lt;p&gt;Initializing all theta weights to zero does not work with neural networks. When we backpropagate, all nodes will update to the same value repeatedly. Instead we can randomly initialize our weights for our \ThetaΘmatrices using the following method:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tKfTcly1frgukh5tezj30fb07qjsk.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hence, we initialize each $\Theta^{(l)}_{ij}$ to a random value between $[-\epsilon,\epsilon]$. Using the above formula guarantees that we get the desired bound. The same procedure applies to all the $\Theta$’s. Below is some working code you could use to experiment.&lt;/p&gt;
+
+&lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;If&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dimensions&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta1&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta2&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x11&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta3&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x11&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Theta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INIT_EPSILON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INIT_EPSILON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Theta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INIT_EPSILON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INIT_EPSILON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Theta3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INIT_EPSILON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INIT_EPSILON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;rand(x,y) is just a function in octave that will initialize a matrix of random real numbers between 0 and 1.&lt;/p&gt;
+
+&lt;p&gt;(Note: the epsilon used above is unrelated to the epsilon from Gradient Checking)&lt;/p&gt;
+
+&lt;h3 id=&quot;724-putting-it-together&quot;&gt;7.2.4 Putting it Together&lt;/h3&gt;
+
+&lt;p&gt;First, pick a network architecture; choose the layout of your neural network, including how many hidden units in each layer and how many layers in total you want to have.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Number of input units = dimension of features $x^{(i)}$&lt;/li&gt;
+  &lt;li&gt;Number of output units = number of classes&lt;/li&gt;
+  &lt;li&gt;Number of hidden units per layer = usually more the better (must balance with cost of computation as it increases with more hidden units)&lt;/li&gt;
+  &lt;li&gt;Defaults: 1 hidden layer. If you have more than 1 hidden layer, then it is recommended that you have the same number of units in every hidden layer.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Training a Neural Network&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Randomly initialize the weights&lt;/li&gt;
+  &lt;li&gt;Implement forward propagation to get $h_\Theta(x^{(i)})$ for any $x^{(i)}$&lt;/li&gt;
+  &lt;li&gt;Implement the cost function&lt;/li&gt;
+  &lt;li&gt;Implement backpropagation to compute partial derivatives&lt;/li&gt;
+  &lt;li&gt;Use gradient checking to confirm that your backpropagation works. Then disable gradient checking.&lt;/li&gt;
+  &lt;li&gt;Use gradient descent or a built-in optimization function to minimize the cost function with the weights in theta.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When we perform forward and back propagation, we loop on every training example:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for i = 1:m,
+   Perform forward propagation and backpropagation using example (x(i),y(i))
+   (Get activations a(l) and delta terms d(l) for l = 2,...,L
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The following image gives us an intuition of what is happening as we are implementing our neural network:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tKfTcly1frgukfnqmcj30eu08aq5g.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ideally, you want $h_\Theta(x^{(i)}) \approx y^{(i)}$. This will minimize our cost function. However, keep in mind that $J(\Theta)$ is not convex and thus we can end up in a local minimum instead.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Apr 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/04/30/ml-week5/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/04/30/ml-week5/</guid>
+        
+        <category>机器学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Machine Learning Week 4</title>
+        <description>&lt;h1 id=&quot;6-neural-networks-representation&quot;&gt;6. Neural Networks: Representation&lt;/h1&gt;
+
+&lt;h2 id=&quot;61-neural-networks&quot;&gt;6.1 Neural Networks&lt;/h2&gt;
+
+&lt;h3 id=&quot;611-model-representation-i&quot;&gt;6.1.1 Model Representation I&lt;/h3&gt;
+
+&lt;p&gt;Let’s examine how we will represent a hypothesis function using neural networks. At a very simple level, neurons are basically computational units that take inputs (&lt;strong&gt;dendrites&lt;/strong&gt;) as electrical inputs (called “spikes”) that are channeled to outputs (&lt;strong&gt;axons&lt;/strong&gt;). In our model, our dendrites are like the input features $x_1\cdots x_n$, and the output is the result of our hypothesis function. In this model our $x_0$ input node is sometimes called the “bias unit.” It is always equal to 1. In neural networks, we use the same logistic function as in classification, $\frac{1}{1 + e^{-\theta^Tx}}$, yet we sometimes call it a sigmoid (logistic) &lt;strong&gt;activation&lt;/strong&gt; function. In this situation, our “theta” parameters are sometimes called “weights”.&lt;/p&gt;
+
+&lt;p&gt;Visually, a simplistic representation looks like:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline \end{bmatrix}\rightarrow\begin{bmatrix}\ \ \ \newline \end{bmatrix}\rightarrow h_\theta(x)&lt;/script&gt;
+
+&lt;p&gt;Our input nodes (layer 1), also known as the “input layer”, go into another node (layer 2), which finally outputs the hypothesis function, known as the “output layer”.&lt;/p&gt;
+
+&lt;p&gt;We can have intermediate layers of nodes between the input and output layers called the “hidden layers.”&lt;/p&gt;
+
+&lt;p&gt;In this example, we label these intermediate or “hidden” layer nodes $a^2_0 \cdots a^2_n$and call them “activation units.”&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; a_i^{(j)} = \text{&quot;activation&quot; of unit $i$ in layer $j$} \newline&amp; \Theta^{(j)} = \text{matrix of weights controlling function mapping from layer $j$ to layer $j+1$}\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;If we had one hidden layer, it would look like:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline x_3\end{bmatrix}\rightarrow\begin{bmatrix}a_1^{(2)} \newline a_2^{(2)} \newline a_3^{(2)} \newline \end{bmatrix}\rightarrow h_\theta(x)&lt;/script&gt;
+
+&lt;p&gt;The values for each of the “activation” nodes is obtained as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*} a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \newline a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \newline a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \newline h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \newline \end{align*}&lt;/script&gt;
+
+&lt;p&gt;This is saying that we compute our activation nodes by using a 3×4 matrix of parameters. We apply each row of the parameters to our inputs to obtain the value for one activation node. Our hypothesis output is the logistic function applied to the sum of the values of our activation nodes, which have been multiplied by yet another parameter matrix $\Theta^{(2)}$ containing the weights for our second layer of nodes.&lt;/p&gt;
+
+&lt;p&gt;Each layer gets its own matrix of weights, $\Theta^{(j)}$.&lt;/p&gt;
+
+&lt;p&gt;The dimensions of these matrices of weights is determined as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{If network has }{s_j}\text{ units in layer j and }{s_{j+1}}\text{ units in layer j+1, then }{\Theta^{(j)}}\text{ will be of dimension }{s_{j+1} \times (s_j + 1)}\text{ .}&lt;/script&gt;
+
+&lt;p&gt;The +1 comes from the addition in $\Theta^{(j)}$ of the “bias nodes,” $x_0$ and $\Theta_0^{(j)}$. In other words the output nodes will not include the bias nodes while the inputs will. The following image summarizes our model representation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tKfTcly1fr2jxyyawgj30jk0ay772.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Example: If layer 1 has 2 input nodes and layer 2 has 4 activation nodes. Dimension of $\Theta^{(1)}$ is going to be 4×3 where $ s_j = 2$ and $s_{j+1} = 4$, so $s_{j+1} \times (s_j + 1) = 4 \times 3$.&lt;/p&gt;
+
+&lt;h3 id=&quot;612-model-representation-ii&quot;&gt;6.1.2 Model Representation II&lt;/h3&gt;
+
+&lt;p&gt;To re-iterate, the following is an example of a neural network:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*} a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \newline a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \newline a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \newline h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \newline \end{align*}&lt;/script&gt;
+
+&lt;p&gt;In this section we’ll do a vectorized implementation of the above functions. We’re going to define a new variable $z_k^{(j)}$zk(j) that encompasses the parameters inside our g function. In our previous example if we replaced by the variable z for all the parameters we would get:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*}a_1^{(2)} = g(z_1^{(2)}) \newline a_2^{(2)} = g(z_2^{(2)}) \newline a_3^{(2)} = g(z_3^{(2)}) \newline \end{align*}&lt;/script&gt;
+
+&lt;p&gt;In other words, for layer j=2 and node k, the variable z will be:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;z_k^{(2)}=\Theta_{k,0}^{(1)}x_0+\Theta_{k,1}^{(1)}x_1+\cdots+\Theta_{k,n}^{(1)}x_n&lt;/script&gt;
+
+&lt;p&gt;The vector representation of x and $z^{j}$ is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}x = \begin{bmatrix}x_0 \newline x_1 \newline\cdots \newline x_n\end{bmatrix} &amp;z^{(j)} = \begin{bmatrix}z_1^{(j)} \newline z_2^{(j)} \newline\cdots \newline z_n^{(j)}\end{bmatrix}\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Setting $x = a^{(1)}$, we can rewrite the equation as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;z^{(j)}=\Theta^{(j-1)}a^{(j-1)}&lt;/script&gt;
+
+&lt;p&gt;We are multiplying our matrix $\Theta^{(j-1)}$ with dimensions $s_j\times (n+1)$ (where s_jsj is the number of our activation nodes) by our vector $a^{(j-1)}$ with height (n+1). This gives us our vector $z^{(j)}$ with height $s_j$. Now we can get a vector of our activation nodes for layer j as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;a^{(j+1)}=\Theta^{(j)}a^{(j)}&lt;/script&gt;
+
+&lt;p&gt;We get this final z vector by multiplying the next theta matrix after $\Theta^{(j-1)}$ with the values of all the activation nodes we just got. This last theta matrix $\Theta^{(j)}$ will have only &lt;strong&gt;one row&lt;/strong&gt; which is multiplied by one column $a^{(j)}$ so that our result is a single number. We then get our final result with:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_\Theta(x)=a^{(j+1)}=g(z^{(j+1)})&lt;/script&gt;
+
+&lt;p&gt;Notice that in this &lt;strong&gt;last step&lt;/strong&gt;, between layer j and layer j+1, we are doing &lt;strong&gt;exactly the same thing&lt;/strong&gt; as we did in logistic regression. Adding all these intermediate layers in neural networks allows us to more elegantly produce interesting and more complex non-linear hypotheses.&lt;/p&gt;
+
+&lt;h2 id=&quot;62-applications&quot;&gt;6.2 Applications&lt;/h2&gt;
+
+&lt;h3 id=&quot;621-examples-and-intuitions-i&quot;&gt;6.2.1 Examples and Intuitions I&lt;/h3&gt;
+
+&lt;p&gt;A simple example of applying neural networks is by predicting $x_1$ AND $x_2$, which is the logical ‘and’ operator and is only true if both $x_1$ and $x_2$ are 1.&lt;/p&gt;
+
+&lt;p&gt;The graph of our functions will look like:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*}\begin{bmatrix}x_0 \newline x_1 \newline x_2\end{bmatrix} \rightarrow\begin{bmatrix}g(z^{(2)})\end{bmatrix} \rightarrow h_\Theta(x)\end{align*}&lt;/script&gt;
+
+&lt;p&gt;Remember that $x_0$ is our bias variable and is always 1.&lt;/p&gt;
+
+&lt;p&gt;Let’s set our first theta matrix as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\Theta^{(1)}=[-30\ 20\ 20]&lt;/script&gt;
+
+&lt;p&gt;This will cause the output of our hypothesis to only be positive if both $x_1$ and $x_2$ are 1. In other words:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; h_\Theta(x) = g(-30 + 20x_1 + 20x_2) \newline \newline &amp; x_1 = 0 \ \ and \ \ x_2 = 0 \ \ then \ \ g(-30) \approx 0 \newline &amp; x_1 = 0 \ \ and \ \ x_2 = 1 \ \ then \ \ g(-10) \approx 0 \newline &amp; x_1 = 1 \ \ and \ \ x_2 = 0 \ \ then \ \ g(-10) \approx 0 \newline &amp; x_1 = 1 \ \ and \ \ x_2 = 1 \ \ then \ \ g(10) \approx 1\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;So we have constructed one of the fundamental operations in computers by using a small neural network rather than using an actual AND gate. Neural networks can also be used to simulate all the other logical gates. The following is an example of the logical operator ‘OR’, meaning either $x_1$ is true or $x_2$ is true, or both:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tKfTcly1fr2qx34y7mj30gb07raaw.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Where g(z) is the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tKfTcly1fr2qx34y7mj30gb07raaw.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;622-examples-and-intuitions-ii&quot;&gt;6.2.2 Examples and Intuitions II&lt;/h3&gt;
+
+&lt;p&gt;The $Θ^{(1)}$ matrices for AND, NOR, and OR are:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}AND:\newline\Theta^{(1)} &amp;=\begin{bmatrix}-30 &amp; 20 &amp; 20\end{bmatrix} \newline NOR:\newline\Theta^{(1)} &amp;= \begin{bmatrix}10 &amp; -20 &amp; -20\end{bmatrix} \newline OR:\newline\Theta^{(1)} &amp;= \begin{bmatrix}-10 &amp; 20 &amp; 20\end{bmatrix} \newline\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;We can combine these to get the XNOR logical operator (which gives 1 if $x_1$ and $x_2$ are both 0 or both 1).&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*}\begin{bmatrix}x_0 \newline x_1 \newline x_2\end{bmatrix} \rightarrow\begin{bmatrix}a_1^{(2)} \newline a_2^{(2)} \end{bmatrix} \rightarrow\begin{bmatrix}a^{(3)}\end{bmatrix} \rightarrow h_\Theta(x)\end{align*}&lt;/script&gt;
+
+&lt;p&gt;For the transition between the first and second layer, we’ll use a $Θ^{(1)}$ matrix that combines the values for AND and NOR:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\Theta^{(1)} =\begin{bmatrix}-30 &amp; 20 &amp; 20 \newline 10 &amp; -20 &amp; -20\end{bmatrix} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;For the transition between the second and third layer, we’ll use a $Θ^{(2)}$ matrix that uses the value for OR:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\Theta^{(2)}=[-10\ 20\ 20]&lt;/script&gt;
+
+&lt;p&gt;Let’s write out the values for all our nodes:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}&amp; a^{(2)} = g(\Theta^{(1)} \cdot x) \newline&amp; a^{(3)} = g(\Theta^{(2)} \cdot a^{(2)}) \newline&amp; h_\Theta(x) = a^{(3)}\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;And there we have the XNOR operator using a hidden layer with two nodes! The following summarizes the above algorithm:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fr2rikyh1ij30hb09h40o.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;623-multiclass-classification&quot;&gt;6.2.3 Multiclass Classification&lt;/h3&gt;
+
+&lt;p&gt;To classify data into multiple classes, we let our hypothesis function return a vector of values. Say we wanted to classify our data into one of four categories. We will use the following example to see how this classification is done. This algorithm takes as input an image and classifies it accordingly:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tKfTcly1fr2rxa2aybj30h309en0f.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can define our set of resulting classes as y:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y^{(i)}=\begin {bmatrix}1\\0\\0\\0\end {bmatrix} ,\begin {bmatrix}0\\1\\0\\0\end {bmatrix} ,\begin {bmatrix}0\\0\\1\\0\end {bmatrix} ,\begin {bmatrix}0\\0\\0\\1\end {bmatrix}&lt;/script&gt;
+
+&lt;p&gt;Each $y^{(i)}$ represents a different image corresponding to either a car, pedestrian, truck, or motorcycle. The inner layers, each provide us with some new information which leads to our final hypothesis function. The setup looks like:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin {bmatrix}x_0\\x_1\\x_2\\\cdots\\x_n\end {bmatrix} \rightarrow \begin {bmatrix}a_0^{(2)}\\a_1^{(2)}\\a_2^{(2)}\\\cdots\end {bmatrix} \rightarrow \begin {bmatrix}a_0^{(3)}\\a_1^{(3)}\\a_2^{(3)}\\\cdots\end {bmatrix} \rightarrow \cdots \rightarrow \begin {bmatrix}h_\Theta(x)_1\\h_\Theta(x)_2\\h_\Theta(x)_3\\h_\Theta(x)_4\end {bmatrix}&lt;/script&gt;
+
+&lt;p&gt;Our resulting hypothesis for one set of inputs may look like:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_\Theta(x) =\begin{bmatrix}0 \newline 0 \newline 1 \newline 0 \newline\end{bmatrix}&lt;/script&gt;
+
+&lt;p&gt;In which case our resulting class is the third one down, or $h_\Theta(x)_3$, which represents the motorcycle.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Apr 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/04/30/ml-week4/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/04/30/ml-week4/</guid>
+        
+        <category>机器学习</category>
+        
+        
+      </item>
+    
+      <item>
         <title>Machine Learning Week 3</title>
-        <description>&lt;h2 id=&quot;4-classification&quot;&gt;4. Classification&lt;/h2&gt;
+        <description>&lt;h1 id=&quot;4-logistic-regression&quot;&gt;4. Logistic Regression&lt;/h1&gt;
+
+&lt;h2 id=&quot;41-classification-and-representation&quot;&gt;4.1 Classification and Representation&lt;/h2&gt;
+
+&lt;h3 id=&quot;411-classification&quot;&gt;4.1.1 Classification&lt;/h3&gt;
 
 &lt;p&gt;To attempt classification, one method is to use linear regression and map all predictions greater than 0.5 as a 1 and all less than 0.5 as a 0. However, this method doesn’t work well because classification is not actually a linear function.&lt;/p&gt;
 
 &lt;p&gt;The classification problem is just like the regression problem, except that the values we now want to predict take on only a small number of discrete values. For now, we will focus on the &lt;strong&gt;binary classification&lt;/strong&gt; &lt;strong&gt;problem&lt;/strong&gt; in which y can take on only two values, 0 and 1. (Most of what we say here will also generalize to the multiple-class case.) For instance, if we are trying to build a spam classifier for email, then $x^{(i)}$ may be some features of a piece of email, and y may be 1 if it is a piece of spam mail, and 0 otherwise. Hence, y∈{0,1}. 0 is also called the negative class, and 1 the positive class, and they are sometimes also denoted by the symbols “-” and “+.” Given $x^{(i)}$, the corresponding $y^{(i)}$ is also called the label for the training example.&lt;/p&gt;
 
-&lt;h3 id=&quot;41-hypothesis-representation&quot;&gt;4.1 Hypothesis Representation&lt;/h3&gt;
+&lt;h3 id=&quot;412-hypothesis-representation&quot;&gt;4.1.2 Hypothesis Representation&lt;/h3&gt;
 
 &lt;p&gt;We could approach the classification problem ignoring the fact that y is discrete-valued, and use our old linear regression algorithm to try to predict y given x. However, it is easy to construct examples where this method performs very poorly. Intuitively, it also doesn’t make sense for hθ(x) to take values larger than 1 or smaller than 0 when we know that y ∈ {0, 1}. To fix this, let’s change the form for our hypotheses hθ(x)to satisfy 0≤hθ(x)≤1. This is accomplished by plugging θTx into the Logistic Function.&lt;/p&gt;
 
@@ -189,7 +590,7 @@
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{align*}&amp; h_\theta(x) = P(y=1 | x ; \theta) = 1 - P(y=0 | x ; \theta) \newline&amp; P(y = 0 | x;\theta) + P(y = 1 | x ; \theta) = 1\end{align*} %]]&gt;&lt;/script&gt;
 
-&lt;h3 id=&quot;42-decision-boundary&quot;&gt;4.2 Decision Boundary&lt;/h3&gt;
+&lt;h3 id=&quot;413-decision-boundary&quot;&gt;4.1.3 Decision Boundary&lt;/h3&gt;
 
 &lt;p&gt;In order to get our discrete 0 or 1 classification, we can translate the output of the hypothesis function as follows:&lt;/p&gt;
 
@@ -226,7 +627,9 @@
 
 &lt;p&gt;Again, the input to the sigmoid function g(z) (e.g. $θ^TX$) doesn’t need to be linear, and could be a function that describes a circle (e.g. $z=θ_0+θ_1x^2_1+θ_2x^2_2$) or any shape to fit our data.&lt;/p&gt;
 
-&lt;h3 id=&quot;43-cost-function&quot;&gt;4.3 Cost Function&lt;/h3&gt;
+&lt;h2 id=&quot;42-logistic-regression-model&quot;&gt;4.2 Logistic Regression Model&lt;/h2&gt;
+
+&lt;h3 id=&quot;421-cost-function&quot;&gt;4.2.1 Cost Function&lt;/h3&gt;
 
 &lt;p&gt;We cannot use the same cost function that we use for linear regression because the Logistic Function will cause the output to be wavy, causing many local optima. In other words, it will not be a convex function.&lt;/p&gt;
 
@@ -252,7 +655,7 @@
 
 &lt;p&gt;Note that writing the cost function in this way guarantees that J(θ) is convex for logistic regression.&lt;/p&gt;
 
-&lt;h3 id=&quot;44-simplified-cost-function-and-gradient-descent&quot;&gt;4.4 Simplified Cost Function and Gradient Descent&lt;/h3&gt;
+&lt;h3 id=&quot;422-simplified-cost-function-and-gradient-descent&quot;&gt;4.2.2 Simplified Cost Function and Gradient Descent&lt;/h3&gt;
 
 &lt;p&gt;We can compress our cost function’s two conditional cases into one case:&lt;/p&gt;
 
@@ -269,7 +672,7 @@
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{align*} &amp; h = g(X\theta)\newline &amp; J(\theta) = \frac{1}{m} \cdot \left(-y^{T}\log(h)-(1-y)^{T}\log(1-h)\right) \end{align*} %]]&gt;&lt;/script&gt;
 
-&lt;h3 id=&quot;45-gradient-descent&quot;&gt;&lt;strong&gt;4.5 Gradient Descent&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4 id=&quot;gradient-descent&quot;&gt;Gradient Descent&lt;/h4&gt;
 
 &lt;p&gt;Remember that the general form of gradient descent is:&lt;/p&gt;
 
@@ -287,14 +690,15 @@
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;θ:=θ−\frac{α}{m}X^T(g(Xθ)−\hat{y})&lt;/script&gt;
 
-&lt;h3 id=&quot;46-advanced-optimization&quot;&gt;4.6 Advanced Optimization&lt;/h3&gt;
+&lt;h3 id=&quot;423-advanced-optimization&quot;&gt;4.2.3 Advanced Optimization&lt;/h3&gt;
 
 &lt;p&gt;“Conjugate gradient”, “BFGS”, and “L-BFGS” are more sophisticated, faster ways to optimize $θ$ that can be used instead of gradient descent. We suggest that you should not write these more sophisticated algorithms yourself (unless you are an expert in numerical computing) but use the libraries instead, as they’re already tested and highly optimized. Octave provides them.&lt;/p&gt;
 
 &lt;p&gt;We first need to provide a function that evaluates the following two functions for a given input value θ:&lt;/p&gt;
 
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;J(θ)&lt;/script&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\frac{∂}{∂θ_j}J(θ)&lt;/script&gt;&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ)&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{∂}{∂θ_j}J(θ)&lt;/script&gt;
 
 &lt;p&gt;We can write a single function that returns both of these:&lt;/p&gt;
 
@@ -314,7 +718,9 @@
 
 &lt;p&gt;We give to the function “fminunc()” our cost function, our initial vector of theta values, and the “options” object that we created beforehand.&lt;/p&gt;
 
-&lt;h3 id=&quot;47-multiclass-classification-one-vs-all&quot;&gt;4.7 Multiclass Classification: One-vs-all&lt;/h3&gt;
+&lt;h2 id=&quot;43-multiclass-classification&quot;&gt;4.3 Multiclass Classification&lt;/h2&gt;
+
+&lt;h3 id=&quot;431multiclass-classification-one-vs-all&quot;&gt;4.3.1Multiclass Classification: One-vs-all&lt;/h3&gt;
 
 &lt;p&gt;Now we will approach the classification of data when we have more than two categories. Instead of y = {0,1} we will expand our definition so that y = {0,1…n}.&lt;/p&gt;
 
@@ -335,7 +741,11 @@
 
 &lt;p&gt;To make a prediction on a new x, pick the class ￼that maximizes $h_θ(x)$&lt;/p&gt;
 
-&lt;h3 id=&quot;48-the-problem-of-overfitting&quot;&gt;4.8 The Problem of Overfitting&lt;/h3&gt;
+&lt;h1 id=&quot;5-regularization&quot;&gt;5. Regularization&lt;/h1&gt;
+
+&lt;h2 id=&quot;51-solving-the-problem-of-overfitting&quot;&gt;5.1 Solving the Problem of Overfitting&lt;/h2&gt;
+
+&lt;h3 id=&quot;511-the-problem-of-overfitting&quot;&gt;5.1.1 The Problem of Overfitting&lt;/h3&gt;
 
 &lt;p&gt;Consider the problem of predicting y from x ∈ R. The leftmost figure below shows the result of fitting a $y = θ_0+θ_1x$ to a dataset. We see that the data doesn’t really lie on straight line, and so the fit is not very good.&lt;/p&gt;
 
@@ -361,7 +771,7 @@
   &lt;li&gt;Regularization works well when we have a lot of slightly useful features.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;49-cost-function&quot;&gt;4.9 Cost Function&lt;/h3&gt;
+&lt;h3 id=&quot;512-cost-function&quot;&gt;5.1.2 Cost Function&lt;/h3&gt;
 
 &lt;p&gt;If we have overfitting from our hypothesis function, we can reduce the weight that some of the terms in our function carry by increasing their cost.&lt;/p&gt;
 
@@ -381,17 +791,17 @@
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;min_\theta\ \dfrac{1}{2m}\  [ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\ \sum_{j=1}^n \theta_j^2 ]&lt;/script&gt;
 
-&lt;p&gt;The $λ​$, or lambda, is the &lt;strong&gt;regularization parameter&lt;/strong&gt;. It determines how much the costs of our theta parameters are inflated.&lt;/p&gt;
+&lt;p&gt;The $\lambda$, or lambda, is the &lt;strong&gt;regularization parameter&lt;/strong&gt;. It determines how much the costs of our theta parameters are inflated.&lt;/p&gt;
 
-&lt;p&gt;Using the above cost function with the extra summation, we can smooth the output of our hypothesis function to reduce overfitting. If lambda is chosen to be too large, it may smooth out the function too much and cause underfitting. Hence, what would happen if $λ=0$ or is too small ? If $λ$ is very small, $θ$ will not be restricted. So it will cause overfitting.&lt;/p&gt;
+&lt;p&gt;Using the above cost function with the extra summation, we can smooth the output of our hypothesis function to reduce overfitting. If lambda is chosen to be too large, it may smooth out the function too much and cause underfitting. Hence, what would happen if $λ=0$ or is too small ? If $\lambda$ is very small, $\theta$ will not be restricted. So it will cause overfitting.&lt;/p&gt;
 
-&lt;h3 id=&quot;410-regularized-linear-regression&quot;&gt;4.10 Regularized Linear Regression&lt;/h3&gt;
+&lt;h3 id=&quot;513-regularized-linear-regression&quot;&gt;5.1.3 Regularized Linear Regression&lt;/h3&gt;
 
 &lt;p&gt;We can apply regularization to both linear regression and logistic regression. We will approach linear regression first.&lt;/p&gt;
 
-&lt;h4 id=&quot;4101-gradient-descent&quot;&gt;4.10.1 Gradient Descent&lt;/h4&gt;
+&lt;h4 id=&quot;gradient-descent-1&quot;&gt;Gradient Descent&lt;/h4&gt;
 
-&lt;p&gt;We will modify our gradient descent function to separate out θ0 from the rest of the parameters because we do not want to penalize $θ_0$.&lt;/p&gt;
+&lt;p&gt;We will modify our gradient descent function to separate out $\theta_0$ from the rest of the parameters because we do not want to penalize $\theta_0$.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{align*} &amp; \text{Repeat}\ \lbrace \newline &amp; \ \ \ \ \theta_0 := \theta_0 - \alpha\ \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_0^{(i)} \newline &amp; \ \ \ \ \theta_j := \theta_j - \alpha\ \left[ \left( \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)} \right) + \frac{\lambda}{m}\theta_j \right] &amp;\ \ \ \ \ \ \ \ \ \ j \in \lbrace 1,2...n\rbrace\newline &amp; \rbrace \end{align*} %]]&gt;&lt;/script&gt;
@@ -402,7 +812,7 @@
 
 &lt;p&gt;The first term in the above equation, $1−α\frac{λ}m$ will always be less than 1. Intuitively you can see it as reducing the value of $θ_j$ by some amount on every update. Notice that the second term is now exactly the same as it was before.&lt;/p&gt;
 
-&lt;h4 id=&quot;4102-normal-equation&quot;&gt;&lt;strong&gt;4.10.2 Normal Equation&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;normal-equation&quot;&gt;&lt;strong&gt;Normal Equation&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;p&gt;Now let’s approach regularization using the alternate method of the non-iterative normal equation.&lt;/p&gt;
 
@@ -415,13 +825,13 @@
 
 &lt;p&gt;Recall that if m &amp;lt; n, then $X^TX$ is non-invertible. However, when we add the term λ⋅L, then $X^TX + λ⋅L$ becomes invertible.&lt;/p&gt;
 
-&lt;h3 id=&quot;411-regularized-logistic-regression&quot;&gt;4.11 Regularized Logistic Regression&lt;/h3&gt;
+&lt;h3 id=&quot;514-regularized-logistic-regression&quot;&gt;5.1.4 Regularized Logistic Regression&lt;/h3&gt;
 
 &lt;p&gt;We can regularize logistic regression in a similar way that we regularize linear regression. As a result, we can avoid overfitting. The following image shows how the regularized function, displayed by the pink line, is less likely to overfit than the non-regularized function represented by the blue line:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fr0rr7x64lj30do07edh2.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;4111-cost-function&quot;&gt;4.11.1 Cost Function&lt;/h4&gt;
+&lt;h4 id=&quot;cost-function&quot;&gt;Cost Function&lt;/h4&gt;
 
 &lt;p&gt;Recall that our cost function for logistic regression was:&lt;/p&gt;
 
@@ -446,9 +856,11 @@
     
       <item>
         <title>Machine Learning Week 2</title>
-        <description>&lt;h2 id=&quot;3-linear-regression-with-multiple-variables&quot;&gt;3. Linear Regression with Multiple Variables&lt;/h2&gt;
+        <description>&lt;h1 id=&quot;3-linear-regression-with-multiple-variables&quot;&gt;3. Linear Regression with Multiple Variables&lt;/h1&gt;
 
-&lt;h3 id=&quot;31-multiple-features&quot;&gt;3.1 Multiple Features&lt;/h3&gt;
+&lt;h2 id=&quot;31-multivariate-linear-regression&quot;&gt;3.1 Multivariate Linear Regression&lt;/h2&gt;
+
+&lt;h3 id=&quot;311-multiple-features&quot;&gt;3.1.1 Multiple Features&lt;/h3&gt;
 
 &lt;p&gt;Linear regression with multiple variables is also known as “multivariate linear regression”.&lt;/p&gt;
 
@@ -485,7 +897,7 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;&lt;strong&gt;For the rest of these notes, and other lecture notes, X will represent a matrix of training examples&lt;/strong&gt; $x_{(i)}$ &lt;strong&gt;stored row-wise.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;32-cost-function&quot;&gt;&lt;strong&gt;3.2 Cost function&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;312-cost-function&quot;&gt;3.1.2 Cost function&lt;/h3&gt;
 
 &lt;p&gt;For the parameter vector θ (of type $ℝ^{n+1}$ or in $ℝ^{(n+1)×1}$, the cost function is:&lt;/p&gt;
 
@@ -495,9 +907,9 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ)=\frac{1}{2m}(Xθ−\hat y )^T(Xθ−\hat y )&lt;/script&gt;
 
-&lt;p&gt;Where $\hat{y}$ denotes the vector of all y values.&lt;/p&gt;
+&lt;p&gt;Where $\hat{y}$  denotes the vector of all y values.&lt;/p&gt;
 
-&lt;h3 id=&quot;33-gradient-descent-for-multiple-variables&quot;&gt;&lt;strong&gt;3.3 Gradient Descent for Multiple Variables&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;313-gradient-descent-for-multiple-variables&quot;&gt;3.1.3 Gradient Descent for Multiple Variables&lt;/h3&gt;
 
 &lt;p&gt;The gradient descent equation itself is generally the same form; we just have to repeat it for our ‘n’ features:&lt;/p&gt;
 
@@ -513,7 +925,7 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fqs784zggaj30g508ttam.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;34-gradient-descent-in-practice-i---feature-scaling&quot;&gt;3.4 Gradient Descent in Practice I - Feature Scaling&lt;/h3&gt;
+&lt;h3 id=&quot;314-gradient-descent-in-practice-i---feature-scaling&quot;&gt;3.1.4 Gradient Descent in Practice I - Feature Scaling&lt;/h3&gt;
 
 &lt;p&gt;We can speed up gradient descent by having each of our input values in roughly the same range. This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven.&lt;/p&gt;
 
@@ -537,7 +949,7 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;For example, if xi represents housing prices with a range of 100 to 2000 and a mean value of 1000, then, $xi:=\frac {price−1000}{1900}$.&lt;/p&gt;
 
-&lt;h3 id=&quot;35-gradient-descent-in-practice-ii---learning-rate&quot;&gt;3.5 Gradient Descent in Practice II - Learning Rate&lt;/h3&gt;
+&lt;h3 id=&quot;315-gradient-descent-in-practice-ii---learning-rate&quot;&gt;3.1.5 Gradient Descent in Practice II - Learning Rate&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;Debugging gradient descent.&lt;/strong&gt; Make a plot with &lt;em&gt;number of iterations&lt;/em&gt; on the x-axis. Now plot the cost function, J(θ) over the number of iterations of gradient descent. If J(θ) ever increases, then you probably need to decrease α.&lt;/p&gt;
 
@@ -555,13 +967,13 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;If α is too large: ￼may not decrease on every iteration and thus may not converge.&lt;/p&gt;
 
-&lt;h3 id=&quot;36-features-and-polynomial-regression&quot;&gt;3.6 Features and Polynomial Regression&lt;/h3&gt;
+&lt;h3 id=&quot;316-features-and-polynomial-regression&quot;&gt;3.1.6 Features and Polynomial Regression&lt;/h3&gt;
 
 &lt;p&gt;We can improve our features and the form of our hypothesis function in a couple different ways.&lt;/p&gt;
 
-&lt;p&gt;We can &lt;strong&gt;combine&lt;/strong&gt; multiple features into one. For example, we can combine $x_1$ and $x_2$ into a new feature $x_3$ by taking $x_1⋅x_2$.&lt;/p&gt;
+&lt;p&gt;We can &lt;strong&gt;combine&lt;/strong&gt; multiple features into one. For example, we can combine x1 and x2 into a new feature x3 by taking $x_1⋅x_2$.&lt;/p&gt;
 
-&lt;h4 id=&quot;361-polynomial-regression&quot;&gt;3.6.1 Polynomial Regression&lt;/h4&gt;
+&lt;h4 id=&quot;polynomial-regression&quot;&gt;Polynomial Regression&lt;/h4&gt;
 
 &lt;p&gt;Our hypothesis function need not be linear (a straight line) if that does not fit the data well.&lt;/p&gt;
 
@@ -577,7 +989,9 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;eg. if $x_1$ has range 1 - 1000 then range of $x^2_1$ becomes 1 - 1000000 and that of $x^3_1$ becomes 1 - 1000000000&lt;/p&gt;
 
-&lt;h3 id=&quot;37-normal-equation&quot;&gt;3.7 Normal Equation&lt;/h3&gt;
+&lt;h2 id=&quot;32-computing-parameters-analytically&quot;&gt;3.2 Computing Parameters Analytically&lt;/h2&gt;
+
+&lt;h3 id=&quot;321-normal-equation&quot;&gt;3.2.1 Normal Equation&lt;/h3&gt;
 
 &lt;p&gt;Gradient descent gives one way of minimizing J. Let’s discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In the “Normal Equation” method, we will minimize J by explicitly taking its derivatives with respect to the $θ_j$ ’s, and setting them to zero. This allows us to find the optimum theta without iteration. The normal equation formula is given below:&lt;/p&gt;
 
@@ -618,9 +1032,9 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;With the normal equation, computing the inversion has complexity $O(n^3)$. So if we have a very large number of features, the normal equation will be slow. In practice, when n exceeds 10,000 it might be a good time to go from a normal solution to an iterative process.&lt;/p&gt;
 
-&lt;h4 id=&quot;371-normal-equation-noninvertibility&quot;&gt;3.7.1 Normal Equation Noninvertibility&lt;/h4&gt;
+&lt;h3 id=&quot;322-normal-equation-noninvertibility&quot;&gt;3.2.2 Normal Equation Noninvertibility&lt;/h3&gt;
 
-&lt;p&gt;When implementing the normal equation in octave we want to use the ‘pinv’ function rather than &lt;code class=&quot;highlighter-rouge&quot;&gt;inv &lt;/code&gt; . The &lt;code class=&quot;highlighter-rouge&quot;&gt;pinv&lt;/code&gt; function will give you a value of $θ$ even if $X^TX$ is not invertible.&lt;/p&gt;
+&lt;p&gt;When implementing the normal equation in octave we want to use the ‘pinv’ function rather than &lt;code class=&quot;highlighter-rouge&quot;&gt;inv&lt;/code&gt; . The &lt;code class=&quot;highlighter-rouge&quot;&gt;pinv&lt;/code&gt; function will give you a value of $θ$ even if $X^TX$ is not invertible.&lt;/p&gt;
 
 &lt;p&gt;If $X^TX$ is &lt;strong&gt;noninvertible,&lt;/strong&gt; the common causes might be having :&lt;/p&gt;
 
@@ -642,9 +1056,11 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
     
       <item>
         <title>Machine Learning Week 1</title>
-        <description>&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+        <description>&lt;h1 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h1&gt;
 
-&lt;h3 id=&quot;11-what-is-machine-learning&quot;&gt;1.1 What is Machine Learning?&lt;/h3&gt;
+&lt;h2 id=&quot;11-introduction&quot;&gt;1.1 Introduction&lt;/h2&gt;
+
+&lt;h3 id=&quot;111-what-is-machine-learning&quot;&gt;1.1.1 What is Machine Learning?&lt;/h3&gt;
 
 &lt;p&gt;Two definitions of Machine Learning are offered. Arthur Samuel described it as: “the field of study that gives computers the ability to learn without being explicitly programmed.” This is an older, informal definition.&lt;/p&gt;
 
@@ -662,7 +1078,7 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;Supervised learning and Unsupervised learning.&lt;/p&gt;
 
-&lt;h3 id=&quot;12-supervised-learning&quot;&gt;1.2 Supervised Learning&lt;/h3&gt;
+&lt;h3 id=&quot;112-supervised-learning&quot;&gt;1.1.2 Supervised Learning&lt;/h3&gt;
 
 &lt;p&gt;In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output.&lt;/p&gt;
 
@@ -680,7 +1096,7 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;(b) Classification - Given a patient with a tumor, we have to predict whether the tumor is malignant or benign.&lt;/p&gt;
 
-&lt;h3 id=&quot;13-unsupervised-learning&quot;&gt;1.3 Unsupervised Learning&lt;/h3&gt;
+&lt;h3 id=&quot;113-unsupervised-learning&quot;&gt;1.1.3 Unsupervised Learning&lt;/h3&gt;
 
 &lt;p&gt;Unsupervised learning allows us to approach problems with little or no idea what our results should look like. We can derive structure from data where we don’t necessarily know the effect of the variables.&lt;/p&gt;
 
@@ -694,9 +1110,11 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;Non-clustering: The “Cocktail Party Algorithm”, allows you to find structure in a chaotic environment. (i.e. identifying individual voices and music from a mesh of sounds at a &lt;a href=&quot;https://en.wikipedia.org/wiki/Cocktail_party_effect&quot;&gt;cocktail party&lt;/a&gt;).&lt;/p&gt;
 
-&lt;h2 id=&quot;2-linear-regression-with-one-variable&quot;&gt;2. Linear Regression with One Variable&lt;/h2&gt;
+&lt;h1 id=&quot;2-linear-regression-with-one-variable&quot;&gt;2. Linear Regression with One Variable&lt;/h1&gt;
 
-&lt;h3 id=&quot;21-model-representation&quot;&gt;2.1 Model Representation&lt;/h3&gt;
+&lt;h2 id=&quot;21-model-and-cost-function&quot;&gt;2.1 Model and Cost Function&lt;/h2&gt;
+
+&lt;h3 id=&quot;211-model-representation&quot;&gt;2.1.1 Model Representation&lt;/h3&gt;
 
 &lt;p&gt;To establish notation for future use, we’ll use $x^{(i)}$ to denote the “input” variables (living area in this example), also called input features, and $y{(i)}$ to denote the “output” or target variable that we are trying to predict (price). A pair $(x^{(i)},y^{(i)})$ is called a training example, and the dataset that we’ll be using to learn—a list of m training examples $(x^{(i)},y^{(i)});i=1,…,m$—is called a training set. Note that the superscript “(i)” in the notation is simply an index into the training set, and has nothing to do with exponentiation. We will also use X to denote the space of input values, and Y to denote the space of output values. In this example, X = Y = ℝ.&lt;/p&gt;
 
@@ -706,11 +1124,11 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;When the target variable that we’re trying to predict is continuous, such as in our housing example, we call the learning problem a regression problem. When y can take on only a small number of discrete values (such as if, given the living area, we wanted to predict if a dwelling is a house or an apartment, say), we call it a classification problem.&lt;/p&gt;
 
-&lt;h3 id=&quot;22-the-hypothesis-function&quot;&gt;2.2 The Hypothesis Function&lt;/h3&gt;
+&lt;h3 id=&quot;212-the-hypothesis-function&quot;&gt;2.1.2 The Hypothesis Function&lt;/h3&gt;
 
 &lt;p&gt;Our hypothesis function has the general form:&lt;/p&gt;
 
-&lt;p&gt;$\hat{y}=h_θ(x)=θ_0+θ_1x$&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{y}=h_θ(x)=θ_0+θ_1x&lt;/script&gt;
 
 &lt;p&gt;Note that this is like the equation of a straight line. We give to $h_θ(x)$ values for $θ_0$ and $θ_1$ to get our estimated output $\hat{y}$. In other words, we are trying to create a function called $h_θ$ that is trying to map our input data (the x’s) to our output data (the y’s).&lt;/p&gt;
 
@@ -749,7 +1167,7 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;So for input of 1 to our hypothesis, y will be 4. This is off by 3. Note that we will be trying out various values of $θ_0$ and $θ_1$ to try to find values which provide the best possible “fit” or the most representative “straight line” through the data points mapped on the x-y plane.&lt;/p&gt;
 
-&lt;h3 id=&quot;23-cost-function&quot;&gt;2.3 Cost Function&lt;/h3&gt;
+&lt;h3 id=&quot;213-cost-function&quot;&gt;2.1.3 Cost Function&lt;/h3&gt;
 
 &lt;p&gt;We can measure the accuracy of our hypothesis function by using a &lt;strong&gt;cost function&lt;/strong&gt;. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x’s and the actual output y’s.&lt;/p&gt;
 
@@ -757,11 +1175,11 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;To break it apart, it is $\frac{1}{2} \bar x$ where $\bar x$ is the mean of the squares of $h_θ(x_i)−y_i$ , or the difference between the predicted value and the actual value.&lt;/p&gt;
 
-&lt;p&gt;This function is otherwise called the “Squared error function”, or “Mean squared error”. The mean is halved $(\frac{1}{2m})​$ as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $(\frac{1}{2})​$ term. The following image summarizes what the cost function does:&lt;/p&gt;
+&lt;p&gt;This function is otherwise called the “Squared error function”, or “Mean squared error”. The mean is halved $(\frac{1}{2m})$ as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $(\frac{1}{2})$ term. The following image summarizes what the cost function does:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fqqdhwkrbhj30i60aatak.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;24-cost-function---intuition-i&quot;&gt;2.4 Cost Function - Intuition I&lt;/h3&gt;
+&lt;h3 id=&quot;214-cost-function---intuition-i&quot;&gt;2.1.4 Cost Function - Intuition I&lt;/h3&gt;
 
 &lt;p&gt;If we try to think of it in visual terms, our training data set is scattered on the x-y plane. We are trying to make a straight line (defined by $h_θ(x)$) which passes through these scattered data points.&lt;/p&gt;
 
@@ -779,7 +1197,7 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;Thus as a goal, we should try to minimize the cost function. In this case, $θ_1=1$ is our global minimum.&lt;/p&gt;
 
-&lt;h3 id=&quot;25-cost-function---intuition-ii&quot;&gt;2.5 Cost Function - Intuition II&lt;/h3&gt;
+&lt;h3 id=&quot;215-cost-function---intuition-ii&quot;&gt;2.1.5 Cost Function - Intuition II&lt;/h3&gt;
 
 &lt;p&gt;A contour plot is a graph that contains many contour lines. A contour line of a two variable function has a constant value at all points of the same line. An example of such a graph is the one to the right below.&lt;/p&gt;
 
@@ -795,7 +1213,9 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;The graph above minimizes the cost function as much as possible and consequently, the result of $θ_1$ and $θ_0$ tend to be around 0.12 and 250 respectively. Plotting those values on our graph to the right seems to put our point in the center of the inner most ‘circle’.&lt;/p&gt;
 
-&lt;h3 id=&quot;26-gradient-descent&quot;&gt;2.6 Gradient Descent&lt;/h3&gt;
+&lt;h2 id=&quot;22-parameter-learning&quot;&gt;2.2 Parameter Learning&lt;/h2&gt;
+
+&lt;h3 id=&quot;221-gradient-descent&quot;&gt;2.2.1 Gradient Descent&lt;/h3&gt;
 
 &lt;p&gt;So we have our hypothesis function and we have a way of measuring how well it fits into the data. Now we need to estimate the parameters in the hypothesis function. That’s where gradient descent comes in.&lt;/p&gt;
 
@@ -815,23 +1235,21 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;repeat until convergence:&lt;/p&gt;
 
-&lt;p&gt;$θ_j:=θ_j−α\frac {∂}{∂θ_j}J(θ_0,θ_1)$&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_j:=θ_j−α\frac {∂}{∂θ_j}J(θ_0,θ_1)&lt;/script&gt;
 
-&lt;p&gt;where&lt;/p&gt;
-
-&lt;p&gt;j=0,1 represents the feature index number.&lt;/p&gt;
+&lt;p&gt;where j=0,1 represents the feature index number.&lt;/p&gt;
 
 &lt;p&gt;At each iteration j, one should simultaneously update the parameters $θ_1,θ_2,…,θ_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fqqzulsm5oj30i903s75a.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;27-gradient-descent-intuition&quot;&gt;2.7 Gradient Descent Intuition&lt;/h3&gt;
+&lt;h3 id=&quot;222-gradient-descent-intuition&quot;&gt;2.2.2 Gradient Descent Intuition&lt;/h3&gt;
 
 &lt;p&gt;In this video we explored the scenario where we used one parameter $θ_1$ and plotted its cost function to implement a gradient descent. Our formula for a single parameter was :&lt;/p&gt;
 
 &lt;p&gt;Repeat until convergence:&lt;/p&gt;
 
-&lt;p&gt;$θ_1:=θ_1−α\frac {d}{dθ_1}J(θ_1)$&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_1:=θ_1−α\frac {d}{dθ_1}J(θ_1)&lt;/script&gt;
 
 &lt;p&gt;Regardless of the slope’s sign for $\frac {d}{dθ_1}J(θ_1)$, $θ_1$ eventually converges to its minimum value. The following graph shows that when the slope is negative, the value of $θ_1$ increases and when it is positive, the value of $θ_1$ decreases.&lt;/p&gt;
 
@@ -841,25 +1259,22 @@ h_θ(x)=\begin{bmatrix}θ_0&amp;θ_1&amp;…&amp;θ_n\end{bmatrix}\begin{bmatrix
 
 &lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fqqzuix1r2j30if0a5gmx.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;271-how-does-gradient-descent-converge-with-a-fixed-step-size-α&quot;&gt;2.7.1 How does gradient descent converge with a fixed step size $α$?&lt;/h4&gt;
+&lt;h4 id=&quot;how-does-gradient-descent-converge-with-a-fixed-step-size-α&quot;&gt;How does gradient descent converge with a fixed step size $α$?&lt;/h4&gt;
 
 &lt;p&gt;The intuition behind the convergence is that $\frac {d}{dθ_1}J(θ_1)$ approaches 0 as we approach the bottom of our convex function. At the minimum, the derivative will always be 0 and thus we get:&lt;/p&gt;
 
-&lt;p&gt;$θ_1:=θ_1−α∗0$&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_1:=θ_1−α∗0&lt;/script&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fqqzuftdncj30i60a2400.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;28-gradient-descent-for-linear-regression&quot;&gt;2.8 Gradient Descent For Linear Regression&lt;/h3&gt;
+&lt;h3 id=&quot;223-gradient-descent-for-linear-regression&quot;&gt;2.2.3 Gradient Descent For Linear Regression&lt;/h3&gt;
 
 &lt;p&gt;When specifically applied to the case of linear regression, a new form of the gradient descent equation can be derived. We can substitute our actual cost function and our actual hypothesis function and modify the equation to :&lt;/p&gt;
 
-&lt;p&gt;repeat until convergence: {&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_0:=θ_0−α\frac {1}{m}∑_{i=1}^{m}(h_θ(x_i)−y_i)&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;θ_1:=θ_1−α\frac {1}{m}∑_{i=1}^{m}((h_θ(x_i)−y_i)*x_i)&lt;/script&gt;
-
-&lt;p&gt;}&lt;/p&gt;
+&lt;p&gt;repeat until convergence: {
+&lt;script type=&quot;math/tex&quot;&gt;θ_0:=θ_0−α\frac {1}{m}∑_{i=1}^{m}(h_θ(x_i)−y_i)&lt;/script&gt;
+&lt;script type=&quot;math/tex&quot;&gt;θ_1:=θ_1−α\frac {1}{m}∑_{i=1}^{m}((h_θ(x_i)−y_i)*x_i)&lt;/script&gt;
+}&lt;/p&gt;
 
 &lt;p&gt;where m is the size of the training set, $θ_0$ a constant that will be changing simultaneously with $θ_1$ and $x_i,y_i$ are values of the given training set (data).&lt;/p&gt;
 
@@ -1239,29 +1654,6 @@ touch ssh
         <guid isPermaLink="true">http://localhost:4000/2017/12/29/block-chain-1/</guid>
         
         <category>区块链</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>不止考试</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;还是忙点好啊&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;考研已经结束几天了，魂不守舍。之前想做的种种事情变得索然无味，说到底还是忙点好。发了几份简历，不如找找寒假实习。不出意外，第一次面试挂掉了哈哈哈，Java还是差些火候，学过的都还给老师了。&lt;/p&gt;
-
-&lt;p&gt;顺便趁着这个空档，终于把博客拾掇出来，“又”结束了没有地方写东西的日子，这次绝对不会没有备份就把自己服务器删掉。&lt;/p&gt;
-
-&lt;p&gt;今年下半年把朋友圈功能暂时关闭了。一来不想看戾气越来越重的言论，二来沉下心来考研。时至今日，效果还不错。只是不能看他们去哪里旅游或是去哪里学习，一些不常联系的人也不知道近况如何，要是以后发的朋友圈能分类该多好。&lt;/p&gt;
-
-&lt;p&gt;最后这个网页用的&lt;a href=&quot;https://github.com/Huxpro/huxpro.github.io&quot;&gt;Huxpro的模板&lt;/a&gt;，挺合我胃口的，好看、简洁、大方，而且还可以加上DISQUS。感谢&lt;a href=&quot;https://github.com/Huxpro&quot;&gt;Huxpro&lt;/a&gt;有这么好的模板！也欢迎各位在下方留言😁（DISQUS需要FQ）&lt;/p&gt;
-</description>
-        <pubDate>Wed, 27 Dec 2017 20:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/12/27/more-than-exam/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/12/27/more-than-exam/</guid>
-        
-        <category>考研</category>
         
         
       </item>

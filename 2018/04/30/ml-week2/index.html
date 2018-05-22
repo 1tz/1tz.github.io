@@ -56,9 +56,12 @@
     <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
+        	showProcessingMessages: false,
+        	messageStyle: "none", //不显示信息
             tex2jax: {
-                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-                inlineMath: [['$','$']]
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+                inlineMath: [['$','$']],
+                displayMath: [ ["$$","$$"] ] //段内公式选择$$
             }
         });
     </script>
@@ -165,13 +168,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-big-data.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-ml.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-big-data.jpg')
+        background-image: url('/img/post-ml.jpg')
     }
 
     
@@ -213,9 +216,11 @@
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="3-linear-regression-with-multiple-variables">3. Linear Regression with Multiple Variables</h2>
+				<h1 id="3-linear-regression-with-multiple-variables">3. Linear Regression with Multiple Variables</h1>
 
-<h3 id="31-multiple-features">3.1 Multiple Features</h3>
+<h2 id="31-multivariate-linear-regression">3.1 Multivariate Linear Regression</h2>
+
+<h3 id="311-multiple-features">3.1.1 Multiple Features</h3>
 
 <p>Linear regression with multiple variables is also known as “multivariate linear regression”.</p>
 
@@ -252,7 +257,7 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
 
 <p><strong>For the rest of these notes, and other lecture notes, X will represent a matrix of training examples</strong> $x_{(i)}$ <strong>stored row-wise.</strong></p>
 
-<h3 id="32-cost-function"><strong>3.2 Cost function</strong></h3>
+<h3 id="312-cost-function">3.1.2 Cost function</h3>
 
 <p>For the parameter vector θ (of type $ℝ^{n+1}$ or in $ℝ^{(n+1)×1}$, the cost function is:</p>
 
@@ -262,9 +267,9 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
 
 <script type="math/tex; mode=display">J(θ)=\frac{1}{2m}(Xθ−\hat y )^T(Xθ−\hat y )</script>
 
-<p>Where $\hat{y}$ denotes the vector of all y values.</p>
+<p>Where $\hat{y}$  denotes the vector of all y values.</p>
 
-<h3 id="33-gradient-descent-for-multiple-variables"><strong>3.3 Gradient Descent for Multiple Variables</strong></h3>
+<h3 id="313-gradient-descent-for-multiple-variables">3.1.3 Gradient Descent for Multiple Variables</h3>
 
 <p>The gradient descent equation itself is generally the same form; we just have to repeat it for our ‘n’ features:</p>
 
@@ -280,7 +285,7 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
 
 <p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fqs784zggaj30g508ttam.jpg" alt="img" /></p>
 
-<h3 id="34-gradient-descent-in-practice-i---feature-scaling">3.4 Gradient Descent in Practice I - Feature Scaling</h3>
+<h3 id="314-gradient-descent-in-practice-i---feature-scaling">3.1.4 Gradient Descent in Practice I - Feature Scaling</h3>
 
 <p>We can speed up gradient descent by having each of our input values in roughly the same range. This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven.</p>
 
@@ -304,7 +309,7 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
 
 <p>For example, if xi represents housing prices with a range of 100 to 2000 and a mean value of 1000, then, $xi:=\frac {price−1000}{1900}$.</p>
 
-<h3 id="35-gradient-descent-in-practice-ii---learning-rate">3.5 Gradient Descent in Practice II - Learning Rate</h3>
+<h3 id="315-gradient-descent-in-practice-ii---learning-rate">3.1.5 Gradient Descent in Practice II - Learning Rate</h3>
 
 <p><strong>Debugging gradient descent.</strong> Make a plot with <em>number of iterations</em> on the x-axis. Now plot the cost function, J(θ) over the number of iterations of gradient descent. If J(θ) ever increases, then you probably need to decrease α.</p>
 
@@ -322,13 +327,13 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
 
 <p>If α is too large: ￼may not decrease on every iteration and thus may not converge.</p>
 
-<h3 id="36-features-and-polynomial-regression">3.6 Features and Polynomial Regression</h3>
+<h3 id="316-features-and-polynomial-regression">3.1.6 Features and Polynomial Regression</h3>
 
 <p>We can improve our features and the form of our hypothesis function in a couple different ways.</p>
 
-<p>We can <strong>combine</strong> multiple features into one. For example, we can combine $x_1$ and $x_2$ into a new feature $x_3$ by taking $x_1⋅x_2$.</p>
+<p>We can <strong>combine</strong> multiple features into one. For example, we can combine x1 and x2 into a new feature x3 by taking $x_1⋅x_2$.</p>
 
-<h4 id="361-polynomial-regression">3.6.1 Polynomial Regression</h4>
+<h4 id="polynomial-regression">Polynomial Regression</h4>
 
 <p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
 
@@ -344,7 +349,9 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
 
 <p>eg. if $x_1$ has range 1 - 1000 then range of $x^2_1$ becomes 1 - 1000000 and that of $x^3_1$ becomes 1 - 1000000000</p>
 
-<h3 id="37-normal-equation">3.7 Normal Equation</h3>
+<h2 id="32-computing-parameters-analytically">3.2 Computing Parameters Analytically</h2>
+
+<h3 id="321-normal-equation">3.2.1 Normal Equation</h3>
 
 <p>Gradient descent gives one way of minimizing J. Let’s discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In the “Normal Equation” method, we will minimize J by explicitly taking its derivatives with respect to the $θ_j$ ’s, and setting them to zero. This allows us to find the optimum theta without iteration. The normal equation formula is given below:</p>
 
@@ -385,9 +392,9 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
 
 <p>With the normal equation, computing the inversion has complexity $O(n^3)$. So if we have a very large number of features, the normal equation will be slow. In practice, when n exceeds 10,000 it might be a good time to go from a normal solution to an iterative process.</p>
 
-<h4 id="371-normal-equation-noninvertibility">3.7.1 Normal Equation Noninvertibility</h4>
+<h3 id="322-normal-equation-noninvertibility">3.2.2 Normal Equation Noninvertibility</h3>
 
-<p>When implementing the normal equation in octave we want to use the ‘pinv’ function rather than <code class="highlighter-rouge">inv </code> . The <code class="highlighter-rouge">pinv</code> function will give you a value of $θ$ even if $X^TX$ is not invertible.</p>
+<p>When implementing the normal equation in octave we want to use the ‘pinv’ function rather than <code class="highlighter-rouge">inv</code> . The <code class="highlighter-rouge">pinv</code> function will give you a value of $θ$ even if $X^TX$ is not invertible.</p>
 
 <p>If $X^TX$ is <strong>noninvertible,</strong> the common causes might be having :</p>
 
@@ -475,7 +482,7 @@ h_θ(x)=\begin{bmatrix}θ_0&θ_1&…&θ_n\end{bmatrix}\begin{bmatrix}x_0\\x_1\\�
                             
         				
                             
-                				<a href="/tags/#机器学习" title="机器学习" rel="3">
+                				<a href="/tags/#机器学习" title="机器学习" rel="5">
                                     机器学习
                                 </a>
                             

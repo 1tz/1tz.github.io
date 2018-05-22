@@ -56,9 +56,12 @@
     <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
+        	showProcessingMessages: false,
+        	messageStyle: "none", //不显示信息
             tex2jax: {
-                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-                inlineMath: [['$','$']]
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+                inlineMath: [['$','$']],
+                displayMath: [ ["$$","$$"] ] //段内公式选择$$
             }
         });
     </script>
@@ -224,6 +227,62 @@
 <hr>
 
 <div class="post-preview">
+    <a href="/2018/04/30/ml-week5/">
+        <h2 class="post-title">
+            Machine Learning Week 5
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            7. Neural Networks: Learning
+
+7.1 Backpropagation
+
+7.1.1 Cost Function
+
+Let’s first define a few variables that we will need to use:
+
+
+  L = total number of layers in the network
+  $s_l$ = number o...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 1tz on April 30, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/04/30/ml-week4/">
+        <h2 class="post-title">
+            Machine Learning Week 4
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            6. Neural Networks: Representation
+
+6.1 Neural Networks
+
+6.1.1 Model Representation I
+
+Let’s examine how we will represent a hypothesis function using neural networks. At a very simple level, neuro...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 1tz on April 30, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/2018/04/30/ml-week3/">
         <h2 class="post-title">
             Machine Learning Week 3
@@ -234,9 +293,13 @@
         </h3>
         
         <div class="post-content-preview">
-            4. Classification
+            4. Logistic Regression
 
-To attempt classification, one method is to use linear regression and map all predictions greater than 0.5 as a 1 and all less than 0.5 as a 0. However, this method doesn’t work ...
+4.1 Classification and Representation
+
+4.1.1 Classification
+
+To attempt classification, one method is to use linear regression and map all predictions greater than 0.5 as a ...
         </div>
     </a>
     <p class="post-meta">
@@ -258,11 +321,11 @@ To attempt classification, one method is to use linear regression and map all pr
         <div class="post-content-preview">
             3. Linear Regression with Multiple Variables
 
-3.1 Multiple Features
+3.1 Multivariate Linear Regression
 
-Linear regression with multiple variables is also known as “multivariate linear regression”.
+3.1.1 Multiple Features
 
-We now introduce notation for equa...
+Linear regression with multiple variables is also known as “multivariate linear regression...
         </div>
     </a>
     <p class="post-meta">
@@ -284,9 +347,11 @@ We now introduce notation for equa...
         <div class="post-content-preview">
             1. Introduction
 
-1.1 What is Machine Learning?
+1.1 Introduction
 
-Two definitions of Machine Learning are offered. Arthur Samuel described it as: “the field of study that gives computers the ability to learn without...
+1.1.1 What is Machine Learning?
+
+Two definitions of Machine Learning are offered. Arthur Samuel described it as: “the field of study that gives computers the abil...
         </div>
     </a>
     <p class="post-meta">
@@ -424,36 +489,17 @@ Two definitions of Machine Learning are offered. Arthur Samuel described it as: 
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/2017/12/27/more-than-exam/">
-        <h2 class="post-title">
-            不止考试
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  还是忙点好啊
-
-
-考研已经结束几天了，魂不守舍。之前想做的种种事情变得索然无味，说到底还是忙点好。发了几份简历，不如找找寒假实习。不出意外，第一次面试挂掉了哈哈哈，Java还是差些火候，学过的都还给老师了。
-
-顺便趁着这个空档，终于把博客拾掇出来，“又”结束了没有地方写东西的日子，这次绝对不会没有备份就把自己服务器删掉。
-
-今年下半年把朋友圈功能暂时关闭了。一来不想看戾气越来越重的言论...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 1tz on December 27, 2017
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/page2">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
 
 
     		</div>
@@ -485,7 +531,7 @@ Two definitions of Machine Learning are offered. Arthur Samuel described it as: 
                             
                         
                             
-                                <a href="/tags/#机器学习" title="机器学习" rel="3">
+                                <a href="/tags/#机器学习" title="机器学习" rel="5">
                                     机器学习
                                 </a>
                             

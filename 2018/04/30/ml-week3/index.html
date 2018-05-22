@@ -56,9 +56,12 @@
     <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
+        	showProcessingMessages: false,
+        	messageStyle: "none", //不显示信息
             tex2jax: {
-                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-                inlineMath: [['$','$']]
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+                inlineMath: [['$','$']],
+                displayMath: [ ["$$","$$"] ] //段内公式选择$$
             }
         });
     </script>
@@ -165,13 +168,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-big-data.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-ml.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-big-data.jpg')
+        background-image: url('/img/post-ml.jpg')
     }
 
     
@@ -213,13 +216,17 @@
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="4-classification">4. Classification</h2>
+				<h1 id="4-logistic-regression">4. Logistic Regression</h1>
+
+<h2 id="41-classification-and-representation">4.1 Classification and Representation</h2>
+
+<h3 id="411-classification">4.1.1 Classification</h3>
 
 <p>To attempt classification, one method is to use linear regression and map all predictions greater than 0.5 as a 1 and all less than 0.5 as a 0. However, this method doesn’t work well because classification is not actually a linear function.</p>
 
 <p>The classification problem is just like the regression problem, except that the values we now want to predict take on only a small number of discrete values. For now, we will focus on the <strong>binary classification</strong> <strong>problem</strong> in which y can take on only two values, 0 and 1. (Most of what we say here will also generalize to the multiple-class case.) For instance, if we are trying to build a spam classifier for email, then $x^{(i)}$ may be some features of a piece of email, and y may be 1 if it is a piece of spam mail, and 0 otherwise. Hence, y∈{0,1}. 0 is also called the negative class, and 1 the positive class, and they are sometimes also denoted by the symbols “-” and “+.” Given $x^{(i)}$, the corresponding $y^{(i)}$ is also called the label for the training example.</p>
 
-<h3 id="41-hypothesis-representation">4.1 Hypothesis Representation</h3>
+<h3 id="412-hypothesis-representation">4.1.2 Hypothesis Representation</h3>
 
 <p>We could approach the classification problem ignoring the fact that y is discrete-valued, and use our old linear regression algorithm to try to predict y given x. However, it is easy to construct examples where this method performs very poorly. Intuitively, it also doesn’t make sense for hθ(x) to take values larger than 1 or smaller than 0 when we know that y ∈ {0, 1}. To fix this, let’s change the form for our hypotheses hθ(x)to satisfy 0≤hθ(x)≤1. This is accomplished by plugging θTx into the Logistic Function.</p>
 
@@ -239,7 +246,7 @@
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align*}& h_\theta(x) = P(y=1 | x ; \theta) = 1 - P(y=0 | x ; \theta) \newline& P(y = 0 | x;\theta) + P(y = 1 | x ; \theta) = 1\end{align*} %]]></script>
 
-<h3 id="42-decision-boundary">4.2 Decision Boundary</h3>
+<h3 id="413-decision-boundary">4.1.3 Decision Boundary</h3>
 
 <p>In order to get our discrete 0 or 1 classification, we can translate the output of the hypothesis function as follows:</p>
 
@@ -276,7 +283,9 @@
 
 <p>Again, the input to the sigmoid function g(z) (e.g. $θ^TX$) doesn’t need to be linear, and could be a function that describes a circle (e.g. $z=θ_0+θ_1x^2_1+θ_2x^2_2$) or any shape to fit our data.</p>
 
-<h3 id="43-cost-function">4.3 Cost Function</h3>
+<h2 id="42-logistic-regression-model">4.2 Logistic Regression Model</h2>
+
+<h3 id="421-cost-function">4.2.1 Cost Function</h3>
 
 <p>We cannot use the same cost function that we use for linear regression because the Logistic Function will cause the output to be wavy, causing many local optima. In other words, it will not be a convex function.</p>
 
@@ -302,7 +311,7 @@
 
 <p>Note that writing the cost function in this way guarantees that J(θ) is convex for logistic regression.</p>
 
-<h3 id="44-simplified-cost-function-and-gradient-descent">4.4 Simplified Cost Function and Gradient Descent</h3>
+<h3 id="422-simplified-cost-function-and-gradient-descent">4.2.2 Simplified Cost Function and Gradient Descent</h3>
 
 <p>We can compress our cost function’s two conditional cases into one case:</p>
 
@@ -319,7 +328,7 @@
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align*} & h = g(X\theta)\newline & J(\theta) = \frac{1}{m} \cdot \left(-y^{T}\log(h)-(1-y)^{T}\log(1-h)\right) \end{align*} %]]></script>
 
-<h3 id="45-gradient-descent"><strong>4.5 Gradient Descent</strong></h3>
+<h4 id="gradient-descent">Gradient Descent</h4>
 
 <p>Remember that the general form of gradient descent is:</p>
 
@@ -337,14 +346,15 @@
 
 <script type="math/tex; mode=display">θ:=θ−\frac{α}{m}X^T(g(Xθ)−\hat{y})</script>
 
-<h3 id="46-advanced-optimization">4.6 Advanced Optimization</h3>
+<h3 id="423-advanced-optimization">4.2.3 Advanced Optimization</h3>
 
 <p>“Conjugate gradient”, “BFGS”, and “L-BFGS” are more sophisticated, faster ways to optimize $θ$ that can be used instead of gradient descent. We suggest that you should not write these more sophisticated algorithms yourself (unless you are an expert in numerical computing) but use the libraries instead, as they’re already tested and highly optimized. Octave provides them.</p>
 
 <p>We first need to provide a function that evaluates the following two functions for a given input value θ:</p>
 
-<p><script type="math/tex">J(θ)</script>
-<script type="math/tex">\frac{∂}{∂θ_j}J(θ)</script></p>
+<script type="math/tex; mode=display">J(θ)</script>
+
+<script type="math/tex; mode=display">\frac{∂}{∂θ_j}J(θ)</script>
 
 <p>We can write a single function that returns both of these:</p>
 
@@ -364,7 +374,9 @@
 
 <p>We give to the function “fminunc()” our cost function, our initial vector of theta values, and the “options” object that we created beforehand.</p>
 
-<h3 id="47-multiclass-classification-one-vs-all">4.7 Multiclass Classification: One-vs-all</h3>
+<h2 id="43-multiclass-classification">4.3 Multiclass Classification</h2>
+
+<h3 id="431multiclass-classification-one-vs-all">4.3.1Multiclass Classification: One-vs-all</h3>
 
 <p>Now we will approach the classification of data when we have more than two categories. Instead of y = {0,1} we will expand our definition so that y = {0,1…n}.</p>
 
@@ -385,7 +397,11 @@
 
 <p>To make a prediction on a new x, pick the class ￼that maximizes $h_θ(x)$</p>
 
-<h3 id="48-the-problem-of-overfitting">4.8 The Problem of Overfitting</h3>
+<h1 id="5-regularization">5. Regularization</h1>
+
+<h2 id="51-solving-the-problem-of-overfitting">5.1 Solving the Problem of Overfitting</h2>
+
+<h3 id="511-the-problem-of-overfitting">5.1.1 The Problem of Overfitting</h3>
 
 <p>Consider the problem of predicting y from x ∈ R. The leftmost figure below shows the result of fitting a $y = θ_0+θ_1x$ to a dataset. We see that the data doesn’t really lie on straight line, and so the fit is not very good.</p>
 
@@ -411,7 +427,7 @@
   <li>Regularization works well when we have a lot of slightly useful features.</li>
 </ul>
 
-<h3 id="49-cost-function">4.9 Cost Function</h3>
+<h3 id="512-cost-function">5.1.2 Cost Function</h3>
 
 <p>If we have overfitting from our hypothesis function, we can reduce the weight that some of the terms in our function carry by increasing their cost.</p>
 
@@ -431,17 +447,17 @@
 
 <script type="math/tex; mode=display">min_\theta\ \dfrac{1}{2m}\  [ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\ \sum_{j=1}^n \theta_j^2 ]</script>
 
-<p>The $λ​$, or lambda, is the <strong>regularization parameter</strong>. It determines how much the costs of our theta parameters are inflated.</p>
+<p>The $\lambda$, or lambda, is the <strong>regularization parameter</strong>. It determines how much the costs of our theta parameters are inflated.</p>
 
-<p>Using the above cost function with the extra summation, we can smooth the output of our hypothesis function to reduce overfitting. If lambda is chosen to be too large, it may smooth out the function too much and cause underfitting. Hence, what would happen if $λ=0$ or is too small ? If $λ$ is very small, $θ$ will not be restricted. So it will cause overfitting.</p>
+<p>Using the above cost function with the extra summation, we can smooth the output of our hypothesis function to reduce overfitting. If lambda is chosen to be too large, it may smooth out the function too much and cause underfitting. Hence, what would happen if $λ=0$ or is too small ? If $\lambda$ is very small, $\theta$ will not be restricted. So it will cause overfitting.</p>
 
-<h3 id="410-regularized-linear-regression">4.10 Regularized Linear Regression</h3>
+<h3 id="513-regularized-linear-regression">5.1.3 Regularized Linear Regression</h3>
 
 <p>We can apply regularization to both linear regression and logistic regression. We will approach linear regression first.</p>
 
-<h4 id="4101-gradient-descent">4.10.1 Gradient Descent</h4>
+<h4 id="gradient-descent-1">Gradient Descent</h4>
 
-<p>We will modify our gradient descent function to separate out θ0 from the rest of the parameters because we do not want to penalize $θ_0$.</p>
+<p>We will modify our gradient descent function to separate out $\theta_0$ from the rest of the parameters because we do not want to penalize $\theta_0$.</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align*} & \text{Repeat}\ \lbrace \newline & \ \ \ \ \theta_0 := \theta_0 - \alpha\ \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_0^{(i)} \newline & \ \ \ \ \theta_j := \theta_j - \alpha\ \left[ \left( \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)} \right) + \frac{\lambda}{m}\theta_j \right] &\ \ \ \ \ \ \ \ \ \ j \in \lbrace 1,2...n\rbrace\newline & \rbrace \end{align*} %]]></script>
@@ -452,7 +468,7 @@
 
 <p>The first term in the above equation, $1−α\frac{λ}m$ will always be less than 1. Intuitively you can see it as reducing the value of $θ_j$ by some amount on every update. Notice that the second term is now exactly the same as it was before.</p>
 
-<h4 id="4102-normal-equation"><strong>4.10.2 Normal Equation</strong></h4>
+<h4 id="normal-equation"><strong>Normal Equation</strong></h4>
 
 <p>Now let’s approach regularization using the alternate method of the non-iterative normal equation.</p>
 
@@ -465,13 +481,13 @@
 
 <p>Recall that if m &lt; n, then $X^TX$ is non-invertible. However, when we add the term λ⋅L, then $X^TX + λ⋅L$ becomes invertible.</p>
 
-<h3 id="411-regularized-logistic-regression">4.11 Regularized Logistic Regression</h3>
+<h3 id="514-regularized-logistic-regression">5.1.4 Regularized Logistic Regression</h3>
 
 <p>We can regularize logistic regression in a similar way that we regularize linear regression. As a result, we can avoid overfitting. The following image shows how the regularized function, displayed by the pink line, is less likely to overfit than the non-regularized function represented by the blue line:</p>
 
 <p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fr0rr7x64lj30do07edh2.jpg" alt="img" /></p>
 
-<h4 id="4111-cost-function">4.11.1 Cost Function</h4>
+<h4 id="cost-function">Cost Function</h4>
 
 <p>Recall that our cost function for logistic regression was:</p>
 
@@ -499,9 +515,9 @@
                     
                     
                     <li class="next">
-                        <a href="/2018/05/03/lhtl/" data-toggle="tooltip" data-placement="top" title="学习如何学习">
+                        <a href="/2018/04/30/ml-week4/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 4">
                         Next<br>
-                        <span>学习如何学习</span>
+                        <span>Machine Learning Week 4</span>
                         </a>
                     </li>
                     
@@ -562,7 +578,7 @@
                             
         				
                             
-                				<a href="/tags/#机器学习" title="机器学习" rel="3">
+                				<a href="/tags/#机器学习" title="机器学习" rel="5">
                                     机器学习
                                 </a>
                             

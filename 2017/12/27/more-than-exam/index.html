@@ -56,9 +56,12 @@
     <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
+        	showProcessingMessages: false,
+        	messageStyle: "none", //不显示信息
             tex2jax: {
-                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-                inlineMath: [['$','$']]
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+                inlineMath: [['$','$']],
+                displayMath: [ ["$$","$$"] ] //段内公式选择$$
             }
         });
     </script>
@@ -281,7 +284,7 @@
                             
         				
                             
-                				<a href="/tags/#机器学习" title="机器学习" rel="3">
+                				<a href="/tags/#机器学习" title="机器学习" rel="5">
                                     机器学习
                                 </a>
                             
