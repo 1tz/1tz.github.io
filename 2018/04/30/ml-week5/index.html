@@ -230,11 +230,15 @@
   <li>K = number of output units/classes</li>
 </ul>
 
-<p>Recall that in neural networks, we may have many output nodes. We denote $h_\Theta(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:
-<script type="math/tex">J(θ)=−\frac{1}{m}∑_{i=1}^m[y^{(i)} log(h_\theta(x^{(i)}))+(1−y^{(i)}) log(1−h_\theta(x^{(i)}))]+\frac\lambda{2m}∑_{j=1}^nθ_j^2</script>
-For neural networks, it is going to be slightly more complicated:
-<script type="math/tex">\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}</script>
-We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes.</p>
+<p>Recall that in neural networks, we may have many output nodes. We denote $h_\Theta(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:</p>
+
+<script type="math/tex; mode=display">J(θ)=−\frac{1}{m}∑_{i=1}^m[y^{(i)} log(h_\theta(x^{(i)}))+(1−y^{(i)}) log(1−h_\theta(x^{(i)}))]+\frac\lambda{2m}∑_{j=1}^nθ_j^2</script>
+
+<p>For neural networks, it is going to be slightly more complicated:</p>
+
+<script type="math/tex; mode=display">\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}</script>
+
+<p>We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes.</p>
 
 <p>In the regularization part, after the square brackets, we must account for multiple theta matrices. The number of columns in our current theta matrix is equal to the number of nodes in our current layer (including the bias unit). The number of rows in our current theta matrix is equal to the number of nodes in the next layer (excluding the bias unit). As before with logistic regression, we square every term.</p>
 
@@ -248,10 +252,13 @@ We have added a few nested summations to account for our multiple output nodes. 
 
 <h3 id="712-backpropagation-algorithm">7.1.2 Backpropagation Algorithm</h3>
 
-<p>“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:
-<script type="math/tex">\min_\Theta J(\Theta)</script>
-That is, we want to minimize our cost function J using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of J(Θ):
-<script type="math/tex">\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)</script></p>
+<p>“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:</p>
+
+<script type="math/tex; mode=display">\min_\Theta J(\Theta)</script>
+
+<p>That is, we want to minimize our cost function J using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of J(Θ):</p>
+
+<script type="math/tex; mode=display">\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)</script>
 
 <p>To do so, we use the following algorithm:</p>
 
@@ -268,8 +275,12 @@ That is, we want to minimize our cost function J using an optimal set of paramet
 <p>For training example t =1 to m:</p>
 
 <ol>
-  <li>Set $a^{(1)} := x^{(t)}$</li>
-  <li>Perform forward propagation to compute $a^{(l)}$ for l=2,3,…,L</li>
+  <li>
+    <p>Set $a^{(1)} := x^{(t)}$</p>
+  </li>
+  <li>
+    <p>Perform forward propagation to compute $a^{(l)}$ for l=2,3,…,L</p>
+  </li>
 </ol>
 
 <p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1frkciksidkj30d8074q53.jpg" alt="img" /></p>
@@ -286,8 +297,9 @@ That is, we want to minimize our cost function J using an optimal set of paramet
 
 <p>The delta values of layer l are calculated by multiplying the delta values in the next layer with the theta matrix of layer l. We then element-wise multiply that with a function called g’, or g-prime, which is the derivative of the activation function g evaluated with the input values given by $z^{(l)}$.</p>
 
-<p>The g-prime derivative terms can also be written out as:
-<script type="math/tex">g'(z^{(l)}) = a^{(l)}\ .*\ (1 - a^{(l)})</script></p>
+<p>The g-prime derivative terms can also be written out as:</p>
+
+<script type="math/tex; mode=display">g'(z^{(l)}) = a^{(l)}\ .*\ (1 - a^{(l)})</script>
 
 <ol>
   <li>$\Delta^{(l)}<em>{i,j} := \Delta^{(l)}</em>{i,j} + a_j^{(l)} \delta_i^{(l+1)}$ or with vectorization, $\Delta^{(l)} := \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^T$</li>
@@ -304,13 +316,19 @@ That is, we want to minimize our cost function J using an optimal set of paramet
 
 <h3 id="713-backpropagation-intuition">7.1.3 Backpropagation Intuition</h3>
 
-<p>Recall that the cost function for a neural network is:
-<script type="math/tex">\begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}</script>
-If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:
-<script type="math/tex">cost(t)=y^{(t)}log(h_\Theta(x^{(t)}))+(1-y^{(t)})log(1-h_\Theta(x^{(t)}))</script>
-Intuitively, $\delta_j^{(l)}$ is the “error” for $a^{(l)}_j$ (unit j in layer l). More formally, the delta values are actually the derivative of the cost function:
-<script type="math/tex">\delta_j^{(l)}=\frac \partial {\partial z_j^{(l)}}cost(t)</script>
-Recall that our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are. Let us consider the following neural network below and see how we could calculate some $\delta_j^{(l)}$:</p>
+<p>Recall that the cost function for a neural network is:</p>
+
+<script type="math/tex; mode=display">\begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}</script>
+
+<p>If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:</p>
+
+<script type="math/tex; mode=display">cost(t)=y^{(t)}log(h_\Theta(x^{(t)}))+(1-y^{(t)})log(1-h_\Theta(x^{(t)}))</script>
+
+<p>Intuitively, $\delta_j^{(l)}$ is the “error” for $a^{(l)}_j$ (unit j in layer l). More formally, the delta values are actually the derivative of the cost function:</p>
+
+<script type="math/tex; mode=display">\delta_j^{(l)}=\frac \partial {\partial z_j^{(l)}}cost(t)</script>
+
+<p>Recall that our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are. Let us consider the following neural network below and see how we could calculate some $\delta_j^{(l)}$:</p>
 
 <p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1frekhy8t1bj30k00b9wi3.jpg" alt="img" /></p>
 
@@ -322,8 +340,9 @@ Recall that our derivative is the slope of a line tangent to the cost function, 
 
 <p>With neural networks, we are working with sets of matrices:</p>
 
-<p><script type="math/tex">\begin{align*} \Theta^{(1)}, \Theta^{(2)}, \Theta^{(3)}, \dots \newline D^{(1)}, D^{(2)}, D^{(3)}, \dots \end{align*}</script>
-In order to use optimizing functions such as “fminunc()”, we will want to “unroll” all the elements and put them into one long vector:</p>
+<script type="math/tex; mode=display">\begin{align*} \Theta^{(1)}, \Theta^{(2)}, \Theta^{(3)}, \dots \newline D^{(1)}, D^{(2)}, D^{(3)}, \dots \end{align*}</script>
+
+<p>In order to use optimizing functions such as “fminunc()”, we will want to “unroll” all the elements and put them into one long vector:</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">thetaVector</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Theta1</span><span class="p">(:);</span> <span class="n">Theta2</span><span class="p">(:);</span> <span class="n">Theta3</span><span class="p">(:);</span> <span class="p">]</span>
 <span class="n">deltaVector</span> <span class="o">=</span> <span class="p">[</span> <span class="n">D1</span><span class="p">(:);</span> <span class="n">D2</span><span class="p">(:);</span> <span class="n">D3</span><span class="p">(:)</span> <span class="p">]</span>
@@ -342,11 +361,15 @@ In order to use optimizing functions such as “fminunc()”, we will want to �
 
 <h3 id="722-gradient-checking">7.2.2 Gradient Checking</h3>
 
-<p>Gradient checking will assure that our backpropagation works as intended. We can approximate the derivative of our cost function with:
-<script type="math/tex">\dfrac{\partial}{\partial\Theta}J(\Theta) \approx \dfrac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}</script>
-With multiple theta matrices, we can approximate the derivative <strong>with respect to</strong> Θ_jΘj as follows:
-<script type="math/tex">\dfrac{\partial}{\partial\Theta_j}J(\Theta) \approx \dfrac{J(\Theta_1, \dots, \Theta_j + \epsilon, \dots, \Theta_n) - J(\Theta_1, \dots, \Theta_j - \epsilon, \dots, \Theta_n)}{2\epsilon}</script>
-A small value for ${\epsilon}$ (epsilon) such as ${\epsilon = 10^{-4}}$, guarantees that the math works out properly. If the value for $\epsilon$ is too small, we can end up with numerical problems.</p>
+<p>Gradient checking will assure that our backpropagation works as intended. We can approximate the derivative of our cost function with:</p>
+
+<script type="math/tex; mode=display">\dfrac{\partial}{\partial\Theta}J(\Theta) \approx \dfrac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}</script>
+
+<p>With multiple theta matrices, we can approximate the derivative <strong>with respect to</strong> Θ_jΘj as follows:</p>
+
+<script type="math/tex; mode=display">\dfrac{\partial}{\partial\Theta_j}J(\Theta) \approx \dfrac{J(\Theta_1, \dots, \Theta_j + \epsilon, \dots, \Theta_n) - J(\Theta_1, \dots, \Theta_j - \epsilon, \dots, \Theta_n)}{2\epsilon}</script>
+
+<p>A small value for ${\epsilon}$ (epsilon) such as ${\epsilon = 10^{-4}}$, guarantees that the math works out properly. If the value for $\epsilon$ is too small, we can end up with numerical problems.</p>
 
 <p>Hence, we are only adding or subtracting epsilon to the $\Theta_j$ matrix. In octave we can do it as follows:</p>
 
@@ -432,9 +455,9 @@ A small value for ${\epsilon}$ (epsilon) such as ${\epsilon = 10^{-4}}$, guarant
                     
                     
                     <li class="next">
-                        <a href="/2018/05/03/lhtl/" data-toggle="tooltip" data-placement="top" title="学习如何学习">
+                        <a href="/2018/04/30/ml-week6/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 6">
                         Next<br>
-                        <span>学习如何学习</span>
+                        <span>Machine Learning Week 6</span>
                         </a>
                     </li>
                     
@@ -495,7 +518,7 @@ A small value for ${\epsilon}$ (epsilon) such as ${\epsilon = 10^{-4}}$, guarant
                             
         				
                             
-                				<a href="/tags/#机器学习" title="机器学习" rel="5">
+                				<a href="/tags/#机器学习" title="机器学习" rel="6">
                                     机器学习
                                 </a>
                             

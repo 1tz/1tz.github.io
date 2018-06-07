@@ -5,8 +5,8 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 22 May 2018 19:34:44 +0800</pubDate>
-    <lastBuildDate>Tue, 22 May 2018 19:34:44 +0800</lastBuildDate>
+    <pubDate>Thu, 07 Jun 2018 21:26:28 +0800</pubDate>
+    <lastBuildDate>Thu, 07 Jun 2018 21:26:28 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -162,6 +162,265 @@
       </item>
     
       <item>
+        <title>Machine Learning Week 6</title>
+        <description>&lt;h1 id=&quot;8-advice-for-applying-machine-learning&quot;&gt;8. Advice for Applying Machine Learning&lt;/h1&gt;
+
+&lt;h2 id=&quot;81-evaluating-a-learning-algorithm&quot;&gt;8.1 Evaluating a Learning Algorithm&lt;/h2&gt;
+
+&lt;h3 id=&quot;811-evaluating-a-hypothesis&quot;&gt;8.1.1 Evaluating a Hypothesis&lt;/h3&gt;
+
+&lt;p&gt;Once we have done some trouble shooting for errors in our predictions by:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Getting more training examples&lt;/li&gt;
+  &lt;li&gt;Trying smaller sets of features&lt;/li&gt;
+  &lt;li&gt;Trying additional features&lt;/li&gt;
+  &lt;li&gt;Trying polynomial features&lt;/li&gt;
+  &lt;li&gt;Increasing or decreasing $\lambda$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can move on to evaluate our new hypothesis.&lt;/p&gt;
+
+&lt;p&gt;A hypothesis may have a low error for the training examples but still be inaccurate (because of overfitting). Thus, to evaluate a hypothesis, given a dataset of training examples, we can split up the data into two sets: a &lt;strong&gt;training set&lt;/strong&gt; and a &lt;strong&gt;test set&lt;/strong&gt;. Typically, the training set consists of 70 % of your data and the test set is the remaining 30 %.&lt;/p&gt;
+
+&lt;p&gt;The new procedure using these two sets is then:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Learn $\Theta$ and minimize $J_{train}(\Theta)$ using the training set&lt;/li&gt;
+  &lt;li&gt;Compute the test set error $J_{test}(\Theta)$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;the-test-set-error&quot;&gt;The test set error&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;For linear regression: $J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}&lt;em&gt;{test}) - y^{(i)}&lt;/em&gt;{test})^2$&lt;/li&gt;
+  &lt;li&gt;For classification ~ Misclassification error (aka 0/1 misclassification error):&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+err(h_\Theta(x),y) = \begin{matrix} 1 &amp; \mbox{if } h_\Theta(x) \geq 0.5\ and\ y = 0\ or\ h_\Theta(x) &lt; 0.5\ and\ y = 1\newline 0 &amp; \mbox otherwise \end{matrix} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;This gives us a binary 0 or 1 error result based on a misclassification. The average test error for the test set is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Test Error} = \dfrac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x^{(i)}_{test}), y^{(i)}_{test})&lt;/script&gt;
+
+&lt;p&gt;This gives us the proportion of the test data that was misclassified.&lt;/p&gt;
+
+&lt;h3 id=&quot;812-model-selection-and-trainvalidationtest-sets&quot;&gt;8.1.2 Model Selection and Train/Validation/Test Sets&lt;/h3&gt;
+
+&lt;p&gt;Just because a learning algorithm fits a training set well, that does not mean it is a good hypothesis. It could over fit and as a result your predictions on the test set would be poor. The error of your hypothesis as measured on the data set with which you trained the parameters will be lower than the error on any other data set.&lt;/p&gt;
+
+&lt;p&gt;Given many models with different polynomial degrees, we can use a systematic approach to identify the ‘best’ function. In order to choose the model of your hypothesis, you can test each degree of polynomial and look at the error result.&lt;/p&gt;
+
+&lt;p&gt;One way to break down our dataset into the three sets is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Training set: 60%&lt;/li&gt;
+  &lt;li&gt;Cross validation set: 20%&lt;/li&gt;
+  &lt;li&gt;Test set: 20%&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can now calculate three separate error values for the three different sets using the following method:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Optimize the parameters in Θ using the training set for each polynomial degree.&lt;/li&gt;
+  &lt;li&gt;Find the polynomial degree d with the least error using the cross validation set.&lt;/li&gt;
+  &lt;li&gt;Estimate the generalization error using the test set with $J_{test}(\Theta^{(d)})$, (d = theta from polynomial with lower error);&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This way, the degree of the polynomial d has not been trained using the test set.&lt;/p&gt;
+
+&lt;h2 id=&quot;82-bias-vs-variance&quot;&gt;8.2 Bias vs. Variance&lt;/h2&gt;
+
+&lt;h3 id=&quot;821-diagnosing-bias-vs-variance&quot;&gt;8.2.1 Diagnosing Bias vs. Variance&lt;/h3&gt;
+
+&lt;p&gt;In this section we examine the relationship between the degree of the polynomial d and the underfitting or overfitting of our hypothesis.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We need to distinguish whether &lt;strong&gt;bias&lt;/strong&gt; or &lt;strong&gt;variance&lt;/strong&gt; is the problem contributing to bad predictions.&lt;/li&gt;
+  &lt;li&gt;High bias is underfitting and high variance is overfitting. Ideally, we need to find a golden mean between these two.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The training error will tend to &lt;strong&gt;decrease&lt;/strong&gt; as we increase the degree d of the polynomial.&lt;/p&gt;
+
+&lt;p&gt;At the same time, the cross validation error will tend to &lt;strong&gt;decrease&lt;/strong&gt; as we increase d up to a point, and then it will &lt;strong&gt;increase&lt;/strong&gt; as d is increased, forming a convex curve.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;High bias (underfitting)&lt;/strong&gt;: both $J_{train}(\Theta)$ and $ J_{CV}(\Theta)$ will be high. Also, $J_{CV}(\Theta) \approx J_{train}(\Theta)$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;High variance (overfitting)&lt;/strong&gt;: $J_{train}(\Theta)$ will be low and $J_{CV}(\Theta)$ will be much greater than $J_{train}(\Theta)$.&lt;/p&gt;
+
+&lt;p&gt;The is summarized in the figure below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79gy1frl0tbtmzjj308c073q3l.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;822-regularization-and-biasvariance&quot;&gt;8.2.2 Regularization and Bias/Variance&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; [The regularization term below and through out the video should be $\frac \lambda {2m} \sum _{j=1}^n \theta_j ^2$ and &lt;strong&gt;NOT&lt;/strong&gt; $\frac \lambda {2m} \sum _{j=1}^m \theta_j ^2$]&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1frl1fgdjz8j30jj0akq4m.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the figure above, we see that as $\lambda$ increases, our fit becomes more rigid. On the other hand, as $\lambda$ approaches 0, we tend to over overfit the data. So how do we choose our parameter $\lambda$ to get it ‘just right’ ? In order to choose the model and the regularization term $\lambda$, we need to:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a list of lambdas (i.e. $\lambda∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24}$);&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a set of models with different degrees or any other variants.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Iterate through the $\lambda$s and for each $\lambda$ go through all the models to learn some $\Theta$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Compute the cross validation error using the learned $\Theta$ (computed with $\lambda$) on the $J_{CV}(\Theta)$ &lt;strong&gt;without&lt;/strong&gt; regularization or $\lambda$ = 0.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Select the best combo that produces the lowest error on the cross validation set.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using the best combo $\Theta$ and $\lambda$, apply it on $ J_{test}(\Theta)$ to see if it has a good generalization of the problem.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;823-learning-curves&quot;&gt;8.2.3 Learning Curves&lt;/h3&gt;
+
+&lt;p&gt;Training an algorithm on a very few number of data points (such as 1, 2 or 3) will easily have 0 errors because we can always find a quadratic curve that touches exactly those number of points. Hence:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;As the training set gets larger, the error for a quadratic function increases.&lt;/li&gt;
+  &lt;li&gt;The error value will plateau out after a certain m, or training set size.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Experiencing high bias:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Low training set size&lt;/strong&gt;: causes $J_{train}(\Theta)$ to be low and $J_{CV}(\Theta)$ to be high.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Large training set size&lt;/strong&gt;: causes both $J_{train}(\Theta)$ and $J_{CV}(\Theta)$ to be high with $J_{train}(\Theta)\approx J_{CV}(\Theta)$.&lt;/p&gt;
+
+&lt;p&gt;If a learning algorithm is suffering from &lt;strong&gt;high bias&lt;/strong&gt;, getting more training data will not &lt;strong&gt;(by itself)&lt;/strong&gt; help much.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1frl2eobr1kj308c056q3e.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Experiencing high variance:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Low training set size&lt;/strong&gt;: $J_{train}(\Theta)$ will be low and $J_{CV}(\Theta)$ will be high.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Large training set size&lt;/strong&gt;: $J_{train}(\Theta)$ increases with training set size and $J_{CV}(\Theta)$ continues to decrease without leveling off. Also, $J_{train}(\Theta) &amp;lt; J_{CV}(\Theta)$ but the difference between them remains significant.&lt;/p&gt;
+
+&lt;p&gt;If a learning algorithm is suffering from &lt;strong&gt;high variance&lt;/strong&gt;, getting more training data is likely to help.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1frl2epp3moj308c04rdgb.jpg&quot; alt=&quot;img&quot; /&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1frl2etwmn4j308c04rdgb.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;824-deciding-what-to-do-next-revisited&quot;&gt;8.2.4 Deciding What to Do Next Revisited&lt;/h3&gt;
+
+&lt;p&gt;Our decision process can be broken down as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Getting more training examples:&lt;/strong&gt; Fixes high variance&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Trying smaller sets of features:&lt;/strong&gt; Fixes high variance&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Adding features:&lt;/strong&gt; Fixes high bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Adding polynomial features:&lt;/strong&gt; Fixes high bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Decreasing $\lambda$:&lt;/strong&gt; Fixes high bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Increasing $\lambda$:&lt;/strong&gt; Fixes high variance.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;825-diagnosing-neural-networks&quot;&gt;8.2.5 Diagnosing Neural Networks&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A neural network with fewer parameters is &lt;strong&gt;prone to underfitting&lt;/strong&gt;. It is also &lt;strong&gt;computationally cheaper&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;A large neural network with more parameters is &lt;strong&gt;prone to overfitting&lt;/strong&gt;. It is also &lt;strong&gt;computationally expensive&lt;/strong&gt;. In this case you can use regularization (increase $\lambda$) to address the overfitting.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Using a single hidden layer is a good starting default. You can train your neural network on a number of hidden layers using your cross validation set. You can then select the one that performs best.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Model Complexity Effects:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lower-order polynomials (low model complexity) have high bias and low variance. In this case, the model fits poorly consistently.&lt;/li&gt;
+  &lt;li&gt;Higher-order polynomials (high model complexity) fit the training data extremely well and the test data extremely poorly. These have low bias on the training data, but very high variance.&lt;/li&gt;
+  &lt;li&gt;In reality, we would want to choose a model somewhere in between, that can generalize well but also fits the data reasonably well.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;83-building-a-spam-classifier&quot;&gt;8.3 Building a Spam Classifier&lt;/h2&gt;
+
+&lt;h3 id=&quot;831-prioritizing-what-to-work-on&quot;&gt;8.3.1 Prioritizing What to Work On&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;System Design Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Given a data set of emails, we could construct a vector for each email. Each entry in this vector represents a word. The vector normally contains 10,000 to 50,000 entries gathered by finding the most frequently used words in our data set. If a word is to be found in the email, we would assign its respective entry a 1, else if it is not found, that entry would be a 0. Once we have all our x vectors ready, we train our algorithm and finally, we could use it to classify if an email is a spam or not.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1frm85bqkz7j30ki09mdk2.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So how could you spend your time to improve the accuracy of this classifier?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Collect lots of data (for example “honeypot” project but doesn’t always work)&lt;/li&gt;
+  &lt;li&gt;Develop sophisticated features (for example: using email header data in spam emails)&lt;/li&gt;
+  &lt;li&gt;Develop algorithms to process your input in different ways (recognizing misspellings in spam).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is difficult to tell which of the options will be most helpful.&lt;/p&gt;
+
+&lt;h3 id=&quot;832-error-analysis&quot;&gt;8.3.2 Error Analysis&lt;/h3&gt;
+
+&lt;p&gt;The recommended approach to solving machine learning problems is to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Start with a simple algorithm, implement it quickly, and test it early on your cross validation data.&lt;/li&gt;
+  &lt;li&gt;Plot learning curves to decide if more data, more features, etc. are likely to help.&lt;/li&gt;
+  &lt;li&gt;Manually examine the errors on examples in the cross validation set and try to spot a trend where most of the errors were made.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example, assume that we have 500 emails and our algorithm misclassifies a 100 of them. We could manually analyze the 100 emails and categorize them based on what type of emails they are. We could then try to come up with new cues and features that would help us classify these 100 emails correctly. Hence, if most of our misclassified emails are those which try to steal passwords, then we could find some features that are particular to those emails and add them to our model. We could also see how classifying each word according to its root changes our error rate:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79gy1frm8mnk8l5j30jg0a143a.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is very important to get error results as a single, numerical value. Otherwise it is difficult to assess your algorithm’s performance. For example if we use stemming, which is the process of treating the same word with different forms (fail/failing/failed) as one word (fail), and get a 3% error rate instead of 5%, then we should definitely add it to our model. However, if we try to distinguish between upper case and lower case letters and end up getting a 3.2% error rate instead of 3%, then we should avoid using this new feature. Hence, we should try new things, get a numerical value for our error rate, and based on our result decide whether we want to keep the new feature or not.&lt;/p&gt;
+
+&lt;h2 id=&quot;84-handling-skewed-data&quot;&gt;8.4 Handling Skewed Data&lt;/h2&gt;
+
+&lt;h3 id=&quot;841-error-metrics-for-skewed-classes&quot;&gt;8.4.1 Error Metrics for Skewed Classes&lt;/h3&gt;
+
+&lt;p&gt;Precision and recall are defined according to:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1frm90iwi53j30ae0akweg.jpg&quot; alt=&quot;If predicted class and actual class are both 1, then a test example is a True Positive. If predicted class and actual class are both 0, then a test example is a True Negative. If predicted class is 0 actual class is 1, then a test example is a False Negative. If predicted class is 1 and actual class is 0, then a test example is a False Positive.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Precision&lt;/strong&gt; (Of all patients where we predicted $y=1$, what fraction actually has cancer?)
+&lt;script type=&quot;math/tex&quot;&gt;\text{Precision} = \frac{\text{True positives}}{\text{# predicted as positive}} = \frac{\text{True positives}}{\text{True positives + False positives}}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Recall&lt;/strong&gt; (Of all patients that actually have cancer, what fraction did we correctly detect as having cancer?)&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Recall} = \frac{\text{True positives}}{\text{# actual positives}} = \frac{\text{True positives}}{\text{True positives + False negatives}}&lt;/script&gt;
+
+&lt;h3 id=&quot;842-trading-off-precision-an-recall&quot;&gt;8.4.2 Trading Off Precision an Recall&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79gy1frm9eyehi3j30q70eqdim.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79gy1frm9m7r3jpj30q80ergnj.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 30 Apr 2018 23:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/04/30/ml-week6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/04/30/ml-week6/</guid>
+        
+        <category>机器学习</category>
+        
+        
+      </item>
+    
+      <item>
         <title>Machine Learning Week 5</title>
         <description>&lt;h1 id=&quot;7-neural-networks-learning&quot;&gt;7. Neural Networks: Learning&lt;/h1&gt;
 
@@ -177,11 +436,15 @@
   &lt;li&gt;K = number of output units/classes&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Recall that in neural networks, we may have many output nodes. We denote $h_\Theta(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:
-&lt;script type=&quot;math/tex&quot;&gt;J(θ)=−\frac{1}{m}∑_{i=1}^m[y^{(i)} log(h_\theta(x^{(i)}))+(1−y^{(i)}) log(1−h_\theta(x^{(i)}))]+\frac\lambda{2m}∑_{j=1}^nθ_j^2&lt;/script&gt;
-For neural networks, it is going to be slightly more complicated:
-&lt;script type=&quot;math/tex&quot;&gt;\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}&lt;/script&gt;
-We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes.&lt;/p&gt;
+&lt;p&gt;Recall that in neural networks, we may have many output nodes. We denote $h_\Theta(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(θ)=−\frac{1}{m}∑_{i=1}^m[y^{(i)} log(h_\theta(x^{(i)}))+(1−y^{(i)}) log(1−h_\theta(x^{(i)}))]+\frac\lambda{2m}∑_{j=1}^nθ_j^2&lt;/script&gt;
+
+&lt;p&gt;For neural networks, it is going to be slightly more complicated:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}&lt;/script&gt;
+
+&lt;p&gt;We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes.&lt;/p&gt;
 
 &lt;p&gt;In the regularization part, after the square brackets, we must account for multiple theta matrices. The number of columns in our current theta matrix is equal to the number of nodes in our current layer (including the bias unit). The number of rows in our current theta matrix is equal to the number of nodes in the next layer (excluding the bias unit). As before with logistic regression, we square every term.&lt;/p&gt;
 
@@ -195,10 +458,13 @@ We have added a few nested summations to account for our multiple output nodes. 
 
 &lt;h3 id=&quot;712-backpropagation-algorithm&quot;&gt;7.1.2 Backpropagation Algorithm&lt;/h3&gt;
 
-&lt;p&gt;“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:
-&lt;script type=&quot;math/tex&quot;&gt;\min_\Theta J(\Theta)&lt;/script&gt;
-That is, we want to minimize our cost function J using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of J(Θ):
-&lt;script type=&quot;math/tex&quot;&gt;\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\min_\Theta J(\Theta)&lt;/script&gt;
+
+&lt;p&gt;That is, we want to minimize our cost function J using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of J(Θ):&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)&lt;/script&gt;
 
 &lt;p&gt;To do so, we use the following algorithm:&lt;/p&gt;
 
@@ -215,8 +481,12 @@ That is, we want to minimize our cost function J using an optimal set of paramet
 &lt;p&gt;For training example t =1 to m:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Set $a^{(1)} := x^{(t)}$&lt;/li&gt;
-  &lt;li&gt;Perform forward propagation to compute $a^{(l)}$ for l=2,3,…,L&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Set $a^{(1)} := x^{(t)}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Perform forward propagation to compute $a^{(l)}$ for l=2,3,…,L&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcgy1frkciksidkj30d8074q53.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
@@ -233,8 +503,9 @@ That is, we want to minimize our cost function J using an optimal set of paramet
 
 &lt;p&gt;The delta values of layer l are calculated by multiplying the delta values in the next layer with the theta matrix of layer l. We then element-wise multiply that with a function called g’, or g-prime, which is the derivative of the activation function g evaluated with the input values given by $z^{(l)}$.&lt;/p&gt;
 
-&lt;p&gt;The g-prime derivative terms can also be written out as:
-&lt;script type=&quot;math/tex&quot;&gt;g'(z^{(l)}) = a^{(l)}\ .*\ (1 - a^{(l)})&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;The g-prime derivative terms can also be written out as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;g'(z^{(l)}) = a^{(l)}\ .*\ (1 - a^{(l)})&lt;/script&gt;
 
 &lt;ol&gt;
   &lt;li&gt;$\Delta^{(l)}&lt;em&gt;{i,j} := \Delta^{(l)}&lt;/em&gt;{i,j} + a_j^{(l)} \delta_i^{(l+1)}$ or with vectorization, $\Delta^{(l)} := \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^T$&lt;/li&gt;
@@ -251,13 +522,19 @@ That is, we want to minimize our cost function J using an optimal set of paramet
 
 &lt;h3 id=&quot;713-backpropagation-intuition&quot;&gt;7.1.3 Backpropagation Intuition&lt;/h3&gt;
 
-&lt;p&gt;Recall that the cost function for a neural network is:
-&lt;script type=&quot;math/tex&quot;&gt;\begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}&lt;/script&gt;
-If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:
-&lt;script type=&quot;math/tex&quot;&gt;cost(t)=y^{(t)}log(h_\Theta(x^{(t)}))+(1-y^{(t)})log(1-h_\Theta(x^{(t)}))&lt;/script&gt;
-Intuitively, $\delta_j^{(l)}$ is the “error” for $a^{(l)}_j$ (unit j in layer l). More formally, the delta values are actually the derivative of the cost function:
-&lt;script type=&quot;math/tex&quot;&gt;\delta_j^{(l)}=\frac \partial {\partial z_j^{(l)}}cost(t)&lt;/script&gt;
-Recall that our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are. Let us consider the following neural network below and see how we could calculate some $\delta_j^{(l)}$:&lt;/p&gt;
+&lt;p&gt;Recall that the cost function for a neural network is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}&lt;/script&gt;
+
+&lt;p&gt;If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;cost(t)=y^{(t)}log(h_\Theta(x^{(t)}))+(1-y^{(t)})log(1-h_\Theta(x^{(t)}))&lt;/script&gt;
+
+&lt;p&gt;Intuitively, $\delta_j^{(l)}$ is the “error” for $a^{(l)}_j$ (unit j in layer l). More formally, the delta values are actually the derivative of the cost function:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\delta_j^{(l)}=\frac \partial {\partial z_j^{(l)}}cost(t)&lt;/script&gt;
+
+&lt;p&gt;Recall that our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are. Let us consider the following neural network below and see how we could calculate some $\delta_j^{(l)}$:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1frekhy8t1bj30k00b9wi3.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
@@ -269,8 +546,9 @@ Recall that our derivative is the slope of a line tangent to the cost function, 
 
 &lt;p&gt;With neural networks, we are working with sets of matrices:&lt;/p&gt;
 
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\begin{align*} \Theta^{(1)}, \Theta^{(2)}, \Theta^{(3)}, \dots \newline D^{(1)}, D^{(2)}, D^{(3)}, \dots \end{align*}&lt;/script&gt;
-In order to use optimizing functions such as “fminunc()”, we will want to “unroll” all the elements and put them into one long vector:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*} \Theta^{(1)}, \Theta^{(2)}, \Theta^{(3)}, \dots \newline D^{(1)}, D^{(2)}, D^{(3)}, \dots \end{align*}&lt;/script&gt;
+
+&lt;p&gt;In order to use optimizing functions such as “fminunc()”, we will want to “unroll” all the elements and put them into one long vector:&lt;/p&gt;
 
 &lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;thetaVector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Theta3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;deltaVector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
@@ -289,11 +567,15 @@ In order to use optimizing functions such as “fminunc()”, we will want to �
 
 &lt;h3 id=&quot;722-gradient-checking&quot;&gt;7.2.2 Gradient Checking&lt;/h3&gt;
 
-&lt;p&gt;Gradient checking will assure that our backpropagation works as intended. We can approximate the derivative of our cost function with:
-&lt;script type=&quot;math/tex&quot;&gt;\dfrac{\partial}{\partial\Theta}J(\Theta) \approx \dfrac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}&lt;/script&gt;
-With multiple theta matrices, we can approximate the derivative &lt;strong&gt;with respect to&lt;/strong&gt; Θ_jΘj as follows:
-&lt;script type=&quot;math/tex&quot;&gt;\dfrac{\partial}{\partial\Theta_j}J(\Theta) \approx \dfrac{J(\Theta_1, \dots, \Theta_j + \epsilon, \dots, \Theta_n) - J(\Theta_1, \dots, \Theta_j - \epsilon, \dots, \Theta_n)}{2\epsilon}&lt;/script&gt;
-A small value for ${\epsilon}$ (epsilon) such as ${\epsilon = 10^{-4}}$, guarantees that the math works out properly. If the value for $\epsilon$ is too small, we can end up with numerical problems.&lt;/p&gt;
+&lt;p&gt;Gradient checking will assure that our backpropagation works as intended. We can approximate the derivative of our cost function with:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial}{\partial\Theta}J(\Theta) \approx \dfrac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}&lt;/script&gt;
+
+&lt;p&gt;With multiple theta matrices, we can approximate the derivative &lt;strong&gt;with respect to&lt;/strong&gt; Θ_jΘj as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial}{\partial\Theta_j}J(\Theta) \approx \dfrac{J(\Theta_1, \dots, \Theta_j + \epsilon, \dots, \Theta_n) - J(\Theta_1, \dots, \Theta_j - \epsilon, \dots, \Theta_n)}{2\epsilon}&lt;/script&gt;
+
+&lt;p&gt;A small value for ${\epsilon}$ (epsilon) such as ${\epsilon = 10^{-4}}$, guarantees that the math works out properly. If the value for $\epsilon$ is too small, we can end up with numerical problems.&lt;/p&gt;
 
 &lt;p&gt;Hence, we are only adding or subtracting epsilon to the $\Theta_j$ matrix. In octave we can do it as follows:&lt;/p&gt;
 
@@ -1587,54 +1869,6 @@ touch ssh
         <guid isPermaLink="true">http://localhost:4000/2018/01/05/raspberry-pi/</guid>
         
         <category>树莓派</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>区块链原理、技术与应用之一</title>
-        <description>&lt;p&gt;内容均来源于&lt;a href=&quot;https://github.com/yeasy/blockchain_guide&quot;&gt;blockchain_guide&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;比特币构成&quot;&gt;比特币构成&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;一个去中心化的点对点网络（比特币协议）&lt;/li&gt;
-  &lt;li&gt;一个公共的交易账簿（区块链）&lt;/li&gt;
-  &lt;li&gt;一个去中心化的、数学的、确定性的货币发行（分布式挖矿）&lt;/li&gt;
-  &lt;li&gt;一个去中心化的交易验证系统（交易脚本）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;比特币客户端&quot;&gt;比特币客户端&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;完整客户端。包含比特币整个交易历史，类似于一个独立的电子邮件服务器&lt;/li&gt;
-  &lt;li&gt;轻量级客户端。依赖第三方服务器才能进行交易，类似于电子邮件客户端&lt;/li&gt;
-  &lt;li&gt;在线客户端。通过网页浏览器在第三方服务器使用钱包，类似于在线邮件&lt;/li&gt;
-  &lt;li&gt;一个人可以有多个地址，这些地址可以都指向一个钱包&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;交易区块挖矿区块链&quot;&gt;交易、区块、挖矿、区块链&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;交易将钱从交易输入转向输出，交易产生的交易费归矿工。&lt;/li&gt;
-  &lt;li&gt;挖矿在构建区块时会产生新的比特币，大约10分钟解决一个区块，挖矿难度随区块链延长而增大。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;密钥地址钱包&quot;&gt;密钥、地址、钱包&lt;/h4&gt;
-
-&lt;p&gt;一个比特币钱包中包含一系列密钥对，每个密钥对包含一个私钥和一个公钥。公钥用于接受比特币，私钥用于比特币支付时的交易签名。私钥是一个随机生成的256位的数，公钥由私钥计算得到，且不可逆	：K = k * G。已知公钥求私钥需要暴力搜索，非常困难。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../../../img/in-post/block-chain-1.png&quot; alt=&quot;block-chain-1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;下图是一个类似于比特币所用曲线的椭圆曲线。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../../../img/in-post/block-chain-2.png&quot; alt=&quot;block-chain-2&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 30 Dec 2017 04:40:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/12/29/block-chain-1/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/12/29/block-chain-1/</guid>
-        
-        <category>区块链</category>
         
         
       </item>
