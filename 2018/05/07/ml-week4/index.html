@@ -10,7 +10,7 @@
     <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
     <meta name="theme-color" content="#000000">
     
-    <title>Machine Learning Week 6 - 俄罗斯韬娃 | 1tz's Blog</title>
+    <title>Machine Learning Week 4 - 俄罗斯韬娃 | 1tz's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2018/04/30/ml-week6/">
+    <link rel="canonical" href="http://localhost:4000/2018/05/07/ml-week4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -190,12 +190,12 @@
                         <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
                         
                     </div>
-                    <h1>Machine Learning Week 6</h1>
+                    <h1>Machine Learning Week 4</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by 1tz on April 30, 2018</span>
+                    <span class="meta">Posted by 1tz on May 7, 2018</span>
                 </div>
             </div>
         </div>
@@ -216,253 +216,159 @@
                 <!-- Multi-Lingual -->
                 
 
-				<h1 id="8-advice-for-applying-machine-learning">8. Advice for Applying Machine Learning</h1>
+				<h1 id="6-neural-networks-representation">6. Neural Networks: Representation</h1>
 
-<h2 id="81-evaluating-a-learning-algorithm">8.1 Evaluating a Learning Algorithm</h2>
+<h2 id="61-neural-networks">6.1 Neural Networks</h2>
 
-<h3 id="811-evaluating-a-hypothesis">8.1.1 Evaluating a Hypothesis</h3>
+<h3 id="611-model-representation-i">6.1.1 Model Representation I</h3>
 
-<p>Once we have done some trouble shooting for errors in our predictions by:</p>
+<p>Let’s examine how we will represent a hypothesis function using neural networks. At a very simple level, neurons are basically computational units that take inputs (<strong>dendrites</strong>) as electrical inputs (called “spikes”) that are channeled to outputs (<strong>axons</strong>). In our model, our dendrites are like the input features $x_1\cdots x_n$, and the output is the result of our hypothesis function. In this model our $x_0$ input node is sometimes called the “bias unit.” It is always equal to 1. In neural networks, we use the same logistic function as in classification, $\frac{1}{1 + e^{-\theta^Tx}}$, yet we sometimes call it a sigmoid (logistic) <strong>activation</strong> function. In this situation, our “theta” parameters are sometimes called “weights”.</p>
 
-<ul>
-  <li>Getting more training examples</li>
-  <li>Trying smaller sets of features</li>
-  <li>Trying additional features</li>
-  <li>Trying polynomial features</li>
-  <li>Increasing or decreasing $\lambda$</li>
-</ul>
+<p>Visually, a simplistic representation looks like:</p>
 
-<p>We can move on to evaluate our new hypothesis.</p>
+<script type="math/tex; mode=display">\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline \end{bmatrix}\rightarrow\begin{bmatrix}\ \ \ \newline \end{bmatrix}\rightarrow h_\theta(x)</script>
 
-<p>A hypothesis may have a low error for the training examples but still be inaccurate (because of overfitting). Thus, to evaluate a hypothesis, given a dataset of training examples, we can split up the data into two sets: a <strong>training set</strong> and a <strong>test set</strong>. Typically, the training set consists of 70 % of your data and the test set is the remaining 30 %.</p>
+<p>Our input nodes (layer 1), also known as the “input layer”, go into another node (layer 2), which finally outputs the hypothesis function, known as the “output layer”.</p>
 
-<p>The new procedure using these two sets is then:</p>
+<p>We can have intermediate layers of nodes between the input and output layers called the “hidden layers.”</p>
 
-<ol>
-  <li>Learn $\Theta$ and minimize $J_{train}(\Theta)$ using the training set</li>
-  <li>Compute the test set error $J_{test}(\Theta)$</li>
-</ol>
-
-<h4 id="the-test-set-error">The test set error</h4>
-
-<ol>
-  <li>For linear regression: $J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}<em>{test}) - y^{(i)}</em>{test})^2$</li>
-  <li>For classification ~ Misclassification error (aka 0/1 misclassification error):</li>
-</ol>
+<p>In this example, we label these intermediate or “hidden” layer nodes $a^2_0 \cdots a^2_n$and call them “activation units.”</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-err(h_\Theta(x),y) = \begin{matrix} 1 & \mbox{if } h_\Theta(x) \geq 0.5\ and\ y = 0\ or\ h_\Theta(x) < 0.5\ and\ y = 1\newline 0 & \mbox otherwise \end{matrix} %]]></script>
+\begin{align*}& a_i^{(j)} = \text{"activation" of unit $i$ in layer $j$} \newline& \Theta^{(j)} = \text{matrix of weights controlling function mapping from layer $j$ to layer $j+1$}\end{align*} %]]></script>
 
-<p>This gives us a binary 0 or 1 error result based on a misclassification. The average test error for the test set is:</p>
+<p>If we had one hidden layer, it would look like:</p>
 
-<script type="math/tex; mode=display">\text{Test Error} = \dfrac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x^{(i)}_{test}), y^{(i)}_{test})</script>
+<script type="math/tex; mode=display">\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline x_3\end{bmatrix}\rightarrow\begin{bmatrix}a_1^{(2)} \newline a_2^{(2)} \newline a_3^{(2)} \newline \end{bmatrix}\rightarrow h_\theta(x)</script>
 
-<p>This gives us the proportion of the test data that was misclassified.</p>
+<p>The values for each of the “activation” nodes is obtained as follows:</p>
 
-<h3 id="812-model-selection-and-trainvalidationtest-sets">8.1.2 Model Selection and Train/Validation/Test Sets</h3>
+<script type="math/tex; mode=display">\begin{align*} a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \newline a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \newline a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \newline h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \newline \end{align*}</script>
 
-<p>Just because a learning algorithm fits a training set well, that does not mean it is a good hypothesis. It could over fit and as a result your predictions on the test set would be poor. The error of your hypothesis as measured on the data set with which you trained the parameters will be lower than the error on any other data set.</p>
+<p>This is saying that we compute our activation nodes by using a 3×4 matrix of parameters. We apply each row of the parameters to our inputs to obtain the value for one activation node. Our hypothesis output is the logistic function applied to the sum of the values of our activation nodes, which have been multiplied by yet another parameter matrix $\Theta^{(2)}$ containing the weights for our second layer of nodes.</p>
 
-<p>Given many models with different polynomial degrees, we can use a systematic approach to identify the ‘best’ function. In order to choose the model of your hypothesis, you can test each degree of polynomial and look at the error result.</p>
+<p>Each layer gets its own matrix of weights, $\Theta^{(j)}$.</p>
 
-<p>One way to break down our dataset into the three sets is:</p>
+<p>The dimensions of these matrices of weights is determined as follows:</p>
 
-<ul>
-  <li>Training set: 60%</li>
-  <li>Cross validation set: 20%</li>
-  <li>Test set: 20%</li>
-</ul>
+<script type="math/tex; mode=display">\text{If network has }{s_j}\text{ units in layer j and }{s_{j+1}}\text{ units in layer j+1, then }{\Theta^{(j)}}\text{ will be of dimension }{s_{j+1} \times (s_j + 1)}\text{ .}</script>
 
-<p>We can now calculate three separate error values for the three different sets using the following method:</p>
+<p>The +1 comes from the addition in $\Theta^{(j)}$ of the “bias nodes,” $x_0$ and $\Theta_0^{(j)}$. In other words the output nodes will not include the bias nodes while the inputs will. The following image summarizes our model representation:</p>
 
-<ol>
-  <li>Optimize the parameters in Θ using the training set for each polynomial degree.</li>
-  <li>Find the polynomial degree d with the least error using the cross validation set.</li>
-  <li>Estimate the generalization error using the test set with $J_{test}(\Theta^{(d)})$, (d = theta from polynomial with lower error);</li>
-</ol>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fr2jxyyawgj30jk0ay772.jpg" alt="img" /></p>
 
-<p>This way, the degree of the polynomial d has not been trained using the test set.</p>
+<p>Example: If layer 1 has 2 input nodes and layer 2 has 4 activation nodes. Dimension of $\Theta^{(1)}$ is going to be 4×3 where $ s_j = 2$ and $s_{j+1} = 4$, so $s_{j+1} \times (s_j + 1) = 4 \times 3$.</p>
 
-<h2 id="82-bias-vs-variance">8.2 Bias vs. Variance</h2>
+<h3 id="612-model-representation-ii">6.1.2 Model Representation II</h3>
 
-<h3 id="821-diagnosing-bias-vs-variance">8.2.1 Diagnosing Bias vs. Variance</h3>
+<p>To re-iterate, the following is an example of a neural network:</p>
 
-<p>In this section we examine the relationship between the degree of the polynomial d and the underfitting or overfitting of our hypothesis.</p>
+<script type="math/tex; mode=display">\begin{align*} a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \newline a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \newline a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \newline h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \newline \end{align*}</script>
 
-<ul>
-  <li>We need to distinguish whether <strong>bias</strong> or <strong>variance</strong> is the problem contributing to bad predictions.</li>
-  <li>High bias is underfitting and high variance is overfitting. Ideally, we need to find a golden mean between these two.</li>
-</ul>
+<p>In this section we’ll do a vectorized implementation of the above functions. We’re going to define a new variable $z_k^{(j)}$zk(j) that encompasses the parameters inside our g function. In our previous example if we replaced by the variable z for all the parameters we would get:</p>
 
-<p>The training error will tend to <strong>decrease</strong> as we increase the degree d of the polynomial.</p>
+<script type="math/tex; mode=display">\begin{align*}a_1^{(2)} = g(z_1^{(2)}) \newline a_2^{(2)} = g(z_2^{(2)}) \newline a_3^{(2)} = g(z_3^{(2)}) \newline \end{align*}</script>
 
-<p>At the same time, the cross validation error will tend to <strong>decrease</strong> as we increase d up to a point, and then it will <strong>increase</strong> as d is increased, forming a convex curve.</p>
+<p>In other words, for layer j=2 and node k, the variable z will be:</p>
 
-<p><strong>High bias (underfitting)</strong>: both $J_{train}(\Theta)$ and $ J_{CV}(\Theta)$ will be high. Also, $J_{CV}(\Theta) \approx J_{train}(\Theta)$.</p>
+<script type="math/tex; mode=display">z_k^{(2)}=\Theta_{k,0}^{(1)}x_0+\Theta_{k,1}^{(1)}x_1+\cdots+\Theta_{k,n}^{(1)}x_n</script>
 
-<p><strong>High variance (overfitting)</strong>: $J_{train}(\Theta)$ will be low and $J_{CV}(\Theta)$ will be much greater than $J_{train}(\Theta)$.</p>
+<p>The vector representation of x and $z^{j}$ is:</p>
 
-<p>The is summarized in the figure below:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}x = \begin{bmatrix}x_0 \newline x_1 \newline\cdots \newline x_n\end{bmatrix} &z^{(j)} = \begin{bmatrix}z_1^{(j)} \newline z_2^{(j)} \newline\cdots \newline z_n^{(j)}\end{bmatrix}\end{align*} %]]></script>
 
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1frl0tbtmzjj308c073q3l.jpg" alt="img" /></p>
+<p>Setting $x = a^{(1)}$, we can rewrite the equation as:</p>
 
-<h3 id="822-regularization-and-biasvariance">8.2.2 Regularization and Bias/Variance</h3>
+<script type="math/tex; mode=display">z^{(j)}=\Theta^{(j-1)}a^{(j-1)}</script>
 
-<p><strong>Note:</strong> [The regularization term below and through out the video should be $\frac \lambda {2m} \sum _{j=1}^n \theta_j ^2$ and <strong>NOT</strong> $\frac \lambda {2m} \sum _{j=1}^m \theta_j ^2$]</p>
+<p>We are multiplying our matrix $\Theta^{(j-1)}$ with dimensions $s_j\times (n+1)$ (where s_jsj is the number of our activation nodes) by our vector $a^{(j-1)}$ with height (n+1). This gives us our vector $z^{(j)}$ with height $s_j$. Now we can get a vector of our activation nodes for layer j as follows:</p>
 
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1frl1fgdjz8j30jj0akq4m.jpg" alt="img" /></p>
+<script type="math/tex; mode=display">a^{(j+1)}=\Theta^{(j)}a^{(j)}</script>
 
-<p>In the figure above, we see that as $\lambda$ increases, our fit becomes more rigid. On the other hand, as $\lambda$ approaches 0, we tend to over overfit the data. So how do we choose our parameter $\lambda$ to get it ‘just right’ ? In order to choose the model and the regularization term $\lambda$, we need to:</p>
+<p>We get this final z vector by multiplying the next theta matrix after $\Theta^{(j-1)}$ with the values of all the activation nodes we just got. This last theta matrix $\Theta^{(j)}$ will have only <strong>one row</strong> which is multiplied by one column $a^{(j)}$ so that our result is a single number. We then get our final result with:</p>
 
-<ol>
-  <li>
-    <p>Create a list of lambdas (i.e. $\lambda∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24}$);</p>
-  </li>
-  <li>
-    <p>Create a set of models with different degrees or any other variants.</p>
-  </li>
-  <li>
-    <p>Iterate through the $\lambda$s and for each $\lambda$ go through all the models to learn some $\Theta$.</p>
-  </li>
-  <li>
-    <p>Compute the cross validation error using the learned $\Theta$ (computed with $\lambda$) on the $J_{CV}(\Theta)$ <strong>without</strong> regularization or $\lambda$ = 0.</p>
-  </li>
-  <li>
-    <p>Select the best combo that produces the lowest error on the cross validation set.</p>
-  </li>
-  <li>
-    <p>Using the best combo $\Theta$ and $\lambda$, apply it on $ J_{test}(\Theta)$ to see if it has a good generalization of the problem.</p>
-  </li>
-</ol>
+<script type="math/tex; mode=display">h_\Theta(x)=a^{(j+1)}=g(z^{(j+1)})</script>
 
-<h3 id="823-learning-curves">8.2.3 Learning Curves</h3>
+<p>Notice that in this <strong>last step</strong>, between layer j and layer j+1, we are doing <strong>exactly the same thing</strong> as we did in logistic regression. Adding all these intermediate layers in neural networks allows us to more elegantly produce interesting and more complex non-linear hypotheses.</p>
 
-<p>Training an algorithm on a very few number of data points (such as 1, 2 or 3) will easily have 0 errors because we can always find a quadratic curve that touches exactly those number of points. Hence:</p>
+<h2 id="62-applications">6.2 Applications</h2>
 
-<ul>
-  <li>As the training set gets larger, the error for a quadratic function increases.</li>
-  <li>The error value will plateau out after a certain m, or training set size.</li>
-</ul>
+<h3 id="621-examples-and-intuitions-i">6.2.1 Examples and Intuitions I</h3>
 
-<p><strong>Experiencing high bias:</strong></p>
+<p>A simple example of applying neural networks is by predicting $x_1$ AND $x_2$, which is the logical ‘and’ operator and is only true if both $x_1$ and $x_2$ are 1.</p>
 
-<p><strong>Low training set size</strong>: causes $J_{train}(\Theta)$ to be low and $J_{CV}(\Theta)$ to be high.</p>
+<p>The graph of our functions will look like:</p>
 
-<p><strong>Large training set size</strong>: causes both $J_{train}(\Theta)$ and $J_{CV}(\Theta)$ to be high with $J_{train}(\Theta)\approx J_{CV}(\Theta)$.</p>
+<script type="math/tex; mode=display">\begin{align*}\begin{bmatrix}x_0 \newline x_1 \newline x_2\end{bmatrix} \rightarrow\begin{bmatrix}g(z^{(2)})\end{bmatrix} \rightarrow h_\Theta(x)\end{align*}</script>
 
-<p>If a learning algorithm is suffering from <strong>high bias</strong>, getting more training data will not <strong>(by itself)</strong> help much.</p>
+<p>Remember that $x_0$ is our bias variable and is always 1.</p>
 
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1frl2eobr1kj308c056q3e.jpg" alt="img" /></p>
+<p>Let’s set our first theta matrix as:</p>
 
-<p><strong>Experiencing high variance:</strong></p>
+<script type="math/tex; mode=display">\Theta^{(1)}=[-30\ 20\ 20]</script>
 
-<p><strong>Low training set size</strong>: $J_{train}(\Theta)$ will be low and $J_{CV}(\Theta)$ will be high.</p>
+<p>This will cause the output of our hypothesis to only be positive if both $x_1$ and $x_2$ are 1. In other words:</p>
 
-<p><strong>Large training set size</strong>: $J_{train}(\Theta)$ increases with training set size and $J_{CV}(\Theta)$ continues to decrease without leveling off. Also, $J_{train}(\Theta) &lt; J_{CV}(\Theta)$ but the difference between them remains significant.</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& h_\Theta(x) = g(-30 + 20x_1 + 20x_2) \newline \newline & x_1 = 0 \ \ and \ \ x_2 = 0 \ \ then \ \ g(-30) \approx 0 \newline & x_1 = 0 \ \ and \ \ x_2 = 1 \ \ then \ \ g(-10) \approx 0 \newline & x_1 = 1 \ \ and \ \ x_2 = 0 \ \ then \ \ g(-10) \approx 0 \newline & x_1 = 1 \ \ and \ \ x_2 = 1 \ \ then \ \ g(10) \approx 1\end{align*} %]]></script>
 
-<p>If a learning algorithm is suffering from <strong>high variance</strong>, getting more training data is likely to help.</p>
+<p>So we have constructed one of the fundamental operations in computers by using a small neural network rather than using an actual AND gate. Neural networks can also be used to simulate all the other logical gates. The following is an example of the logical operator ‘OR’, meaning either $x_1$ is true or $x_2$ is true, or both:</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1frl2epp3moj308c04rdgb.jpg" alt="img" /><img src="https://ws4.sinaimg.cn/large/006tNc79ly1frl2etwmn4j308c04rdgb.jpg" alt="img" /></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fr2qx34y7mj30gb07raaw.jpg" alt="img" /></p>
 
-<h3 id="824-deciding-what-to-do-next-revisited">8.2.4 Deciding What to Do Next Revisited</h3>
+<p>Where g(z) is the following:</p>
 
-<p>Our decision process can be broken down as follows:</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fr2qx34y7mj30gb07raaw.jpg" alt="img" /></p>
 
-<ul>
-  <li>
-    <p><strong>Getting more training examples:</strong> Fixes high variance</p>
-  </li>
-  <li>
-    <p><strong>Trying smaller sets of features:</strong> Fixes high variance</p>
-  </li>
-  <li>
-    <p><strong>Adding features:</strong> Fixes high bias</p>
-  </li>
-  <li>
-    <p><strong>Adding polynomial features:</strong> Fixes high bias</p>
-  </li>
-  <li>
-    <p><strong>Decreasing $\lambda$:</strong> Fixes high bias</p>
-  </li>
-  <li>
-    <p><strong>Increasing $\lambda$:</strong> Fixes high variance.</p>
-  </li>
-</ul>
+<h3 id="622-examples-and-intuitions-ii">6.2.2 Examples and Intuitions II</h3>
 
-<h3 id="825-diagnosing-neural-networks">8.2.5 Diagnosing Neural Networks</h3>
+<p>The $Θ^{(1)}$ matrices for AND, NOR, and OR are:</p>
 
-<ul>
-  <li>A neural network with fewer parameters is <strong>prone to underfitting</strong>. It is also <strong>computationally cheaper</strong>.</li>
-  <li>A large neural network with more parameters is <strong>prone to overfitting</strong>. It is also <strong>computationally expensive</strong>. In this case you can use regularization (increase $\lambda$) to address the overfitting.</li>
-</ul>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}AND:\newline\Theta^{(1)} &=\begin{bmatrix}-30 & 20 & 20\end{bmatrix} \newline NOR:\newline\Theta^{(1)} &= \begin{bmatrix}10 & -20 & -20\end{bmatrix} \newline OR:\newline\Theta^{(1)} &= \begin{bmatrix}-10 & 20 & 20\end{bmatrix} \newline\end{align*} %]]></script>
 
-<p>Using a single hidden layer is a good starting default. You can train your neural network on a number of hidden layers using your cross validation set. You can then select the one that performs best.</p>
+<p>We can combine these to get the XNOR logical operator (which gives 1 if $x_1$ and $x_2$ are both 0 or both 1).</p>
 
-<p><strong>Model Complexity Effects:</strong></p>
+<script type="math/tex; mode=display">\begin{align*}\begin{bmatrix}x_0 \newline x_1 \newline x_2\end{bmatrix} \rightarrow\begin{bmatrix}a_1^{(2)} \newline a_2^{(2)} \end{bmatrix} \rightarrow\begin{bmatrix}a^{(3)}\end{bmatrix} \rightarrow h_\Theta(x)\end{align*}</script>
 
-<ul>
-  <li>Lower-order polynomials (low model complexity) have high bias and low variance. In this case, the model fits poorly consistently.</li>
-  <li>Higher-order polynomials (high model complexity) fit the training data extremely well and the test data extremely poorly. These have low bias on the training data, but very high variance.</li>
-  <li>In reality, we would want to choose a model somewhere in between, that can generalize well but also fits the data reasonably well.</li>
-</ul>
+<p>For the transition between the first and second layer, we’ll use a $Θ^{(1)}$ matrix that combines the values for AND and NOR:</p>
 
-<h2 id="83-building-a-spam-classifier">8.3 Building a Spam Classifier</h2>
+<script type="math/tex; mode=display">% <![CDATA[
+\Theta^{(1)} =\begin{bmatrix}-30 & 20 & 20 \newline 10 & -20 & -20\end{bmatrix} %]]></script>
 
-<h3 id="831-prioritizing-what-to-work-on">8.3.1 Prioritizing What to Work On</h3>
+<p>For the transition between the second and third layer, we’ll use a $Θ^{(2)}$ matrix that uses the value for OR:</p>
 
-<p><strong>System Design Example:</strong></p>
+<script type="math/tex; mode=display">\Theta^{(2)}=[-10\ 20\ 20]</script>
 
-<p>Given a data set of emails, we could construct a vector for each email. Each entry in this vector represents a word. The vector normally contains 10,000 to 50,000 entries gathered by finding the most frequently used words in our data set. If a word is to be found in the email, we would assign its respective entry a 1, else if it is not found, that entry would be a 0. Once we have all our x vectors ready, we train our algorithm and finally, we could use it to classify if an email is a spam or not.</p>
+<p>Let’s write out the values for all our nodes:</p>
 
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1frm85bqkz7j30ki09mdk2.jpg" alt="img" /></p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}& a^{(2)} = g(\Theta^{(1)} \cdot x) \newline& a^{(3)} = g(\Theta^{(2)} \cdot a^{(2)}) \newline& h_\Theta(x) = a^{(3)}\end{align*} %]]></script>
 
-<p>So how could you spend your time to improve the accuracy of this classifier?</p>
+<p>And there we have the XNOR operator using a hidden layer with two nodes! The following summarizes the above algorithm:</p>
 
-<ul>
-  <li>Collect lots of data (for example “honeypot” project but doesn’t always work)</li>
-  <li>Develop sophisticated features (for example: using email header data in spam emails)</li>
-  <li>Develop algorithms to process your input in different ways (recognizing misspellings in spam).</li>
-</ul>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fr2rikyh1ij30hb09h40o.jpg" alt="img" /></p>
 
-<p>It is difficult to tell which of the options will be most helpful.</p>
+<h3 id="623-multiclass-classification">6.2.3 Multiclass Classification</h3>
 
-<h3 id="832-error-analysis">8.3.2 Error Analysis</h3>
+<p>To classify data into multiple classes, we let our hypothesis function return a vector of values. Say we wanted to classify our data into one of four categories. We will use the following example to see how this classification is done. This algorithm takes as input an image and classifies it accordingly:</p>
 
-<p>The recommended approach to solving machine learning problems is to:</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fr2rxa2aybj30h309en0f.jpg" alt="img" /></p>
 
-<ul>
-  <li>Start with a simple algorithm, implement it quickly, and test it early on your cross validation data.</li>
-  <li>Plot learning curves to decide if more data, more features, etc. are likely to help.</li>
-  <li>Manually examine the errors on examples in the cross validation set and try to spot a trend where most of the errors were made.</li>
-</ul>
+<p>We can define our set of resulting classes as y:</p>
 
-<p>For example, assume that we have 500 emails and our algorithm misclassifies a 100 of them. We could manually analyze the 100 emails and categorize them based on what type of emails they are. We could then try to come up with new cues and features that would help us classify these 100 emails correctly. Hence, if most of our misclassified emails are those which try to steal passwords, then we could find some features that are particular to those emails and add them to our model. We could also see how classifying each word according to its root changes our error rate:</p>
+<script type="math/tex; mode=display">y^{(i)}=\begin {bmatrix}1\\0\\0\\0\end {bmatrix} ,\begin {bmatrix}0\\1\\0\\0\end {bmatrix} ,\begin {bmatrix}0\\0\\1\\0\end {bmatrix} ,\begin {bmatrix}0\\0\\0\\1\end {bmatrix}</script>
 
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1frm8mnk8l5j30jg0a143a.jpg" alt="img" /></p>
+<p>Each $y^{(i)}$ represents a different image corresponding to either a car, pedestrian, truck, or motorcycle. The inner layers, each provide us with some new information which leads to our final hypothesis function. The setup looks like:</p>
 
-<p>It is very important to get error results as a single, numerical value. Otherwise it is difficult to assess your algorithm’s performance. For example if we use stemming, which is the process of treating the same word with different forms (fail/failing/failed) as one word (fail), and get a 3% error rate instead of 5%, then we should definitely add it to our model. However, if we try to distinguish between upper case and lower case letters and end up getting a 3.2% error rate instead of 3%, then we should avoid using this new feature. Hence, we should try new things, get a numerical value for our error rate, and based on our result decide whether we want to keep the new feature or not.</p>
+<script type="math/tex; mode=display">\begin {bmatrix}x_0\\x_1\\x_2\\\cdots\\x_n\end {bmatrix} \rightarrow \begin {bmatrix}a_0^{(2)}\\a_1^{(2)}\\a_2^{(2)}\\\cdots\end {bmatrix} \rightarrow \begin {bmatrix}a_0^{(3)}\\a_1^{(3)}\\a_2^{(3)}\\\cdots\end {bmatrix} \rightarrow \cdots \rightarrow \begin {bmatrix}h_\Theta(x)_1\\h_\Theta(x)_2\\h_\Theta(x)_3\\h_\Theta(x)_4\end {bmatrix}</script>
 
-<h2 id="84-handling-skewed-data">8.4 Handling Skewed Data</h2>
+<p>Our resulting hypothesis for one set of inputs may look like:</p>
 
-<h3 id="841-error-metrics-for-skewed-classes">8.4.1 Error Metrics for Skewed Classes</h3>
+<script type="math/tex; mode=display">h_\Theta(x) =\begin{bmatrix}0 \newline 0 \newline 1 \newline 0 \newline\end{bmatrix}</script>
 
-<p>Precision and recall are defined according to:</p>
-
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1frm90iwi53j30ae0akweg.jpg" alt="If predicted class and actual class are both 1, then a test example is a True Positive. If predicted class and actual class are both 0, then a test example is a True Negative. If predicted class is 0 actual class is 1, then a test example is a False Negative. If predicted class is 1 and actual class is 0, then a test example is a False Positive." /></p>
-
-<p><strong>Precision</strong> (Of all patients where we predicted $y=1$, what fraction actually has cancer?)
-<script type="math/tex">\text{Precision} = \frac{\text{True positives}}{\text{# predicted as positive}} = \frac{\text{True positives}}{\text{True positives + False positives}}</script></p>
-
-<p><strong>Recall</strong> (Of all patients that actually have cancer, what fraction did we correctly detect as having cancer?)</p>
-
-<script type="math/tex; mode=display">\text{Recall} = \frac{\text{True positives}}{\text{# actual positives}} = \frac{\text{True positives}}{\text{True positives + False negatives}}</script>
-
-<h3 id="842-trading-off-precision-an-recall">8.4.2 Trading Off Precision an Recall</h3>
-
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1frm9eyehi3j30q70eqdim.jpg" alt="img" /></p>
-
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1frm9m7r3jpj30q80ergnj.jpg" alt="img" /></p>
-
+<p>In which case our resulting class is the third one down, or $h_\Theta(x)_3$, which represents the motorcycle.</p>
 
 
                 <hr style="visibility: hidden;">
@@ -470,17 +376,17 @@ err(h_\Theta(x),y) = \begin{matrix} 1 & \mbox{if } h_\Theta(x) \geq 0.5\ and\ y 
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/04/30/ml-week5/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 5">
+                        <a href="/2018/05/03/lhtl/" data-toggle="tooltip" data-placement="top" title="学习如何学习">
                         Previous<br>
-                        <span>Machine Learning Week 5</span>
+                        <span>学习如何学习</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/05/03/lhtl/" data-toggle="tooltip" data-placement="top" title="学习如何学习">
+                        <a href="/2018/05/14/ml-week5/" data-toggle="tooltip" data-placement="top" title="Machine Learning Week 5">
                         Next<br>
-                        <span>学习如何学习</span>
+                        <span>Machine Learning Week 5</span>
                         </a>
                     </li>
                     
@@ -578,8 +484,8 @@ err(h_\Theta(x),y) = \begin{matrix} 1 & \mbox{if } h_\Theta(x) \geq 0.5\ and\ y 
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "1tz";
-    var disqus_identifier = "/2018/04/30/ml-week6";
-    var disqus_url = "http://localhost:4000/2018/04/30/ml-week6/";
+    var disqus_identifier = "/2018/05/07/ml-week4";
+    var disqus_url = "http://localhost:4000/2018/05/07/ml-week4/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
