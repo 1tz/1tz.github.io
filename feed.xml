@@ -5,13 +5,17 @@
     <description>An undergraduate in Beijing Normal University</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 23 Jun 2018 20:26:39 +0800</pubDate>
-    <lastBuildDate>Sat, 23 Jun 2018 20:26:39 +0800</lastBuildDate>
+    <pubDate>Sat, 23 Jun 2018 21:04:51 +0800</pubDate>
+    <lastBuildDate>Sat, 23 Jun 2018 21:04:51 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
         <title>台湾游记</title>
-        <description>&lt;h1 id=&quot;20180527-20180606台北-台中-台南-高雄-垦丁-花莲-台北我韬韬&quot;&gt;2018.05.27-2018.06.06，台北-台中-台南-高雄-垦丁-花莲-台北，我&amp;amp;韬韬。&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;20180527-20180606&quot;&gt;2018.05.27-2018.06.06&lt;/h1&gt;
+
+&lt;h1 id=&quot;台北-台中-台南-高雄-垦丁-花莲-台北&quot;&gt;台北-台中-台南-高雄-垦丁-花莲-台北&lt;/h1&gt;
+
+&lt;h1 id=&quot;我韬韬&quot;&gt;我&amp;amp;韬韬。&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;出发之前，我和韬韬开玩笑，去一趟台湾回来注定要变成肥仔。韬韬信誓旦旦地说，他去台湾的第一天晚上要牛排鸡排各一份，再配上一杯50岚，美滋滋。结果，在台湾的这几天，我们往往一天只吃两顿，事先做好的餐厅、夜市攻略也吃了不到一半。或许，相比于眼花缭乱的美食，台湾更吸引我们的是这里精致的风景和浓浓的人情味。&lt;/p&gt;
@@ -73,10 +77,6 @@
 
 &lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fsj1aql1twg30qo0f0npe.gif&quot; alt=&quot;地热谷&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fsgfbp8uk2j31kw1kwtwy.jpg&quot; alt=&quot;试图点水却被烫死的蜻蜓&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fslc83fffuj31kw16oqv7.jpg&quot; alt=&quot;被地热谷的水冲刷绿的石头&quot; /&gt;&lt;/p&gt;
-
 &lt;h4 id=&quot;️千禧汤&quot;&gt;♨️千禧汤&lt;/h4&gt;
 
 &lt;p&gt;​    肥猫⭐️⭐️⭐️⭐️&lt;/p&gt;
@@ -108,8 +108,6 @@
 &lt;p&gt;&lt;strong&gt;象山看景🙋🏻‍我有话说：&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;如果登象山是冲着看台北101大楼的夜景去的，那么一定要赶在晚上十点之前到达。台北101大楼的灯光只开到晚上十点，我们下山时正好目睹101大楼熄灯，一看时间正好十点。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tKfTcly1fsgfbznbicj31kw16onpd.jpg&quot; alt=&quot;登象山前的能量补充之50岚（韬韬：这时我们的手还是白的）&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fslc8lm38ej31kw11x4qr.jpg&quot; alt=&quot;象山上的台北夜景1&quot; /&gt;&lt;/p&gt;
 
@@ -225,11 +223,9 @@
 
 &lt;h2 id=&quot;day-3-台中&quot;&gt;Day 3 台中&lt;/h2&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;论旅游景点的质量，台中完胜台北！高美湿地、日月潭，每个景点都美得令人窒息，令人不舍离去。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;论旅游景点的质量，台中完胜台北！高美湿地、日月潭，每个景点都美得令人窒息，令人不舍离去。&lt;/p&gt;
 
-&lt;p&gt;🚇在台北车站乘坐高铁到的台中高铁站，因为台中的繁华地带集中在火车站附近，因而我们下了高铁又坐区间车前往台中火车站。如此折腾，似乎还不如一开始就坐台铁从台北车站到台中火车站？&lt;/p&gt;
+&lt;p&gt;在台北车站乘坐高铁到的台中高铁站，因为台中的繁华地带集中在火车站附近，因而我们下了高铁又坐区间车前往台中火车站。如此折腾，似乎还不如一开始就坐台铁从台北车站到台中火车站？&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fslcgjqe96j30sg0lcn1k.jpg&quot; alt=&quot;台中高铁站&quot; /&gt;&lt;/p&gt;
 
@@ -246,6 +242,8 @@
 &lt;p&gt;&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fslchr86cuj31kw11xe85.jpg&quot; alt=&quot;宫原眼科2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fslch9kbdkj31kw23v7wi.jpg&quot; alt=&quot;宫原眼科3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fsle9ujqljj31kw11x1l3.jpg&quot; alt=&quot;宫原眼科4&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;台中肉员&quot;&gt;🍱台中肉员&lt;/h4&gt;
 
@@ -365,13 +363,13 @@
 
 &lt;p&gt;这原是一间老房子，后经过修缮和利用，成为一家古色古香的餐馆。店内食物以小吃为主，因为选择困难，我们当时点了个套餐，又加了点卤料。大力推荐它家的担仔面，无法用言语形容的好吃！鱼羹也不错，稠稠的，混合着酸笋的酸味，味道很不错。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fslclo6x0wj30sg0sgn49.jpg&quot; alt=&quot;赤莰担仔面1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fslclzk8vpj30sg0lcgvd.jpg&quot; alt=&quot;赤莰担仔面1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fslclsg2nuj30sg0sg12i.jpg&quot; alt=&quot;赤莰担仔面2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fslclo6x0wj30sg0sgn49.jpg&quot; alt=&quot;赤莰担仔面2&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fslclw8dgej30sg0sgn4i.jpg&quot; alt=&quot;赤莰担仔面3&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fslclsg2nuj30sg0sg12i.jpg&quot; alt=&quot;赤莰担仔面3&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fslclzk8vpj30sg0lcgvd.jpg&quot; alt=&quot;赤莰担仔面4&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fslclw8dgej30sg0sgn4i.jpg&quot; alt=&quot;赤莰担仔面4&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws3.sinaimg.cn/large/006tNc79ly1fslcm3l5xyj30sg0sgn3i.jpg&quot; alt=&quot;赤莰担仔面5&quot; /&gt;&lt;/p&gt;
 
@@ -591,7 +589,7 @@
 
 &lt;p&gt;从海生馆出来，乘坐垦丁街车再转垦丁快线，到达枋寮火车站，乘坐台铁前往花莲。值得注意的是，台铁的空调开得较足，因而随身携带一件薄外套可能会更适宜。&lt;/p&gt;
 
-&lt;p&gt;本来以为台铁便当需要提前预定，或者在火车站直接购买，便在枋寮火车站附近匆匆吃了一餐。上了台铁发现，台铁服务员是会在饭点推着小车来兜售便当的。台铁便当真的非常好吃，价格也实惠，60新台币一份，有肉有菜，都很实在。相比大陆火车上的快餐实在是物美价廉。&lt;/p&gt;
+&lt;p&gt;本来以为台铁便当需要提前预定，或者在火车站直接购买，便在枋寮火车站附近匆匆吃了一餐。上了台铁发现，台铁服务员是会在饭点推着小车来兜售便当的。台铁便当真的非常好吃，价格也实惠，80新台币一份，有肉有菜，都很实在。相比大陆火车上的快餐实在是物美价廉。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsj382y6f5j30sg0sgwik.jpg&quot; alt=&quot;台铁便当1&quot; /&gt;&lt;/p&gt;
 
@@ -828,6 +826,8 @@
 &lt;p&gt;​     韬韬⭐️⭐️⭐️⭐️⭐️&lt;/p&gt;
 
 &lt;p&gt;这里简直是书虫们的天堂！书的种类很多，而且每本书几乎都有已经拆封、可供阅读的样书。书店设有座位，可坐着阅读。最棒的是书店是24小时营业的，想象着在这里彻夜阅读，也会是一次很不错的人生体验。&lt;/p&gt;
+
+&lt;p&gt;此外，这附近有很多有意思的文创产品出售。下图是诚品敦南店地下的一个临时展览。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fslcwyi7z3j31kw16ox6p.jpg&quot; alt=&quot;诚品敦南店地下的一个展览&quot; /&gt;&lt;/p&gt;
 
