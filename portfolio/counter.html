@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>食堂专用计数器</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+
+<button id="b1" style="background:#36B1BF;border:none;width:200px;height:50px;color:#E9F1DF;font-size:20px;font-weight: 400;">计数</button>
+<button id="b2" style="background:#F23C50;border:none;color:#E9F1DF">重置</button>
+<textarea id='rec' style="display:block;width:200px;height:300px;"></textarea>
+<script>
+    var count = 0;
+    function getNow(s) {
+        return s < 10 ? '0' + s: s;
+    }
+
+    function getTime(){
+        var myDate = new Date();
+        //获取当前年
+        var year=myDate.getFullYear();
+        //获取当前月
+        var month=myDate.getMonth()+1;
+        //获取当前日
+        var date=myDate.getDate(); 
+        var h=myDate.getHours();       //获取当前小时数(0-23)
+        var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+        var s=myDate.getSeconds();  
+        var now=year+'-'+getNow(month)+"-"+getNow(date)+" "+getNow(h)+':'+getNow(m)+":"+getNow(s);
+        return now
+    }
+
+    $(document).ready(function(){
+        $('#b1').click(function(){
+            $('#rec').val('第'+ ++count + '个 ' + getTime()+'\n'+$('#rec').val())
+        });
+        $('#b2').click(function(){
+            $('#rec').val('')
+            count = 0
+        });
+    });
+</script>
+</body>
+</html>
