@@ -10,7 +10,7 @@
     <meta name="keywords"  content="俄罗斯韬娃, , 1tz">
     <meta name="theme-color" content="#000000">
     
-    <title>大学生能力测试 - 俄罗斯韬娃 | 1tz's Blog</title>
+    <title>折腾树莓派 - 俄罗斯韬娃 | 1tz's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2018/03/16/about-eep/">
+    <link rel="canonical" href="http://localhost:4000/2018/01/06/raspberry-pi/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,13 +168,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-error.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-raspberry-pi.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-error.jpg')
+        background-image: url('/img/post-raspberry-pi.jpg')
     }
 
     
@@ -187,15 +187,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#考研" title="考研">考研</a>
+                        <a class="tag" href="/tags/#树莓派" title="树莓派">树莓派</a>
                         
                     </div>
-                    <h1>大学生能力测试</h1>
+                    <h1>折腾树莓派</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by 1tz on March 16, 2018</span>
+                    <span class="meta">Posted by 1tz on January 6, 2018</span>
                 </div>
             </div>
         </div>
@@ -217,85 +217,92 @@
                 
 
 				<blockquote>
-  <p>对于考研，我更愿意称之为大学生能力测试，因为里面的科目我都不太喜欢</p>
+  <p>抱歉，路由器已经满足不了我了</p>
 </blockquote>
 
-<p>今年报考的是北京大学软件与微电子学院，金融大数据方向。从结果来看，这次报考算是偷波鸡，明年是否还是这个情况我也不清楚了。留着当个念想吧，说不定还能帮到今后的考研勇士。</p>
+<p>自从考完研就心水树莓派，于是马上就买了个折腾折腾，想当个软路由，但是效果并没有想象中的那么好。暂时先搁着，闲暇时候折腾折腾，当个小玩具。慢慢更新，免得以后迷路。</p>
 
-<h3 id="一初试">一、初试</h3>
+<h3 id="1-准备工作">1. 准备工作</h3>
 
-<p>初始分也不算太高（政治59，英语71，数学110，专业课109，总分349），各位按照自己的计划进行，可能不太适合所有人。说实话我的专业课我的确考得不太好。</p>
+<p>一根网线，一台电脑（只说 MAC OS 环境），一个 Raspberry Pi 3B，一个读卡器，一个8G及以上的 TF 卡，一个 Wi-Fi 环境，一个 USB 网线转换器</p>
 
-<h4 id="1-数学">1. 数学</h4>
+<h3 id="2-钦定系统-raspbian">2. 钦定系统 Raspbian</h3>
 
-<ul>
-  <li>辅导书：推荐高数十八讲（张宇）、概率论九讲（张宇），以及线性代数辅导讲义（李永乐）。</li>
-  <li>网课：高数、概率论看张宇，线代看李永乐，看基础班、强化班。最后有时间可以看点题班，没时间也无所谓，影响不大。</li>
-  <li>习题集：看课的时候搭配教材和辅导书上的习题（较简单）以及题源1000题（难一些，张宇），看完视频了，最后标记一下错题。后面开始做数学历年真题集（张宇），做完了再整理一下错题。最后有时间可以做张宇的最后八套卷（非常难，分数不用当真），没时间就把整理的历年真题的错题再做一遍。</li>
-  <li>具体思路：建议前期直接看视频学习。先看高数基础班、线代基础班、概率论基础班，看的时候做好笔记，后面复习有用。有时间就做一做教材上的题或题源1000题的基础部分，一般都比较简单。然后看高数提高班、线代提高班、概率论提高班，看一节做完一节题源1000题的题，错题标记出来。学习完这两遍之后，最迟十一月就开始做真题吧，每天一套左右。遇到难的要硬着头皮啃完，理解每道题的解法，把错题记录下来。十二月上旬就开始做错题，有时间再做做最后八套卷，没时间就把错题做完就行了。至此，数学能考的题型你基本都见过了，考前再看看错题，想想思路就行了。</li>
-  <li>至于李林还能不能押到题，很难预测到，有空的话找找资源也不亏。</li>
-</ul>
+<h4 id="21-烧录">2.1 烧录</h4>
 
-<h4 id="2-政治">2. 政治</h4>
+<p>下载官网的固件后，解压出 <code class="highlighter-rouge">.img</code> 格式的镜像文件后，插上读卡器。打开 iTerm / Terminal，输入以下指令查看当前挂载设备</p>
 
-<ul>
-  <li>辅导书和习题集：个人不管肖秀荣怎么样，无脑推荐徐涛。买考研政治核心考案、优题库、习题集，最后八套卷，考研政治考前必背20题（都是徐涛的，除了最后一本书以外，主要都是怼选择题）。考研政治考前必背20题需要20天左右背完，合理安排时间（大概60道小题的内容）。做好错题标记，有空了看一看。</li>
-  <li>网课：直接看徐涛的<strong>强化班</strong>。最好暑假开始看视频，挤不出来时间的话九月份开始也行。</li>
-  <li>具体思路：也建议直接上视频，并从九月份开始准备。我是从十月份开始的，时间略紧。算好视频的数量，每天看几个视频，然后做对应的题（徐涛推荐看完一门课做一门课的题，自己抉择吧），做完把错题标记一下。看完强化班之后，根据其他科目准备的情况，有时间可以看看冲刺班。然后注意他的解答题讲解视频，尤其是马哲的解答题需要自己练习。后面等小黄书（考研政治考前必背20题）出了，最迟考试前三天把内容背完，最后根据年度热门事件选择性地背熟某几个考试概率高的。</li>
-</ul>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">df</span> <span class="nt">-h</span>
+</code></pre></div></div>
 
-<h4 id="3-英语">3. 英语</h4>
+<p>找到你U盘的路径 <code class="highlighter-rouge">[usb_device_path]</code> 然后输入以下指令卸载设备</p>
 
-<ul>
-  <li>关于背单词：我当时看了恋恋有词，但是我觉得看了遗忘的比较多，而且比较费时间。我就下载的沪江开心英语这个APP，每天150个词，1个小时左右。每个词有解释的听解释，效率对我而言稍高一些。第二天复习的时候注意换个题型考察自己。一些可以用到作文里的经典例句可以提前摘抄下来，以备练习作文时套用。</li>
-  <li>辅导书：做了黄剑的阅读理解150提高版，但是感觉书的质量离真题还是差了一些，要是愿意做也可以当个参考。还用了黄剑的历年真题和写作书（他的书全都是黄色的）。</li>
-  <li>具体思路：每天花半个小时到一个小时背150个单词，考前都不能停下。暑假开始做考研英语真题，一套卷子拆成两三天慢慢做（不用做写作），最好用铅笔写，做完之后看解析，想自己思路哪里不对。全部做完了把笔迹擦掉，隔几天再做一遍，一两天一份（不用做写作）。做完了就一天一节黄剑阅读理解，这个书很怪，个人答案有些奇怪。不过也不用管，反正保持每天阅读就行了。考前一个月看一看他的作文书，背一背小作文模板，练练大作文，上考场就基本不慌了。</li>
-</ul>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil unmount <span class="o">[</span>usb_device_path]
+</code></pre></div></div>
 
-<h4 id="4-专业课">4. 专业课</h4>
+<p>然后输入以下指令再找路径 <code class="highlighter-rouge">[device_path]</code></p>
 
-<ul>
-  <li>辅导书：看你报考学校的要求，一般是操作系统、数据结构、计算机网络和组成原理。王道论坛的一套书（这个去他们官方的淘宝店买，后面会送模拟题）质量还行，根据自己需要购买。如果感觉数据结构有些困难，可以买一本天勤的数据结构搭配着看，天勤的数据结构比较细、容易理解。</li>
-  <li>习题：除了书上的题，没时间的话做王道的最后八套，有时间王道和天勤都做了。做好错题整理，考前都有用，特别是计算机网络的杂碎知识点。</li>
-  <li>失败的思路：直接看辅导书做题，不懂的看书。来来回回看了四遍辅导书。</li>
-  <li>觉得可能正确的思路：课本仔细看一遍，然后再看辅导书，不懂的再看书。需要记住书上算法的具体实现。</li>
-</ul>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil list
+</code></pre></div></div>
 
-<h4 id="5-关于网课视频">5. 关于网课视频</h4>
+<p>然后就可以烧录了</p>
 
-<ul>
-  <li>一般买书送的视频都不太靠谱，我的视频基本都是在大傻考研网这个公众号找的（他也有微博号），这个更新的比较快。</li>
-  <li>如果想要更及时的视频，请上<strong>B站</strong>，多搜搜老师的名字有惊喜，特别是徐涛的视频。</li>
-  <li>如果现在找不到资源，数学可以看去年的，尤其是线性代数。</li>
-</ul>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">dd </span><span class="nv">ds</span><span class="o">=</span>4m <span class="k">if</span><span class="o">=[</span>path_to_img] <span class="nv">of</span><span class="o">=[</span>device_path]
+</code></pre></div></div>
 
-<h4 id="6-关于流量">6. 关于流量</h4>
+<p>等待10分钟左右即可，烧录完成后进入U盘路径，并创建空文件 ssh 后保存退出</p>
 
-<ul>
-  <li>开个一年的百度云会员，200多块钱，去图书馆三楼机房下视频或看B站视频。</li>
-  <li>最好搞个内网穿透，把这一年流量问题解决掉，但是稍微有些麻烦，没时间的话请忽略。</li>
-</ul>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="o">[</span>path_to_device]
+<span class="nb">touch </span>ssh
+</code></pre></div></div>
 
-<h4 id="7-其他">7. 其他</h4>
+<h4 id="22-连接">2.2 连接</h4>
 
-<ul>
-  <li>晚上七点半准时选第二天图书馆的座位，如果需要三楼的电脑，请早起抢座。</li>
-  <li>考试前一周是四六级考试，请抢好座位。</li>
-  <li>年末背政治犯困，可移步一楼站着背书，一楼可能有点冷风，穿厚点，别感冒了。</li>
-  <li>注意坐姿，眼镜干涩备好眼药水。</li>
-</ul>
+<p><code class="highlighter-rouge">系统偏好设置-&gt;共享-&gt;互联网共享</code> 把连接的Wi-Fi共享到USB端口，然后再打开 iTerm / Terminal 后输入以下指令</p>
 
-<h3 id="二复试">二、复试</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arp <span class="nt">-a</span>
+</code></pre></div></div>
 
-<p>考完初试，休息几天，就抓紧准备复试吧。看看报考方向需要的知识，最好看那么一两本完整的入门书，不至于到时候慌了阵脚。多做做OJ，即使没有进复试也是在为以后积累，这个怎么着也不亏。</p>
+<p>就可以找到树莓派的IP地址，一般是 <code class="highlighter-rouge">192.168.2.3</code> ，再使用SSH连接树莓派，密码是raspberry</p>
 
-<p>具体过程。进去之后敲门、向老师们问好。老师英语问看过什么大数据的书、什么金融的书，既然没怎么看过金融的书为什么报这个方向（那就暑假在补呗……）。然后就开始聊项目了。讲了讲Adaboost算法原理和具体实现，但是具体实现没有说得特别清楚，有些紧张。总的来说和上午的几个小伙伴差不多，问题都不算太刁钻，都是顺着回答的不断深入地问。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh root@[ip_address]
+</code></pre></div></div>
 
-<h3 id="三后记">三、后记</h3>
+<p>至此即可使用 ssh 控制树莓派</p>
 
-<p>想想这半年多的确还是辛苦，从八月回学校真正开始看视频到十二月结束考试，走过了一些弯路，当然也得到了很多人的帮助。在此感谢爸爸妈妈、各位叔叔阿姨、各位老师同学的理解和支持。感谢舍友们对寝室两个考研党的关照。也感谢肥猫一直陪我学习，要是没有肥猫的帮助，我不可能坚持下来。本来想着如果上不了，我也不打算再来一次了。结果3月16号复试结束，3月19日晚上就收到了拟录取通知，然而肥猫运气稍差了一些，还在努力地争取着自己的未来。</p>
+<h3 id="3-路由系统-lede">3. 路由系统 LEDE</h3>
 
-<p>顺境需谨慎，不顺才是是常态，愿你我都有光明的未来。</p>
+<h4 id="31-烧录">3.1 烧录</h4>
+
+<p>下载官网镜像，选择 <code class="highlighter-rouge">arm_cortex-a53_neon-vfpv4</code> 这个目录下面的固件，解压出 <code class="highlighter-rouge">.img</code> 格式的镜像文件后，插上读卡器。打开 iTerm / Terminal，输入以下指令查看当前挂载设备</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">df</span> <span class="nt">-h</span>
+</code></pre></div></div>
+
+<p>找到你U盘的路径 <code class="highlighter-rouge">[usb_device_path]</code> 然后输入以下指令卸载设备</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil unmount <span class="o">[</span>usb_device_path]
+</code></pre></div></div>
+
+<p>然后输入以下指令再找路径 <code class="highlighter-rouge">[device_path]</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil list
+</code></pre></div></div>
+
+<p>然后就可以烧录了</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">dd </span><span class="nv">ds</span><span class="o">=</span>2m <span class="k">if</span><span class="o">=[</span>path_to_img] <span class="nv">of</span><span class="o">=[</span>device_path]
+</code></pre></div></div>
+
+<p>等待5分钟左右即可</p>
+
+<h4 id="32-连接">3.2 连接</h4>
+
+<p>现在官方的 LEDE 固件已经集成 LUCI ，并开启了 DHCP 。网线连到树莓派的网线口，关掉Wi-Fi，有IP地址后，登录 <code class="highlighter-rouge">192.168.1.1</code> 即可进行路由器设置</p>
+
+<h4 id="33-设置">3.3 设置</h4>
+
+<p>打开 LUCI 界面，开启树莓派的无线，然后用 Wi-Fi 连接树莓派。（未完待续）</p>
 
 
                 <hr style="visibility: hidden;">
@@ -303,17 +310,17 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/01/05/raspberry-pi/" data-toggle="tooltip" data-placement="top" title="折腾树莓派">
+                        <a href="/2017/12/30/block-chain-1/" data-toggle="tooltip" data-placement="top" title="区块链原理、技术与应用之一">
                         Previous<br>
-                        <span>折腾树莓派</span>
+                        <span>区块链原理、技术与应用之一</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/03/19/big-data-env/" data-toggle="tooltip" data-placement="top" title="Mac OS下大数据工具环境搭建">
+                        <a href="/2018/03/17/about-eep/" data-toggle="tooltip" data-placement="top" title="大学生能力测试">
                         Next<br>
-                        <span>Mac OS下大数据工具环境搭建</span>
+                        <span>大学生能力测试</span>
                         </a>
                     </li>
                     
@@ -383,6 +390,8 @@
         				
                             
         				
+                            
+        				
         			</div>
                 </section>
                 
@@ -413,8 +422,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "1tz";
-    var disqus_identifier = "/2018/03/16/about-eep";
-    var disqus_url = "http://localhost:4000/2018/03/16/about-eep/";
+    var disqus_identifier = "/2018/01/06/raspberry-pi";
+    var disqus_url = "http://localhost:4000/2018/01/06/raspberry-pi/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -499,7 +508,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; 俄罗斯韬娃 2018
+                    Copyright &copy; 俄罗斯韬娃 2019
                 </p>
             </div>
         </div>
